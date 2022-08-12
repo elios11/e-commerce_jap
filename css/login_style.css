@@ -32,12 +32,12 @@
     width: 50%;
 }
 
-.formInputBox {
+input.formElement {
     border-radius: 10px;
     border: none;
 }
 
-.formInputBox:focus {
+input.formElement:focus {
     outline-color: lavender;
 }
 
