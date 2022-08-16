@@ -8,3 +8,7 @@ loginButton.addEventListener("click", function() {
         window.location = "portada.html";
     }
 })
+
+function irAPortada() {
+    window.location = "portada.html";
+}
