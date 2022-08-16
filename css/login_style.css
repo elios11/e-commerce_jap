@@ -10,7 +10,7 @@
 }
 
 #loginTitle {
-    font-size: 70px;
+    font-size: 60px;
     padding-bottom: 50px;
     user-select: none;
 }
@@ -50,4 +50,8 @@ input.formElement:focus {
     padding: 15px 10px;
     border-radius: 8px;
     width: 50%;
+}
+
+.g_id_signin {
+    margin-bottom: 15px;
 }
