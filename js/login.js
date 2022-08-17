@@ -1,4 +1,5 @@
 let loginButton = document.getElementById("loginButton");
+let alertaDatos = document.getElementById("alertaDatos");
 
 loginButton.addEventListener("click", function() {
     let email = document.getElementById("email");
@@ -6,6 +7,9 @@ loginButton.addEventListener("click", function() {
     
     if (email.value !== "" && password.value !== "") {
         window.location = "portada.html";
+    }
+    else {
+        alertaDatos.innerHTML = "Por favor rellene todos los campos";
     }
 })
 
