@@ -4,8 +4,9 @@ let alertaDatos = document.getElementById("alertaDatos");
 loginButton.addEventListener("click", function() {
     let email = document.getElementById("email");
     let password = document.getElementById("pass");
-    
+
     if (email.value !== "" && password.value !== "") {
+        sessionStorage.setItem("userEmail", email.value);
         window.location = "portada.html";
     }
     else {

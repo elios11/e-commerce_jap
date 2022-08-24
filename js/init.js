@@ -39,3 +39,9 @@ let getJSONData = function(url){
         return result;
     });
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+  let showUserEmail = document.getElementById("showUserEmail");  
+  let userEmail = sessionStorage.getItem("userEmail");
+  showUserEmail.innerHTML = userEmail;
+})
