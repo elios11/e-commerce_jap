@@ -1,9 +1,11 @@
-const CARS_URL = `${PRODUCTS_URL}101.json`;
+let categoryID = localStorage.getItem("catID");
+const CATEGORY_URL = PRODUCTS_URL + categoryID + EXT_TYPE;
 let productsArray = [];
+let categoryTitle = document.getElementById("categoryTitle");
 
 //Devuelve un objeto utilizando un archivo JSON y luego ejecuta la función showProductsList
 document.addEventListener("DOMContentLoaded", function() {
-    getJSONData(CARS_URL).then(function(resultObj) {
+    getJSONData(CATEGORY_URL).then(function(resultObj) {
         if (resultObj.status === "ok") {
             productsArray = resultObj.data;
             showProductsList();
@@ -13,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 //Muestra una lista de los productos del objeto "productsArray" en filas y columnas de HTML
 function showProductsList() {
+    categoryTitle.innerHTML = `Verás aquí todos los productos de la categoría ${productsArray.catName}`;
     let htmlContentToAppend = "";
     for (let i = 0; i < productsArray.products.length; i++) {
         let currentProduct = productsArray.products[i];
@@ -32,6 +35,6 @@ function showProductsList() {
             </div>
         </div>
         `
-        document.getElementById("carProductsContainer").innerHTML = htmlContentToAppend;
+        document.getElementById("productsContainer").innerHTML = htmlContentToAppend;
     }
 }
