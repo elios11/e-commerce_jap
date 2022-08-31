@@ -10,6 +10,7 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/products.css">
 </head>
 
 <body>
@@ -36,10 +37,46 @@
       </div>
     </div>
   </nav>
-  
+
   <div class="text-center p-4">
       <h2>Productos</h2>
       <p class="lead" id="categoryTitle"></p>
+  </div>
+
+  <!-- Contenedor de filtros de órden -->
+  <div class="col-11 d-flex justify-content-end">
+      <button class="btn btn-light btn-block" id="sortDownBtn">
+          <img src="img/sort-descending.png" alt="Organizar por precio descendente" class="sort-icon">$
+      </button>
+      <button class="btn btn-light btn-block" id="sortUpBtn">
+          <img src="img/sort-ascending.png" alt="Organizar por precio ascendente" class="sort-icon">$
+      </button>
+      <button class="btn btn-light btn-block">
+          <img src="img/sort-ascending.png" alt="Organizar por relevancia" class="sort-icon">Rel.
+      </button>
+  </div>
+
+  <!-- Contenedor de filtros de precio -->
+  <div class="row">
+      <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
+          <div class="row container p-0 m-0">
+              <div class="col">
+                  <p class="font-weight-normal text-end my-2">Precio</p>
+              </div>
+              <div class="col">
+                  <input class="form-control" type="number" placeholder="min." id="rangeFilterCostMin">
+              </div>
+              <div class="col">
+                  <input class="form-control" type="number" placeholder="máx." id="rangeFilterCostMax">
+              </div>
+              <div class="col-3 p-0">
+                  <div class="btn-group" role="group">
+                        <button class="btn btn-light btn-block" id="rangeFilterCount">Filtrar</button>
+                        <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
+                  </div>
+              </div>
+          </div>
+      </div>
   </div>
 
   <!-- Contenedor para lista de productos -->
