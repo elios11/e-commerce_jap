@@ -1,7 +1,11 @@
 let categoryID = localStorage.getItem("catID");
 const CATEGORY_URL = PRODUCTS_URL + categoryID + EXT_TYPE;
-let productsArray = [];
 let categoryTitle = document.getElementById("categoryTitle");
+let productsArray = [];
+let minCost = undefined;
+let maxCost = undefined;
+const minCostField = document.getElementById("rangeFilterCostMin");
+const maxCostField = document.getElementById("rangeFilterCostMax");
 
 //Devuelve un objeto utilizando un archivo JSON y luego ejecuta la función showProductsList
 document.addEventListener("DOMContentLoaded", function() {
@@ -13,28 +17,60 @@ document.addEventListener("DOMContentLoaded", function() {
     })
 })
 
+//Obtiene los rangos de valores del filtro de precio
+document.getElementById("rangeFilterCost").addEventListener("click", function() {
+    if (minCostField.value !== "") {
+        minCost = parseInt(minCostField.value);
+    }
+    else {
+        minCost = undefined;
+    }
+
+    if (maxCostField.value !== "") {
+        maxCost = maxCostField.value;
+    }
+    else {
+        maxCost = undefined;
+    }
+    showProductsList();
+})
+
 //Muestra una lista de los productos del objeto "productsArray" en filas y columnas de HTML
 function showProductsList() {
     categoryTitle.innerHTML = `Verás aquí todos los productos de la categoría ${productsArray.catName}`;
     let htmlContentToAppend = "";
     for (let i = 0; i < productsArray.products.length; i++) {
         let currentProduct = productsArray.products[i];
-        htmlContentToAppend += `
-        <div class="list-group-item list-group-item-action cursor-active">
-            <div class="row">
-                <div class="col-3">
-                    <img src="${currentProduct.image}" alt="${currentProduct.description}" class="img-thumbnail">
-                </div>
-                <div class="col">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h4 class="mb-1">${currentProduct.name} - ${currentProduct.currency} ${currentProduct.cost}</h4>
-                        <small class="text-muted">${currentProduct.soldCount} artículos</small>
+        //Filtra los valores obtenidos en el for por el rango de precio definido en minCost y maxCost
+        if ((minCost == undefined || minCost !== undefined && minCost <= parseInt(currentProduct.cost)) &&
+            (maxCost == undefined || maxCost !== undefined && maxCost >= parseInt(currentProduct.cost))
+            ) {
+            htmlContentToAppend += `
+            <div class="list-group-item list-group-item-action cursor-active">
+                <div class="row">
+                    <div class="col-3">
+                        <img src="${currentProduct.image}" alt="${currentProduct.description}" class="img-thumbnail">
                     </div>
-                    <p class="mb-1">${currentProduct.description}</p>
+                    <div class="col">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h4 class="mb-1">${currentProduct.name} - ${currentProduct.currency} ${currentProduct.cost}</h4>
+                            <small class="text-muted">${currentProduct.soldCount} artículos</small>
+                        </div>
+                        <p class="mb-1">${currentProduct.description}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        `
-        document.getElementById("productsContainer").innerHTML = htmlContentToAppend;
+            `
+            }
+            document.getElementById("productsContainer").innerHTML = htmlContentToAppend;
     }
 }
+
+//Limpiar los campos de filtro por rango de precio y genera un nuevo listado sin filtrado
+document.getElementById("clearRangeFilter").addEventListener("click", function() {
+    minCostField.value = undefined;
+    maxCostField.value = undefined;
+    minCost = undefined;
+    maxCost = undefined;
+    showProductsList();
+})
