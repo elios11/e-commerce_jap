@@ -4,18 +4,21 @@ let categoryTitle = document.getElementById("categoryTitle");
 let productsArray = [];
 let minCost = undefined;
 let maxCost = undefined;
+const sortDescendingBtn = document.getElementById("sortDescendingBtn");
+const sortAscendingBtn = document.getElementById("sortAscendingBtn");
 const minCostField = document.getElementById("rangeFilterCostMin");
 const maxCostField = document.getElementById("rangeFilterCostMax");
 
 //Devuelve un objeto utilizando un archivo JSON y luego ejecuta la función showProductsList
-document.addEventListener("DOMContentLoaded", function() {
+function getData() {
     getJSONData(CATEGORY_URL).then(function(resultObj) {
         if (resultObj.status === "ok") {
             productsArray = resultObj.data;
             showProductsList();
         }
     })
-})
+}
+document.addEventListener("DOMContentLoaded", getData());
 
 //Obtiene los rangos de valores del filtro de precio
 document.getElementById("rangeFilterCost").addEventListener("click", function() {
@@ -66,11 +69,28 @@ function showProductsList() {
     }
 }
 
-//Limpiar los campos de filtro por rango de precio y genera un nuevo listado sin filtrado
+//Limpia los campos de filtro por rango de precio y genera un nuevo listado sin filtrado
 document.getElementById("clearRangeFilter").addEventListener("click", function() {
     minCostField.value = undefined;
     maxCostField.value = undefined;
     minCost = undefined;
     maxCost = undefined;
+    getData();
+    showProductsList();
+})
+
+//Ordena productsArray por precio de mayor a menor
+sortDescendingBtn.addEventListener("click", function() {
+    productsArray.products.sort((a,b) => {
+        return a.cost - b.cost;
+    })
+    showProductsList();
+})
+
+//Ordena productsArray por precio de menor a mayor
+sortAscendingBtn.addEventListener("click", function() {
+    productsArray.products.sort((a,b) => {
+        return b.cost - a.cost;
+    })
     showProductsList();
 })
