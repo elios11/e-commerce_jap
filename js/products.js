@@ -6,6 +6,7 @@ let minCost = undefined;
 let maxCost = undefined;
 const sortDescendingBtn = document.getElementById("sortDescendingBtn");
 const sortAscendingBtn = document.getElementById("sortAscendingBtn");
+const sortByRelevanceBtn = document.getElementById("sortByRelevanceBtn");
 const minCostField = document.getElementById("rangeFilterCostMin");
 const maxCostField = document.getElementById("rangeFilterCostMax");
 
@@ -46,8 +47,7 @@ function showProductsList() {
         let currentProduct = productsArray.products[i];
         //Filtra los valores obtenidos en el for por el rango de precio definido en minCost y maxCost
         if ((minCost == undefined || minCost !== undefined && minCost <= parseInt(currentProduct.cost)) &&
-            (maxCost == undefined || maxCost !== undefined && maxCost >= parseInt(currentProduct.cost))
-            ) {
+            (maxCost == undefined || maxCost !== undefined && maxCost >= parseInt(currentProduct.cost))) {
             htmlContentToAppend += `
             <div class="list-group-item list-group-item-action cursor-active">
                 <div class="row">
@@ -91,6 +91,14 @@ sortDescendingBtn.addEventListener("click", function() {
 sortAscendingBtn.addEventListener("click", function() {
     productsArray.products.sort((a,b) => {
         return b.cost - a.cost;
+    })
+    showProductsList();
+})
+
+//Ordenar productsArray por relevancia (cantidad de items vendidos)
+sortByRelevanceBtn.addEventListener("click", function() {
+    productsArray.products.sort((a,b) => {
+        return b.soldCount - a.soldCount;
     })
     showProductsList();
 })
