@@ -81,24 +81,24 @@ document.getElementById("clearRangeFilter").addEventListener("click", function()
 
 //Ordena productsArray por precio de mayor a menor
 sortDescendingBtn.addEventListener("click", function() {
-    productsArray.products.sort((a,b) => {
-        return a.cost - b.cost;
+    productsArray.products.sort((a, b) => {
+        return parseInt(a.cost) - parseInt(b.cost);
     })
     showProductsList();
 })
 
 //Ordena productsArray por precio de menor a mayor
 sortAscendingBtn.addEventListener("click", function() {
-    productsArray.products.sort((a,b) => {
-        return b.cost - a.cost;
+    productsArray.products.sort((a, b) => {
+        return parseInt(b.cost) - parseInt(a.cost);
     })
     showProductsList();
 })
 
 //Ordenar productsArray por relevancia (cantidad de items vendidos)
 sortByRelevanceBtn.addEventListener("click", function() {
-    productsArray.products.sort((a,b) => {
-        return b.soldCount - a.soldCount;
+    productsArray.products.sort((a, b) => {
+        return parseInt(b.soldCount) - parseInt(a.soldCount);
     })
     showProductsList();
 })
