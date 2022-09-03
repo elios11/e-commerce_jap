@@ -20,6 +20,7 @@ function getData() {
         }
     })
 }
+
 //Ejecuta getData cuando el contenido HTML esté completamente cargado
 document.addEventListener("DOMContentLoaded", getData());
 
@@ -49,6 +50,7 @@ function showProductsList() {
         let currentProduct = productsArray.products[i];
         let nameAndDescLowerCase = (currentProduct.name + currentProduct.description).toLowerCase();
         //Filtra los valores obtenidos en el for por el rango de precio definido en minCost y maxCost
+        //y filtra en la barra de búsqueda respecto al nombre y descripción de los productos
         if ((minCost == undefined || minCost !== undefined && minCost <= parseInt(currentProduct.cost)) &&
             (maxCost == undefined || maxCost !== undefined && maxCost >= parseInt(currentProduct.cost)) 
              && (inputSearch == "" || nameAndDescLowerCase.includes(inputSearch))) {
@@ -109,7 +111,7 @@ sortByRelevanceBtn.addEventListener("click", function() {
     showProductsList();
 })
 
- //Sin empezar
+//Inserta el contenido de la barra de búsqueda en inputSearch
 document.getElementById("searchBar").addEventListener("input", function() {
     inputSearch = (document.getElementById("searchBar").value).toLowerCase();
     showProductsList();

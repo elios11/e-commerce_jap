@@ -40,6 +40,7 @@ let getJSONData = function(url){
     });
 }
 
+//Muestra el correo electrónico del login en la barra de navegación
 document.addEventListener("DOMContentLoaded", function() {
   let showUserEmail = document.getElementById("showUserEmail");  
   let userEmail = sessionStorage.getItem("userEmail");
