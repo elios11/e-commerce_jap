@@ -4,6 +4,7 @@ let categoryTitle = document.getElementById("categoryTitle");
 let productsArray = [];
 let minCost = undefined;
 let maxCost = undefined;
+let inputSearch = "";
 const sortDescendingBtn = document.getElementById("sortDescendingBtn");
 const sortAscendingBtn = document.getElementById("sortAscendingBtn");
 const sortByRelevanceBtn = document.getElementById("sortByRelevanceBtn");
@@ -19,6 +20,7 @@ function getData() {
         }
     })
 }
+//Ejecuta getData cuando el contenido HTML esté completamente cargado
 document.addEventListener("DOMContentLoaded", getData());
 
 //Obtiene los rangos de valores del filtro de precio
@@ -45,9 +47,11 @@ function showProductsList() {
     let htmlContentToAppend = "";
     for (let i = 0; i < productsArray.products.length; i++) {
         let currentProduct = productsArray.products[i];
+        let nameAndDescLowerCase = (currentProduct.name + currentProduct.description).toLowerCase();
         //Filtra los valores obtenidos en el for por el rango de precio definido en minCost y maxCost
         if ((minCost == undefined || minCost !== undefined && minCost <= parseInt(currentProduct.cost)) &&
-            (maxCost == undefined || maxCost !== undefined && maxCost >= parseInt(currentProduct.cost))) {
+            (maxCost == undefined || maxCost !== undefined && maxCost >= parseInt(currentProduct.cost)) 
+             && (inputSearch == "" || nameAndDescLowerCase.includes(inputSearch))) {
             htmlContentToAppend += `
             <div class="list-group-item list-group-item-action cursor-active">
                 <div class="row">
@@ -71,10 +75,12 @@ function showProductsList() {
 
 //Limpia los campos de filtro por rango de precio y genera un nuevo listado sin filtrado
 document.getElementById("clearRangeFilter").addEventListener("click", function() {
-    minCostField.value = undefined;
-    maxCostField.value = undefined;
+    minCostField.value = "";
+    maxCostField.value = "";
     minCost = undefined;
     maxCost = undefined;
+    document.getElementById("searchBar").value = "";
+    inputSearch = "";
     getData();
     showProductsList();
 })
@@ -82,7 +88,7 @@ document.getElementById("clearRangeFilter").addEventListener("click", function()
 //Ordena productsArray por precio de mayor a menor
 sortDescendingBtn.addEventListener("click", function() {
     productsArray.products.sort((a, b) => {
-        return parseInt(a.cost) - parseInt(b.cost);
+        return parseInt(b.cost) - parseInt(a.cost);
     })
     showProductsList();
 })
@@ -90,7 +96,7 @@ sortDescendingBtn.addEventListener("click", function() {
 //Ordena productsArray por precio de menor a mayor
 sortAscendingBtn.addEventListener("click", function() {
     productsArray.products.sort((a, b) => {
-        return parseInt(b.cost) - parseInt(a.cost);
+        return parseInt(a.cost) - parseInt(b.cost);
     })
     showProductsList();
 })
@@ -100,5 +106,11 @@ sortByRelevanceBtn.addEventListener("click", function() {
     productsArray.products.sort((a, b) => {
         return parseInt(b.soldCount) - parseInt(a.soldCount);
     })
+    showProductsList();
+})
+
+ //Sin empezar
+document.getElementById("searchBar").addEventListener("input", function() {
+    inputSearch = (document.getElementById("searchBar").value).toLowerCase();
     showProductsList();
 })
