@@ -34,13 +34,18 @@ document.getElementById("rangeFilterCost").addEventListener("click", function() 
     }
 
     if (maxCostField.value !== "") {
-        maxCost = maxCostField.value;
+        maxCost = parseInt(maxCostField.value);
     }
     else {
         maxCost = undefined;
     }
     showProductsList();
 })
+
+function setProductID(id) {
+    localStorage.setItem("productID", id);
+    window.location = "product-info.html";
+}
 
 //Muestra una lista de los productos del objeto "productsArray" en filas y columnas de HTML
 function showProductsList() {
@@ -52,9 +57,9 @@ function showProductsList() {
         //Filtra los valores obtenidos en el for por el rango de precio definido en minCost y maxCost
         //y filtra en la barra de búsqueda respecto al nombre y descripción de los productos
         if (!(minCost > parseInt(currentProduct.cost) || maxCost < parseInt(currentProduct.cost)) &&
-              (inputSearch == "" || nameAndDescLowerCase.includes(inputSearch))) {
+             (inputSearch == "" || nameAndDescLowerCase.includes(inputSearch))) {
             htmlContentToAppend += `
-            <div class="list-group-item list-group-item-action cursor-active">
+            <div onclick="setProductID(${currentProduct.id})" class="list-group-item list-group-item-action cursor-active">
                 <div class="row">
                     <div class="col-3">
                         <img src="${currentProduct.image}" alt="${currentProduct.description}" class="img-thumbnail">
