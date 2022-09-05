@@ -51,9 +51,8 @@ function showProductsList() {
         let nameAndDescLowerCase = (currentProduct.name + currentProduct.description).toLowerCase();
         //Filtra los valores obtenidos en el for por el rango de precio definido en minCost y maxCost
         //y filtra en la barra de búsqueda respecto al nombre y descripción de los productos
-        if ((minCost == undefined || minCost !== undefined && minCost <= parseInt(currentProduct.cost)) &&
-            (maxCost == undefined || maxCost !== undefined && maxCost >= parseInt(currentProduct.cost)) 
-             && (inputSearch == "" || nameAndDescLowerCase.includes(inputSearch))) {
+        if (!(minCost > parseInt(currentProduct.cost) || maxCost < parseInt(currentProduct.cost)) &&
+              (inputSearch == "" || nameAndDescLowerCase.includes(inputSearch))) {
             htmlContentToAppend += `
             <div class="list-group-item list-group-item-action cursor-active">
                 <div class="row">
