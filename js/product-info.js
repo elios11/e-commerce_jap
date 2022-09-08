@@ -5,24 +5,20 @@ let productInfoArray = "";
 let productCommentsArray = "";
 const productTitle = document.getElementById("productTitle");
 
-//Devuelve un objeto utilizando un archivo JSON y luego ejecuta la función showProductInfo
-function getProdInfo() {
+function getData() {
+    //Obtiene array de productos a partir de un archivo JSON
     getJSONData(PRODUCT_URL).then(function(resultObj) {
         productInfoArray = resultObj.data;
     })
-}
-
-function getProdComments() {
-    getJSONData(PRODUCT_COMMENTS_URL).then(function(resultObj) {
-        productCommentsArray = resultObj.data;
-        showProductInfo();
+    .then(() => {
+        //Obtiene array de comentarios del producto a partir de archivo JSON y llama a showProductInfo
+        getJSONData(PRODUCT_COMMENTS_URL).then(function(resultObj) {
+            productCommentsArray = resultObj.data;
+            showProductInfo();
+        })
     })
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-    getProdInfo();
-    getProdComments();
-});
+document.addEventListener("DOMContentLoaded", getData());
 
 function showProductInfo() {
     let htmlContentToAppend = `
