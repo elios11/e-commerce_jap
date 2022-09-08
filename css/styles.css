@@ -186,5 +186,9 @@ a.custom-card:hover {
 }
 
 .checked {
-  color: orange;
+  color: red;
+}
+
+input::placeholder {
+  font-style: italic;
 }

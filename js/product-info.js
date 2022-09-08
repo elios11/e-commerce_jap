@@ -83,7 +83,7 @@ function showProductInfo() {
             <h2 class="d-flex justify-content-center pb-4">
                 Opiniones
             </h2>
-            <div class="container">
+            <div class="">
             <hr>
                 ${getComments(productCommentsArray)}
             </div>
@@ -109,18 +109,38 @@ function getComments(array) {
     for (let i = 0; i < array.length; i++) {
         let currentComment = array[i];
         commentsHTML += `
-        <div class="row m-2">
-                </div>
-                    <strong>${currentComment.user}</strong>
-                    <span class="text-muted">&nbsp- ${currentComment.dateTime}</span>
-                </div>
+        <div class="row-lg-12">
+            <div class="col pt-1">
+                <div>
+                    <div class="mb-2">
+                        ${getScore(currentComment)}
+                    </div>
+                    </div>
+                        <strong>${currentComment.user}</strong>
+                        <span class="text-muted">&nbsp- ${currentComment.dateTime}</span>
+                    </div>
+                    <div>
+                        ${currentComment.description}
+                    </div>
+                    <hr class="mb-4 mt-4">
             </div>
-            <div>
-                ${currentComment.description}
-            </div>
-            <hr class="mb-2 mt-3">
         </div>
         `
     }
     return commentsHTML;
+}
+
+function getScore(comment) {
+    let fiveHearts = [
+        `<span class="fa fa-heart"></span>`,
+        `<span class="fa fa-heart"></span>`,
+        `<span class="fa fa-heart"></span>`,
+        `<span class="fa fa-heart"></span>`,
+        `<span class="fa fa-heart"></span>`
+    ]
+
+    for (let i = 0; i < parseInt(comment.score); i++) {
+        fiveHearts[i] = `<span class="fa fa-heart checked"></span>`;
+    }
+    return fiveHearts.join(" ");
 }

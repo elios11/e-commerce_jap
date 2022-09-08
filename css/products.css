@@ -1,7 +1,3 @@
 .sort-icon {
     width: 2em;
 }
-
-::placeholder {
-    font-style: italic;
-}
