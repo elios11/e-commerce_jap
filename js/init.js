@@ -6,6 +6,7 @@ const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/prod
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
+let userEmail = "";
 
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
@@ -43,6 +44,6 @@ let getJSONData = function(url){
 //Muestra el correo electrónico del login en la barra de navegación
 document.addEventListener("DOMContentLoaded", function() {
   let showUserEmail = document.getElementById("showUserEmail");  
-  let userEmail = sessionStorage.getItem("userEmail");
+  userEmail = sessionStorage.getItem("userEmail");
   showUserEmail.innerHTML = userEmail;
 })
