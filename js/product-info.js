@@ -1,9 +1,12 @@
 let productID = localStorage.getItem("productID");
 let PRODUCT_URL = PRODUCT_INFO_URL + productID + EXT_TYPE;
 let PRODUCT_COMMENTS_URL = PRODUCT_INFO_COMMENTS_URL + productID + EXT_TYPE;
-let productInfoArray = "";
-let productCommentsArray = "";
+let productInfoArray = [];
+let productCommentsArray = [];
 const productTitle = document.getElementById("productTitle");
+let pickScoreHearts = document.getElementsByClassName("pickScore");
+let pickScore = 0;
+
 
 function getData() {
     //Obtiene array de productos a partir de un archivo JSON
@@ -14,11 +17,15 @@ function getData() {
         //Obtiene array de comentarios del producto a partir de archivo JSON y llama a showProductInfo
         getJSONData(PRODUCT_COMMENTS_URL).then(function(resultObj) {
             productCommentsArray = resultObj.data;
+            addCommentsToArray();
             showProductInfo();
         })
     })
 }
-document.addEventListener("DOMContentLoaded", getData());
+document.addEventListener("DOMContentLoaded", () => {
+    getData();
+    pickCommentScore();
+});
 
 function showProductInfo() {
     let htmlContentToAppend = `
@@ -79,7 +86,7 @@ function showProductInfo() {
             <h2 class="d-flex justify-content-center pb-4">
                 Opiniones
             </h2>
-            <div class="">
+            <div>
             <hr>
                 ${getComments(productCommentsArray)}
             </div>
@@ -94,7 +101,7 @@ function getImages(array) {
     for(let i = 0; i < array.images.length; i++) {
         let currentImg = array.images[i];
         imagesHTML += `
-            <img src="${currentImg}" alt="Imagen de ${array.name}" class="img-thumbnail w-20 m-2">
+            <img src="${currentImg}" alt="Imagen de ${array.name}" class="border rounded w-20 m-2">
         `
     }
     return imagesHTML;
@@ -108,7 +115,7 @@ function getComments(array) {
         <div class="row-lg-12">
             <div class="col pt-1">
                 <div>
-                    <div class="mb-2">
+                    <div class="mb-2 heartScoreContainer">
                         ${getScore(currentComment)}
                     </div>
                     </div>
@@ -139,4 +146,68 @@ function getScore(comment) {
         fiveHearts[i] = `<span class="fa fa-heart checked"></span>`;
     }
     return fiveHearts.join(" ");
+}
+
+//Envia nuevo comentario al localStorage
+document.getElementById("sendCommentButton").addEventListener("click", function() {
+    console.log("hola");
+    let commentTextBox = document.getElementById("commentTextBox");
+    let nuevosComentarios = [];
+    if (localStorage.getItem(`${productID}_userComments`)) {
+        nuevosComentarios = JSON.parse(localStorage.getItem(`${productID}_userComments`));
+        console.log(nuevosComentarios);
+    }
+    let currentDate = new Date();
+    let fullDate = `${currentDate.getFullYear()}-${currentDate.getMonth()+1}-${currentDate.getDate()} ${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`
+    nuevosComentarios.push(
+    {
+        product: productID,
+        score: pickScore + 1,
+        description: commentTextBox.value,
+        user: userEmail,
+        dateTime: fullDate
+    });
+    localStorage.setItem(`${productID}_userComments`, JSON.stringify(nuevosComentarios));
+    getData();
+})
+
+//Limpia los valores de la caja de nuevo comentario
+document.getElementById("clearButton").addEventListener("click", () => {
+    let commentTextBox = document.getElementById("commentTextBox");
+    commentTextBox.value = "";
+    Array.from(pickScoreHearts).forEach(element => {
+        element.classList.remove("checked");
+    });
+})
+
+//Selecciona calificación de nuevo comentario en base a elección del usuario
+function pickCommentScore() {
+    //Asigna a cada elemento de clase pickScore un evento de click
+    for (let i = 0; i < pickScoreHearts.length; i++) {
+        const element = pickScoreHearts[i];
+
+        element.addEventListener("click", function() {
+            //Despinta los corazones actualmente seleccionados
+            for (let i = 0; i <= pickScore; i++) {
+                pickScoreHearts[i].classList.remove("checked");
+            }
+
+            pickScore = i;
+
+            //Pinta corazones según número de corazón clickeado
+            for (let i = 0; i <= pickScore; i++) {
+                pickScoreHearts[i].classList.add("checked");
+            }
+        })
+    }
+}
+
+//Agrega comentarios del localStorage al array de comentarios original
+function addCommentsToArray() {
+    let localStorageComments = JSON.parse(localStorage.getItem(`${productID}_userComments`));
+    if(localStorageComments) {
+        localStorageComments.forEach(element => {
+            productCommentsArray.push(element);
+        });
+    }
 }
