@@ -6,6 +6,10 @@
     margin-top: 80px;
 }
 
+#newCommentBox h2 {
+    user-select: none;
+}
+
 #commentTextBox {
     resize: none;
 }
@@ -28,4 +32,8 @@
     margin-top: 10px;
     margin-left: 20px;
     width:10%;
+}
+
+.unclickable {
+    pointer-events: none;
 }
