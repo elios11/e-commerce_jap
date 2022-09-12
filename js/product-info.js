@@ -3,9 +3,11 @@ let PRODUCT_URL = PRODUCT_INFO_URL + productID + EXT_TYPE;
 let PRODUCT_COMMENTS_URL = PRODUCT_INFO_COMMENTS_URL + productID + EXT_TYPE;
 let productInfoArray = [];
 let productCommentsArray = [];
-const productTitle = document.getElementById("productTitle");
 let pickScoreHearts = document.getElementsByClassName("pickScore");
 let pickScore = 0;
+const productTitle = document.getElementById("productTitle");
+const sendCommentButton = document.getElementById("sendCommentButton");
+const clearButton = document.getElementById("clearButton");
 
 
 function getData() {
@@ -23,6 +25,16 @@ function getData() {
     })
 }
 document.addEventListener("DOMContentLoaded", () => {
+    if (!sessionStorage.getItem("userEmail")) {
+        sendCommentButton.setAttribute("disabled", "");
+        commentTextBox.setAttribute("disabled", "");
+        commentTextBox.setAttribute("placeholder", "\n\nPara agregar una nueva calificación, por favor inicie sesión.");
+        commentTextBox.setAttribute("rows", 5);
+        clearButton.setAttribute("disabled", "");
+        Array.from(pickScoreHearts).forEach(element => {
+            element.classList.add("unclickable");
+        });
+    }
     getData();
     pickCommentScore();
 });
@@ -149,13 +161,11 @@ function getScore(comment) {
 }
 
 //Envia nuevo comentario al localStorage
-document.getElementById("sendCommentButton").addEventListener("click", function() {
-    console.log("hola");
+sendCommentButton.addEventListener("click", function() {
     let commentTextBox = document.getElementById("commentTextBox");
     let nuevosComentarios = [];
     if (localStorage.getItem(`${productID}_userComments`)) {
         nuevosComentarios = JSON.parse(localStorage.getItem(`${productID}_userComments`));
-        console.log(nuevosComentarios);
     }
     let currentDate = new Date();
     let fullDate = `${currentDate.getFullYear()}-${currentDate.getMonth()+1}-${currentDate.getDate()} ${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`
@@ -172,7 +182,7 @@ document.getElementById("sendCommentButton").addEventListener("click", function(
 })
 
 //Limpia los valores de la caja de nuevo comentario
-document.getElementById("clearButton").addEventListener("click", () => {
+clearButton.addEventListener("click", () => {
     let commentTextBox = document.getElementById("commentTextBox");
     commentTextBox.value = "";
     Array.from(pickScoreHearts).forEach(element => {
