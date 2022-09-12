@@ -14,7 +14,7 @@
     resize: none;
 }
 
-.heartScoreContainer {
+.heartScoreContainer, #sendCommentButton, #clearButton {
     user-select: none;
 }
 
@@ -36,4 +36,8 @@
 
 .unclickable {
     pointer-events: none;
+}
+
+.hoverHeart {
+    color: red;
 }
