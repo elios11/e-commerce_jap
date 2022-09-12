@@ -43,7 +43,7 @@ function showProductInfo() {
     let htmlContentToAppend = `
     <div class="col-lg-12">
         <div class="row">
-            <h1 class="pb-4 display-5">
+            <h1 class="pb-4 pt-4 display-5">
                 ${productInfoArray.name}
             </h1>
             <hr>
@@ -192,6 +192,7 @@ clearButton.addEventListener("click", () => {
 
 //Selecciona calificación de nuevo comentario en base a elección del usuario
 function pickCommentScore() {
+    const heartScoreContainer = document.getElementById("pickScoreHearts");
     //Asigna a cada elemento de clase pickScore un evento de click
     for (let i = 0; i < pickScoreHearts.length; i++) {
         const element = pickScoreHearts[i];
@@ -207,6 +208,20 @@ function pickCommentScore() {
             //Pinta corazones según número de corazón clickeado
             for (let i = 0; i <= pickScore; i++) {
                 pickScoreHearts[i].classList.add("checked");
+            }
+        })
+
+        //Pinta y despinta corazones al pasar el ratón sobre ellos
+        let hoveredScore = i + 1;
+        element.addEventListener("mouseover", function() {
+            for (let i = 0; i < hoveredScore; i++) {
+                pickScoreHearts[i].classList.add("hoverHeart");
+            }
+        })
+
+        element.addEventListener("mouseout", function() {
+            for (let i = 0; i < hoveredScore; i++) {
+                pickScoreHearts[i].classList.remove("hoverHeart");
             }
         })
     }
