@@ -55,9 +55,3 @@ input.formElement:focus {
 .g_id_signin {
     margin-bottom: 15px;
 }
-
-#alertaDatos {
-    color: red;
-    font-style: italic;
-    font-size: 12px;
-}

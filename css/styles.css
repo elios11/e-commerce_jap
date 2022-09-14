@@ -192,3 +192,9 @@ a.custom-card:hover {
 input::placeholder {
   font-style: italic;
 }
+
+.dataAlert {
+  color: red;
+  font-style: italic;
+  font-size: 12px;
+}
