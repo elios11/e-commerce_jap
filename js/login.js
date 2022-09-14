@@ -14,6 +14,9 @@ loginButton.addEventListener("click", function() {
     }
 })
 
-function irAPortada() {
+function irAPortada(credential) {
+    var token = credential.credential;
+    var decoded = jwt_decode(token);
+    sessionStorage.setItem("userEmail", decoded.email);
     window.location = "portada.html";
 }
