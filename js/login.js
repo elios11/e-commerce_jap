@@ -1,5 +1,5 @@
 let loginButton = document.getElementById("loginButton");
-let alertaDatos = document.getElementById("alertaDatos");
+let dataAlert = document.querySelector(".dataAlert");
 
 loginButton.addEventListener("click", function() {
     let email = document.getElementById("email");
@@ -10,7 +10,7 @@ loginButton.addEventListener("click", function() {
         window.location = "portada.html";
     }
     else {
-        alertaDatos.innerHTML = "Por favor rellene todos los campos";
+        dataAlert.innerHTML = "Por favor rellene todos los campos";
     }
 })
 
