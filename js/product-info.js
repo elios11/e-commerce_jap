@@ -169,16 +169,26 @@ sendCommentButton.addEventListener("click", function() {
     }
     let currentDate = new Date();
     let fullDate = `${currentDate.getFullYear()}-${currentDate.getMonth()+1}-${currentDate.getDate()} ${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`
-    nuevosComentarios.push(
-    {
-        product: productID,
-        score: pickScore + 1,
-        description: commentTextBox.value,
-        user: userEmail,
-        dateTime: fullDate
-    });
-    localStorage.setItem(`${productID}_userComments`, JSON.stringify(nuevosComentarios));
-    getData();
+    if (commentTextBox.value.length > 20) {
+        document.querySelector(".dataAlert").innerHTML = "";
+        Array.from(pickScoreHearts).forEach(element => {
+            element.classList.remove("checked");
+        });
+        nuevosComentarios.push(
+        {
+            product: productID,
+            score: pickScore + 1,
+            description: commentTextBox.value,
+            user: userEmail,
+            dateTime: fullDate
+        });
+        localStorage.setItem(`${productID}_userComments`, JSON.stringify(nuevosComentarios));
+        commentTextBox.value = "";
+        getData();
+    }
+    else {
+        document.querySelector(".dataAlert").innerHTML = "Su comentario debe contener al menos 20 caracteres."
+    }
 })
 
 //Limpia los valores de la caja de nuevo comentario
@@ -188,6 +198,7 @@ clearButton.addEventListener("click", () => {
     Array.from(pickScoreHearts).forEach(element => {
         element.classList.remove("checked");
     });
+    document.querySelector(".dataAlert").innerHTML = "";
 })
 
 //Selecciona calificación de nuevo comentario en base a elección del usuario
