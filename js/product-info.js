@@ -168,7 +168,8 @@ sendCommentButton.addEventListener("click", function() {
         nuevosComentarios = JSON.parse(localStorage.getItem(`${productID}_userComments`));
     }
     let currentDate = new Date();
-    let fullDate = `${currentDate.getFullYear()}-${currentDate.getMonth()+1}-${currentDate.getDate()} ${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`
+    let seconds = ("0" + currentDate.getSeconds()).slice(-2);
+    let fullDate = `${currentDate.getFullYear()}-${currentDate.getMonth()+1}-${currentDate.getDate()} ${currentDate.getHours()}:${currentDate.getMinutes()}:${seconds}`
     if (commentTextBox.value.length > 20) {
         document.querySelector(".dataAlert").innerHTML = "";
         Array.from(pickScoreHearts).forEach(element => {
