@@ -9,7 +9,6 @@ const productTitle = document.getElementById("productTitle");
 const sendCommentButton = document.getElementById("sendCommentButton");
 const clearButton = document.getElementById("clearButton");
 
-
 function getData() {
     //Obtiene array de productos a partir de un archivo JSON
     getJSONData(PRODUCT_URL).then(function(resultObj) {
@@ -21,10 +20,13 @@ function getData() {
             productCommentsArray = resultObj.data;
             addCommentsToArray();
             showProductInfo();
+            console.log(productInfoArray);
+            showRelatedProducts(productInfoArray);
         })
     })
 }
 document.addEventListener("DOMContentLoaded", () => {
+    //Valida si el usuario inició sesión para desbloquear nuevo comentario
     if (!sessionStorage.getItem("userEmail")) {
         sendCommentButton.setAttribute("disabled", "");
         commentTextBox.setAttribute("disabled", "");
@@ -247,4 +249,23 @@ function addCommentsToArray() {
             productCommentsArray.push(element);
         });
     }
+}
+
+function getRelatedProdID(id) {
+    PRODUCT_URL = PRODUCT_INFO_URL + id + EXT_TYPE;
+    getData();
+}
+
+function showRelatedProducts(array) {
+    let relatedProductsString = "";
+    array.relatedProducts.forEach(element => {
+        relatedProductsString += `
+        <div class="row">
+            <h6 onclick="getRelatedProdID(${element.id})">${element.name}</h6>
+            <img onclick="getRelatedProdID(${element.id})"
+            src="${element.image}" class="border rounded w-20 m-2" alt="${element.name}">
+        </div>
+        `
+    })
+    document.getElementById("relatedProductsContainer").innerHTML = relatedProductsString;
 }
