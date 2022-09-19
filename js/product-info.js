@@ -260,12 +260,12 @@ function showRelatedProducts(array) {
     let relatedProductsString = "";
     array.relatedProducts.forEach(element => {
         relatedProductsString += `
-        <div class="row">
-            <h6 onclick="getRelatedProdID(${element.id})">${element.name}</h6>
+        <div class="row m-4 w-50 justify-content-center">
+            <h6 onclick="getRelatedProdID(${element.id})" class="text-center">${element.name}</h6>
             <img onclick="getRelatedProdID(${element.id})"
-            src="${element.image}" class="border rounded w-20 m-2" alt="${element.name}">
+            src="${element.image}" class="border rounded w-50 m-2" alt="${element.name}">
         </div>
         `
     })
-    document.getElementById("relatedProductsContainer").innerHTML = relatedProductsString;
+    document.getElementById("relatedProducts").innerHTML = relatedProductsString;
 }
