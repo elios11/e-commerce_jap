@@ -31,8 +31,15 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item nav-link active" id="showUserEmail">
-          </li>
+          <div class="dropdown">
+              <button class="btn dropdown-toggle nav-item" type="button" id="showUserEmail"
+               data-bs-toggle="dropdown" aria-expanded="false"></button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+                <li><a class="dropdown-item" href="cart.html">Carrito</a></li>
+                <li><a class="dropdown-item" href="index.html">Cerrar sesión</a></li>
+              </ul>
+          </div>
         </ul>
       </div>
     </div>
@@ -49,7 +56,7 @@
 
     <!-- Contenedor de caja de creación de nuevo comentario -->
     <div class="container" id="newCommentBox">
-        <h2>Nuevo comentario</h2>
+        <h3>Nuevo comentario</h3>
         <textarea class="form-control form-control-md w-50" rows="6" name="commentTextBox" id="commentTextBox"></textarea>
         <p class="dataAlert"></p>
         <div class="heartScoreContainer" id="pickScoreHearts">
@@ -62,6 +69,12 @@
         <div class="d-flex">
             <button type="button" class="form-control w-20" id="sendCommentButton">Enviar</button>
             <button type="button" class="form-control" id="clearButton">Limpiar</button>
+        </div>
+    </div>
+
+    <div class="container mt-5" id="relatedProductsContainer">
+        <h3>Productos relacionados</h3>
+        <div class="d-flex col-12" id="relatedProducts">
         </div>
     </div>
 

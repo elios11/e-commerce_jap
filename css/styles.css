@@ -198,3 +198,7 @@ input::placeholder {
   font-style: italic;
   font-size: 12px;
 }
+
+#showUserEmail {
+  color: white;
+}

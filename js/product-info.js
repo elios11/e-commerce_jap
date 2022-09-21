@@ -260,10 +260,9 @@ function showRelatedProducts(array) {
     let relatedProductsString = "";
     array.relatedProducts.forEach(element => {
         relatedProductsString += `
-        <div class="row m-4 w-50 justify-content-center">
-            <h6 onclick="getRelatedProdID(${element.id})" class="text-center">${element.name}</h6>
-            <img onclick="getRelatedProdID(${element.id})"
-            src="${element.image}" class="border rounded w-50 m-2" alt="${element.name}">
+        <div onclick="getRelatedProdID(${element.id})" class="row border rounded m-4 w-25 justify-content-center relatedProduct">
+            <h6 class="pt-3 text-center w-50">${element.name}</h6>
+            <img src="${element.image}" class="m-2 rounded" alt="${element.name}">
         </div>
         `
     })

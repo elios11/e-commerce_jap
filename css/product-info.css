@@ -31,7 +31,7 @@
 #clearButton {
     margin-top: 10px;
     margin-left: 20px;
-    width:10%;
+    width: 10%;
 }
 
 .unclickable {
@@ -44,4 +44,9 @@
 
 .dataAlert {
     font-size: 15px;
+}
+
+.relatedProduct {
+    cursor: pointer;
+    user-select: none;
 }
