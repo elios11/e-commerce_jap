@@ -202,3 +202,7 @@ input::placeholder {
 #showUserEmail {
   color: white;
 }
+
+.userProfileButton {
+  padding-left: 0;
+}

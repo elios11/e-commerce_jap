@@ -171,7 +171,12 @@ sendCommentButton.addEventListener("click", function() {
     }
     let currentDate = new Date();
     let seconds = ("0" + currentDate.getSeconds()).slice(-2);
-    let fullDate = `${currentDate.getFullYear()}-${currentDate.getMonth()+1}-${currentDate.getDate()} ${currentDate.getHours()}:${currentDate.getMinutes()}:${seconds}`
+    let minutes = ("0" + currentDate.getMinutes()).slice(-2);
+    let hours = ("0" + currentDate.getHours()).slice(-2);
+    let day = ("0" + currentDate.getDate()).slice(-2);
+    let month = (("0" + (currentDate.getMonth() + 1)).slice(-2));
+
+    let fullDate = `${currentDate.getFullYear()}-${month}-${day} ${hours}:${minutes}:${seconds}`
     if (commentTextBox.value.length > 20) {
         document.querySelector(".dataAlert").innerHTML = "";
         Array.from(pickScoreHearts).forEach(element => {
