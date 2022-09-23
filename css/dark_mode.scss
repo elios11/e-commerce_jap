@@ -1,0 +1,33 @@
+$background-color: rgb(19, 21, 22);
+
+.darkMode {
+    background-color: rgb(19, 21, 22);
+    color: rgb(200, 195, 188);
+    
+    #showUserEmail {
+        color: white;
+    }
+
+    .navbar-dark {
+        background-color: $background-color;
+    }
+
+
+    .form-control {
+        color: rgb(209, 205, 199);
+        background-color: rgb(24, 26, 27);
+        border-color: rgb(60, 65, 68);
+    }
+    
+    .list-group-item {
+        color: rgb(209, 205, 199);
+        text-decoration-color: initial;
+        background-color: $background-color;
+        border-color: rgba(140, 130, 115, 0.13);
+    }
+
+    .img-thumbnail {
+        background-color: rgb(24, 26, 27);
+        border-color: rgb(56, 61, 63);
+    }
+}

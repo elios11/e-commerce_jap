@@ -199,10 +199,14 @@ input::placeholder {
   font-size: 12px;
 }
 
-#showUserEmail {
-  color: white;
-}
-
 .userProfileButton {
   padding-left: 0;
+}
+
+.navbar-light {
+  background-color:rgb(211 209 209 / 50%)!important;
+}
+
+#showUserEmail {
+  color: black;
 }
