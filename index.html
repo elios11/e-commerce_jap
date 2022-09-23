@@ -18,10 +18,10 @@
   </style>
 </head>
 
-<body>
+<body id="loginPage">
   <header>
     <div class="coverLogoContainer">
-      <img src="img/login.png" alt="e-mercado, tu e-commerce favorito" class="coverLogo">
+      <img src="img/login-removebg-preview.png" alt="e-mercado, tu e-commerce favorito" class="coverLogo">
     </div>
   </header>
   <main class="mt-5">
@@ -37,7 +37,7 @@
            data-client_id="938035182232-34t84lece3cvrnes33khbvfsm255msiv.apps.googleusercontent.com"
            data-callback="irAPortada">
       </div>
-      <div class="g_id_signin" data-type="standard"></div>
+      <div class="g_id_signin" data-type="standard" data-shape="pill"></div>
 
       <label for="email" class="formElement">Correo electrónico</label>
       <input type="email" name="email" id="email" placeholder="usuario@correo.com" class="formElement" required>
@@ -62,8 +62,9 @@
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
-  <script src="js/jwt-decode.js"></script>
   <script src="js/login.js"></script>
+  <script src="js/jwt-decode.js"></script>
+  <script src="js/login-dark-mode.js"></script>
 </body>
 
 </html>

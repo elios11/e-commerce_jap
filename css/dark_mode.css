@@ -1,26 +1,63 @@
 .darkMode {
-  background-color: rgb(19, 21, 22);
-  color: rgb(200, 195, 188);
+  background-color: rgb(24, 26, 27);
+  color: rgb(209, 205, 199);
 }
 .darkMode #showUserEmail {
-  color: white;
+  color: rgb(209, 205, 199);
 }
 .darkMode .navbar-dark {
-  background-color: rgb(19, 21, 22);
-}
-.darkMode .form-control {
-  color: rgb(209, 205, 199);
   background-color: rgb(24, 26, 27);
+}
+.darkMode .form-control,
+.darkMode input.formElement {
+  color: rgb(209, 205, 199);
+  background-color: rgb(32, 32, 32);
   border-color: rgb(60, 65, 68);
+}
+.darkMode input.formElement {
+  color: rgb(209, 205, 199);
+  background-color: rgb(59, 59, 59);
+}
+.darkMode input.formElement:focus {
+  outline-style: solid;
+  outline-width: thin;
+  outline-color: rgb(119, 82, 140);
+}
+.darkMode .form-control::-moz-placeholder {
+  color: rgb(209, 205, 199);
+}
+.darkMode .form-control:-ms-input-placeholder {
+  color: rgb(209, 205, 199);
+}
+.darkMode .form-control::placeholder {
+  color: rgb(209, 205, 199);
 }
 .darkMode .list-group-item {
   color: rgb(209, 205, 199);
   -webkit-text-decoration-color: initial;
           text-decoration-color: initial;
-  background-color: rgb(19, 21, 22);
+  background-color: rgb(24, 26, 27);
   border-color: rgba(140, 130, 115, 0.13);
 }
 .darkMode .img-thumbnail {
   background-color: rgb(24, 26, 27);
   border-color: rgb(56, 61, 63);
+}
+.darkMode #productCategory,
+.darkMode #productCurrency,
+.darkMode #file-upload {
+  background-color: rgb(24, 26, 27);
+  color: rgb(209, 205, 199);
+}
+.darkMode .nsm7Bb-HzV7m-LgbsSe {
+  background-color: rgb(24, 26, 27);
+  background-image: none;
+  border-color: rgb(58, 62, 65);
+  color: rgb(192, 186, 178);
+  outline-color: initial;
+}
+.darkMode input:-webkit-autofill,
+.darkMode input:-webkit-autofill:focus {
+  -webkit-transition: background-color 600000s 0s, color 600000s 0s;
+  transition: background-color 600000s 0s, color 600000s 0s;
 }/*# sourceMappingURL=dark_mode.css.map */

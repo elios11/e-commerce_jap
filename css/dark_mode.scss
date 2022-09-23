@@ -1,33 +1,69 @@
-$background-color: rgb(19, 21, 22);
+$body-background-color: rgb(24, 26, 27);
+$font-color: rgb(209, 205, 199);
 
 .darkMode {
-    background-color: rgb(19, 21, 22);
-    color: rgb(200, 195, 188);
-    
+    background-color: $body-background-color;
+    color: $font-color;
+
     #showUserEmail {
-        color: white;
+        color: $font-color;
     }
 
     .navbar-dark {
-        background-color: $background-color;
+        background-color: $body-background-color;
     }
 
-
-    .form-control {
-        color: rgb(209, 205, 199);
-        background-color: rgb(24, 26, 27);
+    .form-control,
+    input.formElement {
+        color: $font-color;
+        background-color: rgb(32, 32, 32);
         border-color: rgb(60, 65, 68);
     }
-    
+
+    input.formElement {
+        color: $font-color;
+        background-color: rgb(59, 59, 59);
+    }
+
+    input.formElement:focus {
+        outline-style: solid;
+        outline-width: thin;
+        outline-color: rgb(119 82 140);
+    }
+
+    .form-control::placeholder {
+        color: $font-color;
+    }
+
     .list-group-item {
-        color: rgb(209, 205, 199);
+        color: $font-color;
         text-decoration-color: initial;
-        background-color: $background-color;
+        background-color: $body-background-color;
         border-color: rgba(140, 130, 115, 0.13);
     }
 
     .img-thumbnail {
-        background-color: rgb(24, 26, 27);
+        background-color: $body-background-color;
         border-color: rgb(56, 61, 63);
+    }
+
+    #productCategory,
+    #productCurrency,
+    #file-upload {
+        background-color: $body-background-color;
+        color: $font-color;
+    }
+
+    .nsm7Bb-HzV7m-LgbsSe {
+        background-color: rgb(24, 26, 27);
+        background-image: none;
+        border-color: rgb(58, 62, 65);
+        color: rgb(192, 186, 178);
+        outline-color: initial;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:focus {
+        transition: background-color 600000s 0s, color 600000s 0s;
     }
 }
