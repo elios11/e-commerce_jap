@@ -42,7 +42,9 @@ function setTheme() {
         });
     }
     else {
-        document.querySelector(".jumbotron").style.backgroundImage="url(img/cover_back.png)"
+        if (document.querySelector(".jumbotron")) {
+            document.querySelector(".jumbotron").style.backgroundImage="url(img/cover_back.png)";
+        }
         document.getElementById("themeImg").src = "img/bx-moon.svg";
         document.body.classList.remove("darkMode");
         document.querySelector("nav").classList.remove("navbar-dark");
