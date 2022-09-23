@@ -210,3 +210,7 @@ input::placeholder {
 #showUserEmail {
   color: black;
 }
+
+#themeImg {
+  cursor: pointer;
+}
