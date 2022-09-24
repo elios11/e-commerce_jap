@@ -49,6 +49,15 @@
   background-color: rgb(24, 26, 27);
   color: rgb(209, 205, 199);
 }
+.darkMode .dropdown-menu {
+  background-color: rgb(24, 26, 27);
+}
+.darkMode .dropdown-menu .dropdown-item {
+  color: rgb(209, 205, 199);
+}
+.darkMode .dropdown-menu .dropdown-item:hover {
+  background-color: rgb(35, 38, 39);
+}
 .darkMode input:-webkit-autofill,
 .darkMode input:-webkit-autofill:focus {
   -webkit-transition: background-color 600000s 0s, color 600000s 0s;

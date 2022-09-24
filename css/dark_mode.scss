@@ -53,6 +53,16 @@ $font-color: rgb(209, 205, 199);
         background-color: $body-background-color;
         color: $font-color;
     }
+    
+    .dropdown-menu {
+        background-color: rgb(24, 26, 27);
+        .dropdown-item {
+            color: $font-color;
+            &:hover {
+                background-color: rgb(35, 38, 39);
+            }
+        }
+    }
 
     input:-webkit-autofill,
     input:-webkit-autofill:focus {
