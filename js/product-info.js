@@ -9,22 +9,20 @@ const productTitle = document.getElementById("productTitle");
 const sendCommentButton = document.getElementById("sendCommentButton");
 const clearButton = document.getElementById("clearButton");
 
-function getData() {
-    //Obtiene array de productos a partir de un archivo JSON
-    getJSONData(PRODUCT_URL).then(function(resultObj) {
-        productInfoArray = resultObj.data;
-    })
-    .then(() => {
-        //Obtiene array de comentarios del producto a partir de archivo JSON y llama a showProductInfo
-        getJSONData(PRODUCT_COMMENTS_URL).then(function(resultObj) {
-            productCommentsArray = resultObj.data;
-            addCommentsToArray();
-            showProductInfo();
-            console.log(productInfoArray);
-            showRelatedProducts(productInfoArray);
-        })
-    })
+async function getData() {
+    const productsRes = await fetch(PRODUCT_URL);
+    const productsData = await productsRes.json();
+    productInfoArray = productsData;
+
+    const commentsRes = await fetch(PRODUCT_COMMENTS_URL);
+    const commentsData = await commentsRes.json();
+    productCommentsArray = commentsData;
+
+    addCommentsToArray();
+    showProductInfo();
+    showRelatedProducts(productInfoArray);
 }
+
 document.addEventListener("DOMContentLoaded", () => {
     //Valida si el usuario inició sesión para desbloquear nuevo comentario
     if (!sessionStorage.getItem("userEmail")) {
@@ -37,8 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
             element.classList.add("unclickable");
         });
     }
-    getData();
     pickCommentScore();
+    getData();
 });
 
 function showProductInfo() {
