@@ -49,17 +49,6 @@
   background-color: rgb(24, 26, 27);
   color: rgb(209, 205, 199);
 }
-.darkMode .nsm7Bb-HzV7m-LgbsSe {
-  background-color: rgb(24, 26, 27);
-  background-image: none;
-  border-color: rgb(58, 62, 65);
-  color: rgb(192, 186, 178);
-  outline-color: initial;
-}
-.darkMode .nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-MJoBVe {
-  background-color: rgb(24, 26, 27);
-  color: rgb(192, 186, 178);
-}
 .darkMode input:-webkit-autofill,
 .darkMode input:-webkit-autofill:focus {
   -webkit-transition: background-color 600000s 0s, color 600000s 0s;
