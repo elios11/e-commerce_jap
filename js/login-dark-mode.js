@@ -12,5 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function setTheme() {
     if (isDarkModeEnabled) {
         document.body.classList.add("darkMode");
+        document.querySelector(".g_id_signin").setAttribute("data-theme", "filled_black");
     }
 }
