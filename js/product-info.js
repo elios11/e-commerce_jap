@@ -42,56 +42,53 @@ document.addEventListener("DOMContentLoaded", () => {
 function showProductInfo() {
     let htmlContentToAppend = `
     <div class="col-lg-12">
-        <div class="row">
-            <h1 class="pb-4 pt-4 display-5">
-                ${productInfoArray.name}
-            </h1>
-            <hr>
-            <div>
-                <strong>
-                    Precio
-                </strong>
-            </div>
-            <div>
-                ${productInfoArray.cost}
-            </div>
-        </div>
-        <div class="row pt-3">
-            <div>
-                <strong>
-                    Descripción
-                </strong>
-            </div>
-            <div>
-                ${productInfoArray.description}
-            </div>
-        </div>
-        <div class="row pt-3">
-            <div>
-                <strong>
-                    Categoría
-                </strong>
-            </div>
-            <div>
-                ${productInfoArray.category}
-            </div>
-        </div>
-        <div class="row pt-3">
-            <div>
-                <strong>
-                    Cantidad de vendidos
-                </strong>
-            </div>
-            <div>
-                ${productInfoArray.soldCount}
-            </div>
-        </div>
-        <div class="row pt-3">
-            <strong>
-                Imágenes ilustrativas
-            </strong>
-            <div class="row pt-3 d-flex justify-content-center" id="imagesContainer">
+        <div class="d-flex flex-row pt-3">
                 ${getImages(productInfoArray)}
+            <div class="ms-5 d-flex flex-column">
+                <div class="row">
+                    <h1 class="pb-4 pt-4 display-5">
+                        ${productInfoArray.name}
+                    </h1>
+                    <hr>
+                    <div>
+                        <strong>
+                            Precio
+                        </strong>
+                    </div>
+                    <div>
+                        ${productInfoArray.cost}
+                    </div>
+                </div>
+                <div class="row pt-3">
+                    <div>
+                        <strong>
+                            Descripción
+                        </strong>
+                    </div>
+                    <div>
+                        ${productInfoArray.description}
+                    </div>
+                </div>
+                <div class="row pt-3">
+                    <div>
+                        <strong>
+                            Categoría
+                        </strong>
+                    </div>
+                    <div>
+                        ${productInfoArray.category}
+                    </div>
+                </div>
+                <div class="row pt-3">
+                    <div>
+                        <strong>
+                            Cantidad de vendidos
+                        </strong>
+                    </div>
+                    <div>
+                        ${productInfoArray.soldCount}
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row pt-5">
@@ -109,13 +106,45 @@ function showProductInfo() {
 }
 
 function getImages(array) {
-    let imagesHTML = ``;
+    let carrouselItems = "";
     for(let i = 0; i < array.images.length; i++) {
         let currentImg = array.images[i];
-        imagesHTML += `
-            <img src="${currentImg}" alt="Imagen de ${array.name}" class="border rounded w-20 m-2">
+        if (i > 0) {
+            carrouselItems += `
+                <div class="carousel-item">
+                    <img src="${currentImg}" alt="Imagen de ${array.name}" class="d-block w-100">
+                </div>
+            `
+        }
+        else {
+            carrouselItems += `
+            <div class="carousel-item active">
+                <img src="${currentImg}" alt="Imagen de ${array.name}" class="d-block w-100">
+            </div>
         `
+        }
     }
+    let imagesHTML = `
+    <div id="imagesCarousel" class="carousel slide w-50 h-25 d-inline-block" data-bs-ride="carousel" data-bs-interval="200">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#imagesCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#imagesCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#imagesCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        ${console.log(carrouselItems)}
+        ${carrouselItems}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#imagesCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#imagesCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+    </div>
+    `;
     return imagesHTML;
 }
 
