@@ -284,8 +284,10 @@ function addCommentsToArray() {
 }
 
 function getRelatedProdID(id) {
+    localStorage.setItem("productID", id);
     PRODUCT_URL = PRODUCT_INFO_URL + id + EXT_TYPE;
     getData();
+    window.location = "product-info.html";
 }
 
 function showRelatedProducts(array) {
