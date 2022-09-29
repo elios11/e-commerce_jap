@@ -125,7 +125,7 @@ function getImages(array) {
         }
     }
     let imagesHTML = `
-    <div id="imagesCarousel" class="carousel slide w-50 h-25 d-inline-block" data-bs-ride="carousel" data-bs-interval="200">
+    <div id="imagesCarousel" class="carousel mt-5 slide w-50 h-25 d-inline-block" data-bs-ride="carousel" data-bs-interval="200">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#imagesCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#imagesCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
