@@ -107,31 +107,39 @@ function showProductInfo() {
 
 function getImages(array) {
     let carrouselItems = "";
+    let carouselIndicators = "";
     for(let i = 0; i < array.images.length; i++) {
         let currentImg = array.images[i];
-        if (i > 0) {
+        if (i === 0) {
+            carrouselItems += `
+            <div class="carousel-item active">
+                <img src="${currentImg}" alt="Imagen de ${array.name}" class="d-block w-100">
+            </div>
+            `
+            carouselIndicators += `
+            <button type="button" data-bs-target="#imagesCarousel" data-bs-slide-to="${i}" class="active"
+            aria-current="true" aria-label="Slide 1"></button>
+            `
+        }
+        else {
             carrouselItems += `
                 <div class="carousel-item">
                     <img src="${currentImg}" alt="Imagen de ${array.name}" class="d-block w-100">
                 </div>
             `
-        }
-        else {
-            carrouselItems += `
-            <div class="carousel-item active">
-                <img src="${currentImg}" alt="Imagen de ${array.name}" class="d-block w-100">
-            </div>
-        `
+            carouselIndicators += `
+            <button type="button" data-bs-target="#imagesCarousel" data-bs-slide-to="${i}" aria-label="Slide 2"></button>
+            `
         }
     }
     let imagesCarousel = `
-    <div id="imagesCarousel" class="carousel mt-5 slide d-inline-block" data-bs-ride="carousel" data-bs-interval="2200">
+    <div id="imagesCarousel" class="carousel mt-5 slide d-inline-block" data-bs-ride="carousel" 
+        data-bs-interval="2200">
         <div class="carousel-indicators">
-            <button type="button" data-bs-target="#imagesCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#imagesCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#imagesCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            ${carouselIndicators}
         </div>
         <div class="carousel-inner">
+            ${console.log(carrouselItems)}
             ${carrouselItems}
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#imagesCarousel" data-bs-slide="prev">
