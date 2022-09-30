@@ -41,64 +41,64 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function showProductInfo() {
     let htmlContentToAppend = `
-    <div class="col-lg-12">
-        <div class="d-flex flex-row pt-3">
-                ${getImages(productInfoArray)}
-            <div class="ms-5 d-flex flex-column">
-                <div class="row">
-                    <h1 class="pb-4 pt-4 display-5">
-                        ${productInfoArray.name}
-                    </h1>
-                    <hr>
-                    <div>
-                        <strong>
-                            Precio
-                        </strong>
-                    </div>
-                    <div>
-                        ${productInfoArray.cost}
-                    </div>
-                </div>
-                <div class="row pt-3">
-                    <div>
-                        <strong>
-                            Descripción
-                        </strong>
-                    </div>
-                    <div>
-                        ${productInfoArray.description}
-                    </div>
-                </div>
-                <div class="row pt-3">
-                    <div>
-                        <strong>
-                            Categoría
-                        </strong>
-                    </div>
-                    <div>
-                        ${productInfoArray.category}
-                    </div>
-                </div>
-                <div class="row pt-3">
-                    <div>
-                        <strong>
-                            Cantidad de vendidos
-                        </strong>
-                    </div>
-                    <div>
-                        ${productInfoArray.soldCount}
-                    </div>
-                </div>
+    <div class="row">
+        <div class="col-xl-6 text-center">
+            ${getImages(productInfoArray)}
+        </div>
+
+        <div class="col-xl-5 mt-lg-4 mt-3 ms-xl-5">
+            <h1 class="display-6 text-center">
+                ${productInfoArray.name}
+            </h1>
+            <hr>
+            <div>
+                <strong>
+                    Precio
+                </strong>
+            </div>
+
+            <div>
+                ${productInfoArray.currency} ${productInfoArray.cost}
+            </div>
+
+            <div class="mt-3">
+                <strong>
+                    Descripción
+                </strong>
+            </div>
+            <div>
+                ${productInfoArray.description}
+            </div>
+
+            <div class="mt-3">
+                <strong>
+                    Categoría
+                </strong>
+            </div>
+
+            <div>
+                ${productInfoArray.category}
+            </div>
+
+            <div class="mt-3">
+                <strong>
+                    Cantidad de vendidos
+                </strong>
+            </div>
+
+            <div>
+                ${productInfoArray.soldCount}
             </div>
         </div>
-        <div class="row pt-5">
-            <h2 class="d-flex justify-content-center pb-4">
-                Opiniones
-            </h2>
-            <div>
+    </div>
+
+    <div class="row mt-5">
+        <h2 class="text-center">
+            Opiniones
+        </h2>
+        <div>
             <hr>
-                ${getComments(productCommentsArray)}
-            </div>
+            ${getComments(productCommentsArray)}
         </div>
     </div>
     `
@@ -124,28 +124,27 @@ function getImages(array) {
         `
         }
     }
-    let imagesHTML = `
-    <div id="imagesCarousel" class="carousel mt-5 slide w-50 h-25 d-inline-block" data-bs-ride="carousel" data-bs-interval="2200">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#imagesCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#imagesCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#imagesCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-        ${console.log(carrouselItems)}
-        ${carrouselItems}
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#imagesCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#imagesCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
+    let imagesCarousel = `
+    <div id="imagesCarousel" class="carousel mt-5 slide d-inline-block" data-bs-ride="carousel" data-bs-interval="2200">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#imagesCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#imagesCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#imagesCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            ${carrouselItems}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#imagesCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#imagesCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+        </button>
     </div>
     `;
-    return imagesHTML;
+    return imagesCarousel;
 }
 
 function getComments(array) {
@@ -153,21 +152,18 @@ function getComments(array) {
     for (let i = 0; i < array.length; i++) {
         let currentComment = array[i];
         commentsHTML += `
-        <div class="row-lg-12">
-            <div class="col pt-1">
-                <div>
-                    <div class="mb-2 heartScoreContainer">
-                        ${getScore(currentComment)}
-                    </div>
-                    </div>
-                        <strong>${currentComment.user}</strong>
-                        <span class="text-muted">&nbsp- ${currentComment.dateTime}</span>
-                    </div>
-                    <div>
-                        ${currentComment.description}
-                    </div>
-                    <hr class="mb-4 mt-4">
+        <div class="col pt-1">
+            <div>
+                <div class="mb-2 heartScoreContainer">
+                    ${getScore(currentComment)}
+                </div>
+                <strong>${currentComment.user}</strong>
+                <span class="text-muted">&nbsp- ${currentComment.dateTime}</span>
             </div>
+            <div>
+                ${currentComment.description}
+            </div>
+            <hr class="mb-4 mt-4">
         </div>
         `
     }
