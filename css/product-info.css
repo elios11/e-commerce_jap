@@ -50,3 +50,7 @@
     cursor: pointer;
     user-select: none;
 }
+
+#relatedProducts .card {
+    max-width: 25%;
+}

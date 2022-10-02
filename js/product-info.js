@@ -139,7 +139,6 @@ function getImages(array) {
             ${carouselIndicators}
         </div>
         <div class="carousel-inner">
-            ${console.log(carrouselItems)}
             ${carrouselItems}
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#imagesCarousel" data-bs-slide="prev">
@@ -287,10 +286,8 @@ function addCommentsToArray() {
     }
 }
 
-function getRelatedProdID(id) {
+function goToRelatedProd(id) {
     localStorage.setItem("productID", id);
-    PRODUCT_URL = PRODUCT_INFO_URL + id + EXT_TYPE;
-    getData();
     window.location = "product-info.html";
 }
 
@@ -298,9 +295,11 @@ function showRelatedProducts(array) {
     let relatedProductsString = "";
     array.relatedProducts.forEach(element => {
         relatedProductsString += `
-        <div onclick="getRelatedProdID(${element.id})" class="row border rounded m-4 w-25 justify-content-center relatedProduct">
-            <h6 class="pt-3 text-center w-50">${element.name}</h6>
-            <img src="${element.image}" class="m-2 rounded" alt="${element.name}">
+        <div onclick="goToRelatedProd(${element.id})" role="button" class="card me-3 bg-dark text-white">
+            <img src="${element.image}" class="card-img-top" alt="${element.name}">
+            <div class="card-body">
+                <h5 class="card-title text-center">${element.name}</h5>
+            </div>
         </div>
         `
     })
