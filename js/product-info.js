@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!sessionStorage.getItem("userEmail")) {
         sendCommentButton.setAttribute("disabled", "");
         commentTextBox.setAttribute("disabled", "");
-        commentTextBox.setAttribute("placeholder", "\n\nPara agregar una nueva calificación, por favor inicie sesión.");
+        commentTextBox.setAttribute("placeholder", "\nPara agregar una nueva calificación, por favor inicie sesión.");
         commentTextBox.setAttribute("rows", 5);
         clearButton.setAttribute("disabled", "");
         Array.from(pickScoreHearts).forEach(element => {
@@ -141,11 +141,13 @@ function getImages(array) {
         <div class="carousel-inner">
             ${carrouselItems}
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#imagesCarousel" data-bs-slide="prev">
+        <button class="carousel-control-prev d-none d-md-block" type="button" data-bs-target="#imagesCarousel" 
+        data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Anterior</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#imagesCarousel" data-bs-slide="next">
+        <button class="carousel-control-next d-none d-md-block" type="button" data-bs-target="#imagesCarousel" 
+        data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Siguiente</span>
         </button>
@@ -295,10 +297,13 @@ function showRelatedProducts(array) {
     let relatedProductsString = "";
     array.relatedProducts.forEach(element => {
         relatedProductsString += `
-        <div onclick="goToRelatedProd(${element.id})" role="button" class="card me-3 bg-dark text-white">
-            <img src="${element.image}" class="card-img-top" alt="${element.name}">
-            <div class="card-body">
-                <h5 class="card-title text-center">${element.name}</h5>
+        <div class="col-6 col-md-5 col-lg-5 col-xl-3">
+            <div class="card bg-dark text-white" onclick="goToRelatedProd(${element.id})" 
+            role="button">
+                <img src="${element.image}" class="card-img-top" alt="${element.name}">
+                <div class="card-body">
+                    <h5 class="card-title text-center">${element.name}</h5>
+                </div>
             </div>
         </div>
         `
