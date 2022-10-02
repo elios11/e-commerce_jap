@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
     <li class="dropdown nav-item">
       <button class="btn dropdown-toggle nav-item userProfileButton" type="button" id="showUserEmail"
       data-bs-toggle="dropdown" aria-expanded="false">${userEmail}</button>
-      <ul class="dropdown-menu">
+      <ul class="dropdown-menu dropdown-menu-end">
         <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
         <li><a class="dropdown-item" href="cart.html">Carrito</a></li>
         <li><a onclick="logout()" class="dropdown-item" href="index.html">Cerrar sesión</a></li>
