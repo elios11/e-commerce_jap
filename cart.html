@@ -36,10 +36,10 @@
       </div>
     </div>
   </nav>
-  <main>
+  <main id="main">
     <div class="container mb-5" id="cart">
     </div>
-    <div class="container mt-4">
+    <div class="container mt-5">
       <h2>Detalles de envío</h2>
       <div class="form-check mt-3">
           <input class="form-check-input" type="radio" id="premium" name="shippingType" value="premium">
@@ -52,6 +52,27 @@
       <div class="form-check">
           <input class="form-check-input" type="radio" id="standard" name="shippingType" value="standard">
           <label class="form-check-label" for="standard">Standard 12 a 15 días (5%)</label>
+      </div>
+      <h2 class="mt-5 mb-3">Dirección de envío</h2>
+      <div class="row gy-4 gx-0 gx-md-5">
+        <div class="col-12 col-md-6">
+          <div class="input-group px-2 px-md-0">
+            <span class="input-group-text">Calle</span>
+            <input type="text" aria-label="nombre" class="form-control">
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="input-group px-2 px-md-0">
+            <span class="input-group-text">Número</span>
+            <input type="text" aria-label="apellido" class="form-control">
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="input-group input-dark px-2 px-md-0">
+            <span class="input-group-text">Esquina</span>
+            <input type="text" aria-label="esquina" class="form-control">
+          </div>
+        </div>
       </div>
     </div>
   </main>
