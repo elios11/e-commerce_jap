@@ -62,4 +62,13 @@
 .darkMode input:-webkit-autofill:focus {
   -webkit-transition: background-color 600000s 0s, color 600000s 0s;
   transition: background-color 600000s 0s, color 600000s 0s;
+}
+.darkMode table {
+  background-color: #212529;
+  border-color: #373b3e;
+  border-radius: 5px;
+  color: inherit;
+}
+.darkMode table tbody tr:hover {
+  background-color: #323539;
 }/*# sourceMappingURL=dark_mode.css.map */

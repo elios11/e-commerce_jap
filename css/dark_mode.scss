@@ -68,4 +68,14 @@ $font-color: rgb(209, 205, 199);
     input:-webkit-autofill:focus {
         transition: background-color 600000s 0s, color 600000s 0s;
     }
+
+    table {
+        background-color: #212529;
+        border-color: #373b3e;
+        border-radius: 5px;
+        color: inherit;
+        tbody tr:hover {
+            background-color: #323539;
+        }
+    }
 }
