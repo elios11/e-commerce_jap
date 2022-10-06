@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("themeImg").addEventListener("click", () => {
         isDarkModeEnabled = !isDarkModeEnabled;
         localStorage.setItem("isDarkModeEnabled", isDarkModeEnabled);
-        console.log(isDarkModeEnabled);
         setTheme();
     })
     setTheme();
