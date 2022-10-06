@@ -6,7 +6,7 @@ loginButton.addEventListener("click", function() {
     let password = document.getElementById("pass");
 
     if (email.value !== "" && password.value !== "") {
-        sessionStorage.setItem("userEmail", email.value);
+        localStorage.setItem("userEmail", email.value);
         window.location = "portada.html";
     }
     else {
@@ -17,6 +17,6 @@ loginButton.addEventListener("click", function() {
 function irAPortada(credential) {
     var token = credential.credential;
     var decoded = jwt_decode(token);
-    sessionStorage.setItem("userEmail", decoded.email);
+    localStorage.setItem("userEmail", decoded.email);
     window.location = "portada.html";
 }

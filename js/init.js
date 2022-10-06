@@ -43,13 +43,13 @@ let getJSONData = function(url) {
 }
 
 function logout() {
-  sessionStorage.removeItem("userEmail");
+  localStorage.removeItem("userEmail");
 }
 
 //Muestra el correo electrónico del login en la barra de navegación
 document.addEventListener("DOMContentLoaded", function() {
-  if (sessionStorage.getItem("userEmail")) {
-    userEmail = sessionStorage.getItem("userEmail");
+  if (localStorage.getItem("userEmail")) {
+    userEmail = localStorage.getItem("userEmail");
     navBarUl.innerHTML += `
     <li class="dropdown nav-item">
       <button class="btn dropdown-toggle nav-item userProfileButton" type="button" id="showUserEmail"
