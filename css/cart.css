@@ -1,0 +1,20 @@
+.cart-img {
+    max-width: 5em;
+}
+@media (max-width: 576px) {
+    .cart-img {
+        max-width: 4em;        
+    }
+    .container {
+        padding: 0;
+    }
+}
+
+.input-group {
+    width: unset;
+}
+
+.fa-trash:hover {
+    color: rgb(167, 1, 1);
+    cursor: pointer;
+}

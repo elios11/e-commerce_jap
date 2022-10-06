@@ -10,6 +10,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <link rel="stylesheet" href="css/dark_mode.css">
+  <link rel="stylesheet" href="css/cart.css">
 </head>
 
 <body>
@@ -36,9 +37,21 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+    <div class="container mb-5" id="cart">
+    </div>
+    <div class="container mt-4">
+      <h2>Detalles de envío</h2>
+      <div class="form-check mt-3">
+          <input class="form-check-input" type="radio" id="premium" name="shippingType" value="premium">
+          <label class="form-check-label" for="premium">Premium 2 a 5 días (15%)</label>
+      </div>
+      <div class="form-check">
+          <input class="form-check-input" type="radio" id="express" name="shippingType" value="express">
+          <label class="form-check-label" for="express">Express 5 a 8 días (7%)</label>
+      </div>
+      <div class="form-check">
+          <input class="form-check-input" type="radio" id="standard" name="shippingType" value="standard">
+          <label class="form-check-label" for="standard">Standard 12 a 15 días (5%)</label>
       </div>
     </div>
   </main>
