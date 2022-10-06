@@ -14,7 +14,7 @@ async function getCartData() {
 // Verifica si el usuario inició sesión, y si lo hizo muestra el contenido de la página
 document.addEventListener("DOMContentLoaded", () => {
     if (!localStorage.getItem("userEmail")) {
-        CART_CONTAINER.innerHTML = `
+        document.getElementById("main").innerHTML = `
         <div class="alert alert-warning text-center w-50 mt-5" role="alert">
             Para ver el carrito de compras, por favor 
             <a href="index.html" class="alert-link">inicie sesión</a>.
