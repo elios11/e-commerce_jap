@@ -10,10 +10,6 @@
     }
 }
 
-.input-group {
-    width: unset;
-}
-
 .fa-trash:hover {
     color: rgb(167, 1, 1);
     cursor: pointer;
