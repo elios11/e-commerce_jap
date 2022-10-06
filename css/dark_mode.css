@@ -71,4 +71,9 @@
 }
 .darkMode table tbody tr:hover {
   background-color: #323539;
+}
+.darkMode .input-group-text {
+  background-color: #212529;
+  color: rgb(209, 205, 199);
+  border: none;
 }/*# sourceMappingURL=dark_mode.css.map */
