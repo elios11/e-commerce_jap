@@ -58,7 +58,7 @@ function showProductInfo() {
             </div>
 
             <div>
-                ${productInfoArray.currency} ${productInfoArray.cost}
+                ${productInfoArray.currency} ${productInfoArray.cost.toLocaleString()}
             </div>
 
             <div class="mt-3">
