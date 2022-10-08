@@ -66,7 +66,9 @@ function showProductsList() {
                     </div>
                     <div class="col">
                         <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">${currentProduct.name} - ${currentProduct.currency} ${currentProduct.cost}</h4>
+                            <h4 class="mb-1">
+                                ${currentProduct.name} - ${currentProduct.currency} ${currentProduct.cost.toLocaleString()}
+                            </h4>
                             <small class="text-muted">${currentProduct.soldCount} artículos</small>
                         </div>
                         <p class="mb-1">${currentProduct.description}</p>
