@@ -3,6 +3,9 @@
 .container,
 .site-header {
   font-family: 'Raleway', serif !important;
+  -webkit-font-feature-settings: "lnum";
+  -moz-font-feature-settings: "lnum";
+  font-feature-settings: "lnum";
 }
 
 .jumbotron .display-4 {
