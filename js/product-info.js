@@ -41,53 +41,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function showProductInfo() {
     let htmlContentToAppend = `
-    <div class="row">
-        <div class="col-xl-6 text-center">
+    <div class="row d-flex align-items-center">
+        <div class="col-xl-7 text-center">
             ${getImages(productInfoArray)}
         </div>
 
-        <div class="col-xl-5 mt-lg-4 mt-3 ms-xl-5">
+        <div class="col-xl-4 mt-lg-0 mt-3 ms-xl-5">
             <h1 class="display-6 text-center">
                 ${productInfoArray.name}
             </h1>
             <hr>
-            <div>
-                <strong>
-                    Precio
-                </strong>
+            <div class="row mt-3 mb-3 text-muted fst-italic">
+                <div class="col-6">
+                    Categoría - <a class="link-secondary" href="products.html">${productInfoArray.category}</a>
+                </div>
+                <div class="d-flex justify-content-end col-6">
+                    Artículos vendidos - &nbsp<b>${productInfoArray.soldCount}</b>
+                </div>
             </div>
 
-            <div>
-                ${productInfoArray.currency} ${productInfoArray.cost.toLocaleString()}
+            <div class="row">
+                <div class="d-flex align-items-center col-6">
+                    <h3 class="mb-0">
+                        ${productInfoArray.currency} ${productInfoArray.cost.toLocaleString()}
+                    </h3>
+                </div>
+                <div class="col-6 d-flex justify-content-end">
+                    <input class="btn btn-success" type="button" value="Agregar al carrito"></input>
+                </div>
             </div>
-
-            <div class="mt-3">
-                <strong>
-                    Descripción
-                </strong>
-            </div>
-            <div>
-                ${productInfoArray.description}
-            </div>
-
-            <div class="mt-3">
-                <strong>
-                    Categoría
-                </strong>
-            </div>
-
-            <div>
-                ${productInfoArray.category}
-            </div>
-
-            <div class="mt-3">
-                <strong>
-                    Cantidad de vendidos
-                </strong>
-            </div>
-
-            <div>
-                ${productInfoArray.soldCount}
+    
+            <div class="row mt-5">
+                <h3 class="mb-3">Descripción</h3>
+                <h4>${productInfoArray.description}</h4>
             </div>
         </div>
     </div>
