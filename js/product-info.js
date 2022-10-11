@@ -25,7 +25,7 @@ async function getData() {
 
 document.addEventListener("DOMContentLoaded", () => {
     //Valida si el usuario inició sesión para desbloquear nuevo comentario
-    if (!sessionStorage.getItem("userEmail")) {
+    if (!localStorage.getItem("userEmail")) {
         sendCommentButton.setAttribute("disabled", "");
         commentTextBox.setAttribute("disabled", "");
         commentTextBox.setAttribute("placeholder", "\nPara agregar una nueva calificación, por favor inicie sesión.");
