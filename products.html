@@ -45,8 +45,8 @@
 
 <div class="container">
     <!-- Contenedor de filtros de órden -->
-    <div class="col text-end">
-      <div class="mb-3 btn-group btn-group-toggle">
+    <div class="text-end">
+      <div class="mb-2 btn-group btn-group-toggle">
         <button class="btn btn-light btn-block" id="sortDescendingBtn">
           <i class="fas fa-sort-amount-down sort-icon"></i>$
         </button>
@@ -59,31 +59,27 @@
       </div>
     </div>
     <!-- Contenedor de filtros de precio -->
-    <div class="row">
-        <div class="col-lg-12 col-md-12 mb-1 container">
-            <div class="row container p-0 m-0 justify-content-end">
-                <div class="col-lg-5 col-md-4">
-                    <input type="search" class="form-control" id="searchBar" placeholder="Búsqueda..." name="searchBar">
-                </div>
-                <div class="col">
-                    <p class="font-weight-normal text-end my-2">Precio</p>
-                </div>
-                <div class="col">
-                    <input class="form-control" type="number" placeholder="min." id="rangeFilterCostMin">
-                </div>
-                <div class="col">
-                    <input class="form-control" type="number" placeholder="máx." id="rangeFilterCostMax">
-                </div>
-                <div class="col-2 p-0">
-                    <div class="btn-group" role="group">
-                          <button class="btn btn-light btn-block" id="rangeFilterCost">Filtrar</button>
-                          <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
-                    </div>
-                </div>
+    <div class="row mb-3 justify-content-end me-1 me-sm-0">
+        <div class="col-12 col-md-4 mb-2 mb-md-0 col-xl-5">
+            <input type="search" class="form-control" id="searchBar" placeholder="Búsqueda..." name="searchBar">
+        </div>
+        <div class="col-2 col-md-1 offset-md-1 offset-xl-2">
+            <p class="font-weight-normal text-end my-2">Precio</p>
+        </div>
+        <div class="col-3 col-sm-2 col-xl-1">
+            <input class="form-control" type="number" placeholder="min." id="rangeFilterCostMin">
+        </div>
+        <div class="col-3 col-sm-2 col-xl-1 pe-4 ps-0">
+            <input class="form-control" type="number" placeholder="máx." id="rangeFilterCostMax">
+        </div>
+        <div class="col-4 ps-0 offset-sm-2 offset-md-0 col-md-2 p-0">
+            <div class="btn-group" role="group">
+                  <button class="btn btn-light btn-block" id="rangeFilterCost">Filtrar</button>
+                  <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
             </div>
         </div>
     </div>
-</div>
+  </div>
 
   <!-- Contenedor para lista de productos -->
   <div class="container" id="productsContainer">
