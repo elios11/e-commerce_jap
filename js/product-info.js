@@ -67,7 +67,9 @@ function showProductInfo() {
                     </h3>
                 </div>
                 <div class="col-6 d-flex justify-content-end">
-                    <input class="btn btn-success" type="button" value="Agregar al carrito"></input>
+                    <input class="btn btn-success" type="button" id="addToCartBtn" 
+                    onclick="addToCart()"
+                    value="Agregar al carrito"></input>
                 </div>
             </div>
     
@@ -295,4 +297,36 @@ function showRelatedProducts(array) {
         `
     })
     document.getElementById("relatedProducts").innerHTML = relatedProductsString;
+}
+
+// Agrega producto al carrito de compras si aún no está incluído
+function addToCart() {
+    let localStorageCartItems = JSON.parse(localStorage.getItem("storedCartProducts"));
+    let cartItems = [];
+    let alreadyInCart = false;
+
+    if (localStorageCartItems) {
+        cartItems = localStorageCartItems;
+    }
+
+    if (cartItems.length !== 0) {
+        cartItems.forEach(item => {
+            if (item.id === productInfoArray.id) {
+                alreadyInCart = true;
+            }
+        })
+    }
+
+    if (!alreadyInCart) {
+        cartItems.push(
+            {
+                id: productInfoArray.id,
+                name: productInfoArray.name,
+                count: 1,
+                unitCost: productInfoArray.cost,
+                currency: productInfoArray.currency,
+                image: productInfoArray.images[0]
+            })
+    }
+    localStorage.setItem("storedCartProducts", JSON.stringify(cartItems));
 }
