@@ -8,7 +8,9 @@ async function getCartData() {
     const cartRes = await fetch(USER_CART);
     const cartData = await cartRes.json();
     userCartArray = cartData;
+    updateFromLocalStorage(userCartArray);
     showUserCart(userCartArray);
+    updateSubtotal(userCartArray);
 }
 
 // Verifica si el usuario inició sesión, y si lo hizo muestra el contenido de la página
@@ -63,27 +65,56 @@ function goToProduct(id) {
 function getArticles(cartArray) {
     let articlesHTMLContent = "";
     cartArray.articles.forEach(element => {
+        element.subtotal = element.count * element.unitCost;
         articlesHTMLContent += `
         <tr class="align-middle">
-            <td class="col-1">
+            <td class="col-2">
                 <img class="cart-img rounded" src="${element.image}" alt="${element.name}">
             </td>
-            <td class="col-2">
+            <td class="col-3">
                 <span onclick="goToProduct(${element.id})" class="text-decoration-underline" role="button">
                     ${element.name}
                 </span>
             </td>
-            <td class="col-2">
+            <td class="col-3">
                 ${element.currency} ${element.unitCost.toLocaleString()}
             </td>
             <td class="col-1">
-                <input class="form-control" type="number" value=${element.count} id="quantity">
+                <input class="form-control" type="number" value=${element.count} 
+                min="1" max="99" id="${element.id}">
             </td>
-            <td class="col-2" id="subtotal${element.id}">
-                <b>${element.currency} ${(element.unitCost * element.count).toLocaleString()}</b>
+            <td class="col-3">
+                <b>${element.currency} ${element.subtotal.toLocaleString()}</b>
             </td>
         </tr>
         `
     });
     return articlesHTMLContent;
+}
+
+// Agrega evento input al input de cantidad de cada producto
+function updateSubtotal(objCartArray) {
+    const localStorageCartItems = JSON.parse(localStorage.getItem("storedCartProducts"));
+
+    objCartArray.articles.forEach(product => {
+        const productCountInput = document.getElementById(product.id);
+        productCountInput.addEventListener("input", () => {
+            localStorageCartItems.forEach(item => {
+                if (item.id === product.id) {
+                    item.count = productCountInput.value;
+                    localStorage.setItem("storedCartProducts", JSON.stringify(localStorageCartItems));
+                }
+            })
+            updateFromLocalStorage(objCartArray);
+            showUserCart(objCartArray);
+            updateSubtotal(objCartArray);
+        })
+    })
+}
+
+// Reemplaza los productos actuales del carrito por los del localStorage
+function updateFromLocalStorage(array) {
+    if (localStorage.getItem("storedCartProducts")) {
+        array.articles = JSON.parse(localStorage.getItem("storedCartProducts"));
+    }
 }
