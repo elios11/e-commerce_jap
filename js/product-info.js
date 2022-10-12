@@ -71,9 +71,13 @@ function showProductInfo() {
                     onclick="addToCart()"
                     value="Agregar al carrito"></input>
                 </div>
+                <div class="col-10 offset-1 col-sm-6 offset-sm-3 offset-xl-0
+                            col-xl-12 mt-4 mb-4 rounded"
+                        id="addToCartAlert" role="alert">
+                </div>
             </div>
     
-            <div class="row mt-5">
+            <div class="row">
                 <h3 class="mb-3">Descripción</h3>
                 <h4>${productInfoArray.description}</h4>
             </div>
@@ -301,7 +305,8 @@ function showRelatedProducts(array) {
 
 // Agrega producto al carrito de compras si aún no está incluído
 function addToCart() {
-    let localStorageCartItems = JSON.parse(localStorage.getItem("storedCartProducts"));
+    const addToCartAlert = document.getElementById("addToCartAlert");
+    const localStorageCartItems = JSON.parse(localStorage.getItem("storedCartProducts"));
     let cartItems = [];
     let alreadyInCart = false;
 
@@ -313,6 +318,16 @@ function addToCart() {
         cartItems.forEach(item => {
             if (item.id === productInfoArray.id) {
                 alreadyInCart = true;
+                addToCartAlert.classList.add("alert-warning");
+                addToCartAlert.classList.add("alert-warning");
+                addToCartAlert.innerHTML = `
+                <h6 class="pb-1 pt-2 px-2 text-center">¡Este producto ya está en el 
+                <a class="link-secondary fst-italic" href="cart.html">carrito</a> de compras!</h6>
+                `
+                setTimeout(() => {
+                    addToCartAlert.innerHTML = "";
+                    addToCartAlert.classList.remove("alert-warning");
+                }, 4000);
             }
         })
     }
@@ -327,6 +342,15 @@ function addToCart() {
                 currency: productInfoArray.currency,
                 image: productInfoArray.images[0]
             })
+        addToCartAlert.classList.add("alert-success");
+        addToCartAlert.innerHTML = `
+        <h6 class="pb-1 pt-2 px-2 text-center">¡El producto fue añadido al 
+        <a class="link-secondary fst-italic" href="cart.html">carrito</a> de compras!</h6>
+        `
+        setTimeout(() => {
+            addToCartAlert.innerHTML = "";
+            addToCartAlert.classList.add("alert-success");
+        }, 4000);
     }
     localStorage.setItem("storedCartProducts", JSON.stringify(cartItems));
 }
