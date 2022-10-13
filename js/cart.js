@@ -11,6 +11,7 @@ async function getCartData() {
     updateFromLocalStorage(userCartArray);
     showUserCart(userCartArray);
     updateSubtotal(userCartArray);
+    removeItemFromCartBtn(userCartArray);
 }
 
 // Verifica si el usuario inició sesión, y si lo hizo muestra el contenido de la página
@@ -47,6 +48,7 @@ function showUserCart(cartArray) {
             <th scope="col">
                 Subtotal
             </th>
+            <th scope="col"></th>
         </thead>
         <tbody>
             ${getArticles(cartArray)}
@@ -76,7 +78,7 @@ function getArticles(cartArray) {
                     ${element.name}
                 </span>
             </td>
-            <td class="col-3">
+            <td class="col-2">
                 ${element.currency} ${element.unitCost.toLocaleString()}
             </td>
             <td class="col-1">
@@ -85,6 +87,9 @@ function getArticles(cartArray) {
             </td>
             <td class="col-3">
                 <b>${element.currency} ${element.subtotal.toLocaleString()}</b>
+            </td>
+            <td class="col-1">
+                <i class="fas fa-trash" id="rmvItem_${element.id}" alt="Eliminar producto del carrito"></i>
             </td>
         </tr>
         `
@@ -112,9 +117,29 @@ function updateSubtotal(objCartArray) {
     })
 }
 
-// Reemplaza los productos actuales del carrito por los del localStorage
+// Reemplaza los productos actuales del carrito por los del almacenamiento local
 function updateFromLocalStorage(array) {
     if (localStorage.getItem("storedCartProducts")) {
         array.articles = JSON.parse(localStorage.getItem("storedCartProducts"));
     }
+}
+
+// Elimina producto elegido del carrito de compras y del almacenamiento local
+function removeItemFromCartBtn(objCartArray) {
+    const localStorageCartItems = JSON.parse(localStorage.getItem("storedCartProducts"));
+
+    objCartArray.articles.forEach(product => {
+        const removeItemBtn = document.getElementById(`rmvItem_${product.id}`);
+        removeItemBtn.addEventListener("click", () => {
+            localStorageCartItems.forEach(item => {
+                if (item.id === product.id) {
+                    localStorageCartItems.splice(item, 1);
+                    localStorage.setItem("storedCartProducts", JSON.stringify(localStorageCartItems));
+                }
+            })
+            updateFromLocalStorage(objCartArray);
+            showUserCart(objCartArray);
+            removeItemFromCartBtn(objCartArray);
+        })
+    })
 }
