@@ -131,9 +131,9 @@ function removeItemFromCartBtn(objCartArray) {
     objCartArray.articles.forEach(product => {
         const removeItemBtn = document.getElementById(`rmvItem_${product.id}`);
         removeItemBtn.addEventListener("click", () => {
-            localStorageCartItems.forEach(item => {
+            localStorageCartItems.forEach(function (item, index) {
                 if (item.id === product.id) {
-                    localStorageCartItems.splice(item, 1);
+                    localStorageCartItems.splice(index, 1);
                     localStorage.setItem("storedCartProducts", JSON.stringify(localStorageCartItems));
                 }
             })
