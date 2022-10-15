@@ -33,27 +33,29 @@ document.addEventListener("DOMContentLoaded", () => {
 function showUserCart(cartArray) {
     let htmlContentToAppend = `
     <h1 class="text-center mt-4 mb-4">Carrito de compras</h1>
-    <table class="table text-center" id="table">
-        <thead>
-            <th></th>
-            <th scope="col">
-                Nombre
-            </th>
-            <th scope="col">
-                Costo
-            </th>
-            <th scope="col">
-                Cantidad
-            </th>
-            <th scope="col">
-                Subtotal
-            </th>
-            <th scope="col"></th>
-        </thead>
-        <tbody>
-            ${getArticles(cartArray)}
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table text-center" id="table">
+            <thead>
+                <th></th>
+                <th scope="col">
+                    Nombre
+                </th>
+                <th scope="col">
+                    Costo
+                </th>
+                <th scope="col">
+                    Cantidad
+                </th>
+                <th scope="col">
+                    Subtotal
+                </th>
+                <th scope="col"></th>
+            </thead>
+            <tbody>
+                ${getArticles(cartArray)}
+            </tbody>
+        </table>
+    </div>
     `
     CART_CONTAINER.innerHTML = htmlContentToAppend;
 }
@@ -70,25 +72,25 @@ function getArticles(cartArray) {
         element.subtotal = element.count * element.unitCost;
         articlesHTMLContent += `
         <tr class="align-middle">
-            <td class="col-2">
+            <td>
                 <img class="cart-img rounded" src="${element.image}" alt="${element.name}">
             </td>
-            <td class="col-3">
+            <td>
                 <span onclick="goToProduct(${element.id})" class="text-decoration-underline" role="button">
                     ${element.name}
                 </span>
             </td>
-            <td class="col-2">
+            <td>
                 ${element.currency} ${element.unitCost.toLocaleString()}
             </td>
-            <td class="col-1">
+            <td>
                 <input class="form-control" type="number" value=${element.count} 
                 min="1" max="99" id="${element.id}">
             </td>
-            <td class="col-3">
+            <td>
                 <b>${element.currency} ${element.subtotal.toLocaleString()}</b>
             </td>
-            <td class="col-1">
+            <td>
                 <i class="fas fa-trash" id="rmvItem_${element.id}" alt="Eliminar producto del carrito"></i>
             </td>
         </tr>
