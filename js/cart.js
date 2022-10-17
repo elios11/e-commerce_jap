@@ -1,17 +1,15 @@
-let userID = 25801;
-const USER_CART = CART_INFO_URL + userID + EXT_TYPE;
 let userCartArray = [];
 const CART_CONTAINER = document.getElementById("cart");
 
 // Obtiene json a partir de url y agrega su contenido a un array
-async function getCartData() {
-    const cartRes = await fetch(USER_CART);
-    const cartData = await cartRes.json();
-    userCartArray = cartData;
+function getCartData() {
     updateFromLocalStorage(userCartArray);
     showUserCart(userCartArray);
-    updateSubtotal(userCartArray);
-    removeItemFromCartBtn(userCartArray);
+    console.log(userCartArray);
+    if (userCartArray.articles.length !== 0) {
+        removeItemFromCartBtn(userCartArray);
+        updateSubtotal(userCartArray);
+    }
 }
 
 // Verifica si el usuario inició sesión, y si lo hizo muestra el contenido de la página
@@ -31,6 +29,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Muestra carrito de compra y sus elementos
 function showUserCart(cartArray) {
+    if (cartArray.articles.length === 0) {
+        CART_CONTAINER.innerHTML = `
+        <h2 class="text-center mt-5" role="alert">
+            El carrito de compras se encuentra vacío, mirá nuevos productos para agregar en
+            <a href="categories.html" class="alert-link">categorías</a>.
+        </h2>
+        `
+        return;
+    }
     let htmlContentToAppend = `
     <h1 class="text-center mt-4 mb-4">Carrito de compras</h1>
     <div class="table-responsive">
@@ -115,6 +122,7 @@ function updateSubtotal(objCartArray) {
             updateFromLocalStorage(objCartArray);
             showUserCart(objCartArray);
             updateSubtotal(objCartArray);
+            removeItemFromCartBtn(objCartArray);
         })
     })
 }
@@ -142,6 +150,7 @@ function removeItemFromCartBtn(objCartArray) {
             updateFromLocalStorage(objCartArray);
             showUserCart(objCartArray);
             removeItemFromCartBtn(objCartArray);
+            updateSubtotal(objCartArray);
         })
     })
 }
