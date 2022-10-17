@@ -1,42 +1,47 @@
 let userCartArray = [];
+const BROU_COTIZACION_API = "https://cotizaciones-brou.herokuapp.com/api/currency/latest";
+let CURRENT_USD_PRICE;
 const CART_CONTAINER = document.getElementById("cart");
 
-// Obtiene json a partir de url y agrega su contenido a un array
+async function getLatestCotizations(url) {
+    const cotizationRes = await fetch(url);
+    const cotizationData = await cotizationRes.json();
+    console.log(cotizationData);
+}
+
 function getCartData() {
     updateFromLocalStorage(userCartArray);
     showUserCart(userCartArray);
-    console.log(userCartArray);
-    if (userCartArray.articles.length !== 0) {
-        removeItemFromCartBtn(userCartArray);
-        updateSubtotal(userCartArray);
-    }
+    removeItemFromCartBtn(userCartArray);
+    updateSubtotal(userCartArray);
 }
 
 // Verifica si el usuario inició sesión, y si lo hizo muestra el contenido de la página
 document.addEventListener("DOMContentLoaded", () => {
     if (!localStorage.getItem("userEmail")) {
         document.getElementById("main").innerHTML = `
-        <div class="alert alert-warning text-center w-50 mt-5" role="alert">
+        <div class="alert alert-warning lead text-center w-50 mt-5" role="alert">
             Para ver el carrito de compras, por favor 
             <a href="index.html" class="alert-link">inicie sesión</a>.
         </div>
         `
+        return false;
     }
-    else {
-        getCartData();
-    }
+    getLatestCotizations(BROU_COTIZACION_API);
+    getCartData();
 })
 
 // Muestra carrito de compra y sus elementos
 function showUserCart(cartArray) {
-    if (cartArray.articles.length === 0) {
+    if (!cartArray.articles || cartArray.articles.length === 0) {
+        document.getElementById("shippingDetails").innerHTML = "";
         CART_CONTAINER.innerHTML = `
         <h2 class="text-center mt-5" role="alert">
             El carrito de compras se encuentra vacío, mirá nuevos productos para agregar en
             <a href="categories.html" class="alert-link">categorías</a>.
         </h2>
         `
-        return;
+        return false;
     }
     let htmlContentToAppend = `
     <h1 class="text-center mt-4 mb-4">Carrito de compras</h1>
@@ -106,6 +111,16 @@ function getArticles(cartArray) {
     return articlesHTMLContent;
 }
 
+// Reemplaza los productos actuales del carrito por los del almacenamiento local
+function updateFromLocalStorage(array) {
+    if (localStorage.getItem("storedCartProducts")) {
+        array.articles = JSON.parse(localStorage.getItem("storedCartProducts"));
+    }
+    else {
+        array.articles = [];
+    }
+}
+
 // Agrega evento input al input de cantidad de cada producto
 function updateSubtotal(objCartArray) {
     const localStorageCartItems = JSON.parse(localStorage.getItem("storedCartProducts"));
@@ -125,13 +140,6 @@ function updateSubtotal(objCartArray) {
             removeItemFromCartBtn(objCartArray);
         })
     })
-}
-
-// Reemplaza los productos actuales del carrito por los del almacenamiento local
-function updateFromLocalStorage(array) {
-    if (localStorage.getItem("storedCartProducts")) {
-        array.articles = JSON.parse(localStorage.getItem("storedCartProducts"));
-    }
 }
 
 // Elimina producto elegido del carrito de compras y del almacenamiento local
