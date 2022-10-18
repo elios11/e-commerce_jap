@@ -99,7 +99,11 @@ function getArticles(cartArray) {
                 </span>
             </td>
             <td>
-                ${element.currency} ${element.unitCost.toLocaleString()}
+                ${element.currency} 
+                ${element.currency == "UYU" ? 
+                    element.unitCost.toLocaleString("ES") : 
+                    element.unitCost.toLocaleString("EN")
+                }
             </td>
             <td>
                 <input class="form-control" type="number" value=${element.count} 
