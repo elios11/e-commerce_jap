@@ -63,7 +63,11 @@ function showProductInfo() {
             <div class="row">
                 <div class="d-flex align-items-center col-6">
                     <h3 class="mb-0">
-                        ${productInfoArray.currency} ${productInfoArray.cost.toLocaleString()}
+                        ${productInfoArray.currency} 
+                        ${productInfoArray.currency == "UYU" ? 
+                            productInfoArray.cost.toLocaleString("ES") : 
+                            productInfoArray.cost.toLocaleString("EN")
+                        }
                     </h3>
                 </div>
                 <div class="col-6 d-flex justify-content-end">

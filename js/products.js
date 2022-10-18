@@ -67,7 +67,11 @@ function showProductsList() {
                     <div class="col">
                         <div class="d-flex w-100 justify-content-between">
                             <h4 class="mb-1">
-                                ${currentProduct.name} - ${currentProduct.currency} ${currentProduct.cost.toLocaleString()}
+                                ${currentProduct.name} - ${currentProduct.currency}
+                                ${currentProduct.currency == "UYU" ? 
+                                    currentProduct.cost.toLocaleString("ES") : 
+                                    currentProduct.cost.toLocaleString("EN")
+                                }
                             </h4>
                             <small class="text-muted">${currentProduct.soldCount} artículos</small>
                         </div>
