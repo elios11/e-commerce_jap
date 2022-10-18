@@ -42,15 +42,15 @@
     <div class="container mt-5" id="shippingDetails">
       <h2 class="ms-2">Detalles de envío</h2>
       <div class="form-check ms-3 mt-3">
-          <input class="form-check-input" type="radio" id="premium" name="shippingType" value="premium">
+          <input class="form-check-input" type="radio" id="premium" name="shippingType" value="15">
           <label class="form-check-label" for="premium">Premium 2 a 5 días (15%)</label>
       </div>
       <div class="form-check ms-3">
-          <input class="form-check-input" type="radio" id="express" name="shippingType" value="express">
+          <input class="form-check-input" type="radio" id="express" name="shippingType" value="7">
           <label class="form-check-label" for="express">Express 5 a 8 días (7%)</label>
       </div>
       <div class="form-check ms-3">
-          <input class="form-check-input" type="radio" id="standard" name="shippingType" value="standard">
+          <input class="form-check-input" type="radio" id="standard" name="shippingType" value="5">
           <label class="form-check-label" for="standard">Standard 12 a 15 días (5%)</label>
       </div>
       <h3 class="mt-5 mb-3">Dirección</h3>
@@ -74,6 +74,45 @@
           </div>
         </div>
       </div>
+      <hr class="mt-5 mb-4">
+      
+      <h2 class="ms-2 mb-3">Costos</h2>
+      <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between">
+          <div>
+            <h6 class="my-0">Subcosto</h6>
+            <small class="text-muted">
+              Costo de productos por cantidad
+            </small>
+          </div>
+          <span class="text-muted" id="productsCost">
+            -
+          </span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <div>
+            <h6 class="my-0">
+                Costo de envío
+            </h6>
+            <small class="text-muted">
+                Según el tipo de envío
+            </small>
+          </div>
+          <span class="text-muted" id="shippingCost">
+                -
+          </span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <div>
+            <h6 class="my-0">
+                Total ($)
+            </h6>
+          </div>
+          <span class="text-muted" id="totalCost">
+            -
+          </span>
+        </li>
+      </ul>
     </div>
   </main>
   <footer class="text-muted">
