@@ -106,7 +106,12 @@ function getArticles(cartArray) {
                 min="1" max="99" id="${element.id}">
             </td>
             <td>
-                <b>${element.currency} ${element.subtotal.toLocaleString()}</b>
+                <b>${element.currency} 
+                   ${element.currency == "UYU" ? 
+                        element.subtotal.toLocaleString("ES") : 
+                        element.subtotal.toLocaleString("EN")
+                    }
+                </b>
             </td>
             <td>
                 <i class="fas fa-trash" id="rmvItem_${element.id}" alt="Eliminar producto del carrito"></i>
