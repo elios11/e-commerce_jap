@@ -70,18 +70,28 @@ $font-color: rgb(209, 205, 199);
     }
 
     table {
-        background-color: #212529;
-        border-color: #373b3e;
+        background-color: rgb(33, 37, 41);
+        border-color: rgb(55, 59, 62);
         border-radius: 5px;
         color: inherit;
         tbody tr:hover {
-            background-color: #323539;
+            background-color: rgb(50, 53, 57);
         }
     }
 
     .input-group-text {
-        background-color: #212529;
+        background-color: rgb(33, 37, 41);
         color: $font-color;
         border: none;
+    }
+
+    .modal-content {
+        background-color: $body-background-color;
+        .modal-header {
+            border-bottom-color: rgb(56, 61, 63);
+        }
+        .modal-footer {
+            border-top-color: rgb(56, 61, 63);
+        }
     }
 }

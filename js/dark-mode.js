@@ -35,9 +35,14 @@ function setTheme() {
         });
 
         document.querySelector("nav").classList.add("bg-dark");
+        
         document.querySelectorAll(".btn-light").forEach(element => {
             element.classList.remove("btn-light");
             element.classList.add("btn-dark");
+        });
+
+        document.querySelectorAll(".btn-close").forEach(element => {
+            element.classList.add("btn-close-white");
         });
     }
     else {
@@ -52,6 +57,10 @@ function setTheme() {
         document.querySelectorAll(".bg-dark").forEach(element => {
             element.classList.remove("bg-dark");
             element.classList.add("bg-light");
+        });
+
+        document.querySelectorAll(".btn-close").forEach(element => {
+            element.classList.remove("btn-close-light");
         });
 
         document.querySelectorAll(".btn-dark").forEach(element => {

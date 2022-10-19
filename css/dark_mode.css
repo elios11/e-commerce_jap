@@ -64,16 +64,25 @@
   transition: background-color 600000s 0s, color 600000s 0s;
 }
 .darkMode table {
-  background-color: #212529;
-  border-color: #373b3e;
+  background-color: rgb(33, 37, 41);
+  border-color: rgb(55, 59, 62);
   border-radius: 5px;
   color: inherit;
 }
 .darkMode table tbody tr:hover {
-  background-color: #323539;
+  background-color: rgb(50, 53, 57);
 }
 .darkMode .input-group-text {
-  background-color: #212529;
+  background-color: rgb(33, 37, 41);
   color: rgb(209, 205, 199);
   border: none;
+}
+.darkMode .modal-content {
+  background-color: rgb(24, 26, 27);
+}
+.darkMode .modal-content .modal-header {
+  border-bottom-color: rgb(56, 61, 63);
+}
+.darkMode .modal-content .modal-footer {
+  border-top-color: rgb(56, 61, 63);
 }/*# sourceMappingURL=dark_mode.css.map */

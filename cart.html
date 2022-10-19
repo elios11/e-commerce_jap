@@ -113,6 +113,68 @@
           </span>
         </li>
       </ul>
+      <hr class="mt-5 mb-4">
+      
+      <h2 class="ms-2 mb-3">Método de pago</h2>
+      <div class="d-flex align-items-center">
+        <p class="ms-3 mb-0">No seleccionado</p>
+        <div class="ms-3">
+          <button type="button" class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#paymentMethodModal">
+            Seleccionar nuevo método de pago
+          </button>
+
+          <div class="modal modal-dark fade" id="paymentMethodModal" tabindex="-1" 
+               aria-labelledby="paymentMethodModal" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="paymentLabel">Forma de pago</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div>
+                    <form>
+                      <div class="mb-3">
+                        <input type="radio" name="paymentMethod" class="form-check-input me-1" id="creditCard">
+                        <label for="creditCard" class="form-check-label">Tarjeta de crédito</label>
+                      </div>
+                      <hr>
+                      <div class="mb-3 row gy-3">
+                        <div class="col-7">
+                          <label for="creditCardNumber">Número de tarjeta</label>
+                          <input type="text" class="form-control" id="creditCardNumber">
+                        </div>
+                        <div class="col-4">
+                          <label for="securityCode" class="ms-1">CVV</label>
+                          <input type="text" class="form-control" id="securityCode">
+                        </div>
+                        <div class="col-6">
+                          <label for="expirationDate">Vencimiento (MM/AAAA)</label>
+                          <input type="text" class="form-control" id="expirationDate">
+                        </div>
+                        <div class="mt-4">
+                          <input type="radio" name="paymentMethod" class="form-check-input me-1" id="bankTransfer">
+                          <label for="bankTransfer" class="form-check-label">Transferencia bancaria</label>
+                        </div>
+                        <hr class="">
+                        <div class="col-6 mt-0 mb-0">
+                          <label for="accoutNumber">Número de cuenta</label>
+                          <input type="text" class="form-control" id="accoutNumber">
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                      Cerrar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
   <footer class="text-muted">
