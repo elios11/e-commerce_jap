@@ -60,7 +60,7 @@ function setTheme() {
         });
 
         document.querySelectorAll(".btn-close").forEach(element => {
-            element.classList.remove("btn-close-light");
+            element.classList.remove("btn-close-white");
         });
 
         document.querySelectorAll(".btn-dark").forEach(element => {
