@@ -39,43 +39,118 @@
   <main id="main">
     <div class="container mb-5" id="cart">
     </div>
-    <div class="container mt-5" id="shippingDetails">
+    <form id="paymentMethodForm" class="needs-validation" novalidate>
+      <div class="container mt-5" id="shippingDetails">
       <h2 class="ms-2">Detalles de envío</h2>
       <div class="form-check ms-3 mt-3">
-          <input class="form-check-input" type="radio" id="premium" name="shippingType" value="15">
-          <label class="form-check-label" for="premium">Premium 2 a 5 días (15%)</label>
+        <input class="form-check-input" type="radio" id="premium" name="shippingType" 
+               value="15" required>
+        <label class="form-check-label" for="premium">Premium 2 a 5 días (15%)</label>
       </div>
       <div class="form-check ms-3">
-          <input class="form-check-input" type="radio" id="express" name="shippingType" value="7">
-          <label class="form-check-label" for="express">Express 5 a 8 días (7%)</label>
+        <input class="form-check-input" type="radio" id="express" name="shippingType" 
+               value="7" required>
+        <label class="form-check-label" for="express">Express 5 a 8 días (7%)</label>
       </div>
       <div class="form-check ms-3">
-          <input class="form-check-input" type="radio" id="standard" name="shippingType" value="5">
-          <label class="form-check-label" for="standard">Standard 12 a 15 días (5%)</label>
+        <input class="form-check-input" type="radio" id="standard" name="shippingType" 
+               value="5" required>
+        <label class="form-check-label" for="standard">Standard 12 a 15 días (5%)</label>
+        <div class="invalid-feedback">
+          Por favor elija un tipo de envío
+        </div>
       </div>
       <h3 class="mt-5 mb-3">Dirección</h3>
       <div class="row gy-4 gx-0 gx-md-5">
         <div class="col-12 col-md-6">
           <div class="input-group px-2 px-md-0">
             <span class="input-group-text">Calle</span>
-            <input type="text" aria-label="nombre" class="form-control">
+            <input type="text" aria-label="nombre" class="form-control" required>
+            <div class="invalid-feedback ms-1">
+              Ingrese una calle
+            </div>
           </div>
         </div>
         <div class="col-12 col-md-6">
           <div class="input-group px-2 px-md-0">
             <span class="input-group-text">Número</span>
-            <input type="text" aria-label="apellido" class="form-control">
+            <input type="text" aria-label="apellido" class="form-control" required>
+            <div class="invalid-feedback ms-1">
+              Ingrese un número
+            </div>
           </div>
         </div>
         <div class="col-6">
           <div class="input-group input-dark px-2 px-md-0">
             <span class="input-group-text">Esquina</span>
-            <input type="text" aria-label="esquina" class="form-control">
+            <input type="text" aria-label="esquina" class="form-control" required>
+            <div class="invalid-feedback ms-1">
+              Ingrese una esquina
+            </div>
           </div>
         </div>
       </div>
       <hr class="mt-5 mb-4">
+    </div>
+    <div class="modal fade" id="paymentMethodModal" tabindex="-1" aria-labelledby="paymentMethodModal"
+      style="display: none;" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header mb-2">
+            <h5 class="modal-title" id="paymentLabel">Forma de pago</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body row gy-3">
+            <div class="col-12">
+              <input type="radio" name="paymentMethod" class="form-check-input me-1" id="creditCard" required>
+              <label for="creditCard" class="form-label">Tarjeta de crédito</label>
+              <div class="invalid-feedback">
+                Por favor elija un método de pago
+              </div>
+            </div>
+            <hr>
+            <div class="col-7">
+              <label class="form-label" for="creditCardNumber">Número de tarjeta</label>
+              <input type="text" class="form-control" id="creditCardNumber" required>
+              <div class="invalid-feedback">
+                El número de tarjeta es inválido
+              </div>
+            </div>
+            <div class="col-4">
+              <label for="securityCode" class="form-label ms-1">CVV</label>
+              <input type="text" class="form-control" id="securityCode" required>
+              <div class="invalid-feedback">
+                Código de seguridad inválido
+              </div>
+            </div>
+            <div class="col-6">
+              <label class="form-label" for="expirationDate">Vencimiento (MM/AAAA)</label>
+              <input type="text" class="form-control" id="expirationDate" required>
+              <div class="invalid-feedback">
+                Introduzca la fecha de vencimiento de su tarjeta
+              </div>
+            </div>
+            <div class="mt-4">
+              <input type="radio" name="paymentMethod" class="form-check-input me-1" id="bankTransfer" required>
+              <label for="bankTransfer" class="form-check-label">Transferencia bancaria</label>
+            </div>
+            <hr class="mt-3">
+            <div class="col-6 mt-0 mb-0">
+              <label for="accoutNumber">Número de cuenta</label>
+              <input type="text" class="form-control" id="accoutNumber" required>
+            </div>
+          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
       
+    <div class="container">
       <h3 class="ms-2 mb-3">Costos</h3>
       <ul class="list-group">
         <li class="list-group-item d-flex justify-content-between">
@@ -92,20 +167,20 @@
         <li class="list-group-item d-flex justify-content-between">
           <div>
             <h6 class="my-0">
-                Costo de envío
+              Costo de envío
             </h6>
             <small class="text-muted">
-                Según el tipo de envío
+              Según el tipo de envío
             </small>
           </div>
           <span class="text-muted" id="shippingCost">
-                -
+            -
           </span>
         </li>
         <li class="list-group-item d-flex justify-content-between">
           <div>
             <h6 class="my-0">
-                Total ($)
+              Total ($)
             </h6>
           </div>
           <span class="text-muted" id="totalCost">
@@ -114,69 +189,22 @@
         </li>
       </ul>
       <hr class="mt-5 mb-4">
-      
+    </div>
+
+    <div class="container">
       <h3 class="ms-2 mb-3">Método de pago</h3>
       <div class="d-flex align-items-center">
-        <p class="ms-3 mb-0">No seleccionado</p>
+        <p class="ms-3 mb-0" id="selectedPaymentMethod">No seleccionado</p>
         <div class="ms-3">
           <button type="button" class="btn btn-sm btn-link" data-bs-toggle="modal" data-bs-target="#paymentMethodModal">
             Seleccionar nuevo método de pago
           </button>
-
-          <div class="modal fade" id="paymentMethodModal" tabindex="-1" 
-               aria-labelledby="paymentMethodModal" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="paymentLabel">Forma de pago</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <div>
-                    <form id="paymentMethodForm">
-                      <div class="mb-3">
-                        <input type="radio" name="paymentMethod" class="form-check-input me-1" id="creditCard">
-                        <label for="creditCard" class="form-check-label">Tarjeta de crédito</label>
-                      </div>
-                      <div class="mb-3 row gy-3">
-                        <hr>
-                        <div class="col-7">
-                          <label for="creditCardNumber">Número de tarjeta</label>
-                          <input type="text" class="form-control" id="creditCardNumber">
-                        </div>
-                        <div class="col-4">
-                          <label for="securityCode" class="ms-1">CVV</label>
-                          <input type="text" class="form-control" id="securityCode">
-                        </div>
-                        <div class="col-6">
-                          <label for="expirationDate">Vencimiento (MM/AAAA)</label>
-                          <input type="text" class="form-control" id="expirationDate">
-                        </div>
-                        <div class="mt-4">
-                          <input type="radio" name="paymentMethod" class="form-check-input me-1" id="bankTransfer">
-                          <label for="bankTransfer" class="form-check-label">Transferencia bancaria</label>
-                        </div>
-                        <hr>
-                        <div class="col-6 mt-0 mb-0">
-                          <label for="accoutNumber">Número de cuenta</label>
-                          <input type="text" class="form-control" id="accoutNumber">
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
-                      Cerrar
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
       <div class="d-flex justify-content-center">
-          <button class="btn w-25 mt-5 btn-primary">Finalizar compra</button>
+        <button type="submit" form="paymentMethodForm" class="btn w-25 mt-5 btn-primary">
+          Finalizar compra
+        </button>
       </div>
     </div>
   </main>
