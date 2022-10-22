@@ -8,6 +8,9 @@
     .container {
         padding: 0;
     }
+    #confirmPurchase {
+        width: 50% !important;
+    }
 }
 
 .fa-trash:hover {
