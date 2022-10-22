@@ -85,4 +85,7 @@
 }
 .darkMode .modal-content .modal-footer {
   border-top-color: rgb(56, 61, 63);
+}
+.darkMode .form-control:disabled {
+  background-color: rgb(35, 38, 39);
 }/*# sourceMappingURL=dark_mode.css.map */

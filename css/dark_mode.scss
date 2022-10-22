@@ -94,4 +94,7 @@ $font-color: rgb(209, 205, 199);
             border-top-color: rgb(56, 61, 63);
         }
     }
+    .form-control:disabled {
+        background-color: rgb(35, 38, 39);
+    }
 }
