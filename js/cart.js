@@ -1,6 +1,7 @@
 let userCartArray = [];
 let currentUSDPrice;
 let shippingTaxes;
+let alreadyTriedSubmitting = false;
 const BROU_COTIZATION_API = "https://cotizaciones-brou.herokuapp.com/api/currency/latest";
 const CART_CONTAINER = document.getElementById("cart");
 const PRODUCTS_COST_TEXT = document.getElementById("productsCost");
@@ -35,6 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return false;
     }
     getCartData();
+    paymentMethodFields();
+    checkFormValidity();
 })
 
 // Muestra carrito de compra y sus elementos
@@ -107,11 +110,12 @@ function getArticles(cartArray) {
             </td>
             <td>
                 <input class="form-control" type="number" value=${element.count} 
-                min="1" max="99" id="${element.id}">
+                min="1" max="99" id="${element.id}" required>
             </td>
             <td>
-                <b>${element.currency} 
-                   ${element.currency == "UYU" ? 
+                <b>
+                    ${element.currency} 
+                    ${element.currency == "UYU" ? 
                         element.subtotal.toLocaleString("ES") : 
                         element.subtotal.toLocaleString("EN")
                     }
@@ -151,17 +155,21 @@ function updateFromLocalStorage(array) {
 // Agrega evento input al input de cantidad de cada producto
 function updateSubtotal(objCartArticles) {
     const localStorageCartItems = JSON.parse(localStorage.getItem("storedCartProducts"));
-
     objCartArticles.forEach(product => {
         const productCountInput = document.getElementById(product.id);
         productCountInput.addEventListener("input", () => {
             localStorageCartItems.forEach(item => {
                 if (item.id === product.id) {
-                    item.count = productCountInput.value;
-                    localStorage.setItem("storedCartProducts", JSON.stringify(localStorageCartItems));
+                    if (productCountInput.value) {
+                        item.count = productCountInput.value;
+                        localStorage.setItem("storedCartProducts", JSON.stringify(localStorageCartItems));
+                    }
                 }
             })
             getCartData();
+            if (alreadyTriedSubmitting) {
+                validateProductsQuantity();
+            }
         })
     })
 }
@@ -214,7 +222,6 @@ function getShippingTypeTax(inputName) {
     radioButtons.forEach(element => {
         element.addEventListener("click", () => {
             shippingTaxes = element.value;
-            console.log(shippingTaxes);
             showCostsValues();
         });
     })
@@ -226,8 +233,74 @@ function calculateShippingCost(subcost, shippingTax) {
     return shippingCost;
 }
 
+// Espera cotización del dolar y devuelve el subtotal sumado de todos los elementos en dólares
 async function getSubtotalValue() {
     await getLatestCotizations(BROU_COTIZATION_API);
     let subtotal = sumOfSubtotals(extractSubtotals(userCartArray.articles));
     return subtotal;
+}
+
+// Deshabilita los campos del método de pago no elegido
+function paymentMethodFields() {
+    const paymentMethods = document.getElementsByName("paymentMethod");
+    const creditCardFields = document.getElementsByName("creditCardItem");
+    const bankTransferField = document.getElementById("accoutNumber");
+    const selectedPaymentMethod = document.getElementById("selectedPaymentMethod");
+    const paymentMethodMessage = document.getElementById("paymentMethodMessage");
+
+    paymentMethods.forEach(element => {
+        element.addEventListener("change", () => {
+            paymentMethodMessage.classList.remove("d-block");
+            selectedPaymentMethod.classList.add("fw-bold");
+            if (element.id === "creditCard") {
+                selectedPaymentMethod.innerHTML = "Tarjeta de crédito";
+                bankTransferField.setAttribute("disabled", "");
+                creditCardFields.forEach(element => {
+                    element.removeAttribute("disabled");
+                })
+            }
+            else {
+                selectedPaymentMethod.innerHTML = "Transferencia bancaria";
+                bankTransferField.removeAttribute("disabled");
+                creditCardFields.forEach(element => {
+                    element.setAttribute("disabled", "");
+                })
+            }
+        })
+    })
+}
+
+// Verifica si todos los input de cantidad de producto son válidos
+function validateProductsQuantity() {
+    const quantityInputs = document.querySelectorAll("table input[type='number']");
+    let allValid = true;
+
+    quantityInputs.forEach(element => {
+        if (!element.checkValidity()) {
+            element.classList.add("invalid-input");
+            allValid = false;
+        }
+    })
+    return allValid;
+}
+
+function unselectedPaymentMethodMsg() {
+    let checkedPaymentMethod = document.querySelector("input[name='paymentMethod']:checked");
+    if (checkedPaymentMethod === null) {
+        document.getElementById("paymentMethodMessage").classList.add("d-block");
+    }
+}
+
+// Verifica la validez de los input y del formulario
+function checkFormValidity() {
+    const paymentMethodForm = document.getElementById("paymentMethodForm");
+    paymentMethodForm.addEventListener("submit", function (event) {
+        alreadyTriedSubmitting = true;
+        if (!paymentMethodForm.checkValidity() || !validateProductsQuantity()) {
+            unselectedPaymentMethodMsg();
+            event.preventDefault();
+        }
+        validateProductsQuantity();
+        paymentMethodForm.classList.add("was-validated");
+    })
 }
