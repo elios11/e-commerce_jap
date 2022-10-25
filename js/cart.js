@@ -44,6 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
 function showUserCart(cartArray) {
     if (!cartArray.articles || cartArray.articles.length === 0) {
         document.getElementById("shippingDetails").innerHTML = "";
+        document.getElementById("costsContainer").innerHTML = "";
+        document.getElementById("paymentMethodContainer").innerHTML = "";
         CART_CONTAINER.innerHTML = `
         <h2 class="text-center mt-5">
             El carrito de compras se encuentra vacío, mirá nuevos productos para agregar en
@@ -284,6 +286,7 @@ function validateProductsQuantity() {
     return allValid;
 }
 
+// Muestra mensaje de método de pago no elegido
 function unselectedPaymentMethodMsg() {
     let checkedPaymentMethod = document.querySelector("input[name='paymentMethod']:checked");
     if (checkedPaymentMethod === null) {
@@ -294,11 +297,29 @@ function unselectedPaymentMethodMsg() {
 // Verifica la validez de los input y del formulario
 function checkFormValidity() {
     const paymentMethodForm = document.getElementById("paymentMethodForm");
+    const purchasedAlert = document.getElementById("successfulPurchaseAlert");
+
     paymentMethodForm.addEventListener("submit", function (event) {
         alreadyTriedSubmitting = true;
+        event.preventDefault();
         if (!paymentMethodForm.checkValidity() || !validateProductsQuantity()) {
             unselectedPaymentMethodMsg();
-            event.preventDefault();
+        }
+        else {
+            purchasedAlert.classList.remove("d-none");
+            purchasedAlert.classList.remove("d-absolute");
+            purchasedAlert.innerHTML = `
+            <div class="alert alert-success text-center" role="alert">
+                ¡La compra ha sido realizada con éxito!
+            </div>
+            `;
+            setTimeout(() => {
+                showSpinner();
+            }, 1000);
+            setTimeout(() => {
+                localStorage.removeItem("storedCartProducts");
+                paymentMethodForm.submit();
+            }, 2000);
         }
         validateProductsQuantity();
         paymentMethodForm.classList.add("was-validated");
