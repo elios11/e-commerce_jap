@@ -307,7 +307,6 @@ function checkFormValidity() {
         }
         else {
             purchasedAlert.classList.remove("d-none");
-            purchasedAlert.classList.remove("d-absolute");
             purchasedAlert.innerHTML = `
             <div class="alert alert-success text-center" role="alert">
                 ¡La compra ha sido realizada con éxito!
