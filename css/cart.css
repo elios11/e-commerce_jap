@@ -17,3 +17,7 @@
     color: rgb(167, 1, 1);
     cursor: pointer;
 }
+
+#successfulPurchaseAlert {
+    z-index: 999;
+}
