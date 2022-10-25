@@ -39,7 +39,7 @@
   <main id="main">
     <div class="container mb-5" id="cart">
     </div>
-    <form id="paymentMethodForm" class="needs-validation" novalidate>
+    <form id="paymentMethodForm" method="get" class="needs-validation" novalidate>
       <div class="container mt-5" id="shippingDetails">
         <h2 class="ms-2">Detalles de envío</h2>
         <div class="form-check ms-3 mt-3">
@@ -74,13 +74,13 @@
           <div class="col-12 col-md-6">
             <div class="input-group px-2 px-md-0">
               <span class="input-group-text">Número</span>
-              <input type="text" aria-label="apellido" class="form-control" required>
+              <input type="number" aria-label="apellido" class="form-control" required>
               <div class="invalid-feedback ms-1">
                 Ingrese un número
               </div>
             </div>
           </div>
-          <div class="col-6">
+          <div class="col-12 col-md-6">
             <div class="input-group input-dark px-2 px-md-0">
               <span class="input-group-text">Esquina</span>
               <input type="text" aria-label="esquina" class="form-control" required>
@@ -124,13 +124,10 @@
                 Código de seguridad inválido
               </div>
             </div>
-            <label>Fecha de vencimiento</label>
-            <div class="col-5 d-flex align-items-center">
-              <input type="number" min="1" max="12" name="creditCardItem" class="form-control text-center" 
-                     id="expirationMonth" placeholder="MM" required>
-              <div class="px-2">/</div>
-              <input type="number" min="22" max="36" name="creditCardItem" class="form-control text-center" 
-                     id="expirationYear" placeholder="AA" required>
+            <div class="col-10 col-md-5 align-items-center">
+              <label for="expirationDate">Fecha de vencimiento</label>
+              <input class="form-control" type="month" min="2022-11" max="2036-12" name="creditCardItem" 
+                     id="expirationDate" required>
               <div class="invalid-feedback">
                 Introduzca la fecha de vencimiento de su tarjeta
               </div>
@@ -158,7 +155,7 @@
       </div>
     </form>
       
-    <div class="container">
+    <div class="container" id="costsContainer">
       <h3 class="ms-2 mb-3">Costos</h3>
       <ul class="list-group">
         <li class="list-group-item d-flex justify-content-between">
@@ -199,7 +196,7 @@
       <hr class="mt-5 mb-4">
     </div>
 
-    <div class="container">
+    <div class="container" id="paymentMethodContainer">
       <h3 class="ms-2 mb-3 fw-2">Método de pago</h3>
       <div class="d-flex align-items-center">
         <p class="ms-3 mb-0" id="selectedPaymentMethod">No seleccionado</p>
@@ -211,6 +208,8 @@
       </div>
       <span class="ms-3 mt-2 invalid-feedback" id="paymentMethodMessage">Por favor especifique un método de pago</span>
       <div class="d-flex justify-content-center">
+        <span class="d-none position-absolute" id="successfulPurchaseAlert"></span>
+
         <button type="submit" form="paymentMethodForm" id="confirmPurchase" class="btn w-25 mt-5 btn-primary">
           Finalizar compra
         </button>
