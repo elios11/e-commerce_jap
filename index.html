@@ -46,10 +46,12 @@
 
       <label for="email" class="formElement">Correo electrónico</label>
       <input type="email" name="email" id="email" placeholder="usuario@correo.com" class="formElement" required>
+      <div class="dataAlert" id="emailAlert"></div>
       
       <label for="password" class="formElement">Contraseña</label>
-      <input type="password" name="pass" id="pass" placeholder="contraseña" class="formElement" required>
-      <div class="dataAlert"></div>
+      <input type="password" name="pass" id="pass" placeholder="contraseña" class="formElement" 
+             minlength="8" required>
+      <div class="dataAlert" id="passwordAlert"></div>
       
       <input type="button" id="loginButton" value="Iniciar sesión">
       
