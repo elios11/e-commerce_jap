@@ -67,7 +67,7 @@ Con el fin de otorgar una mejor experiencia a los usuarios nocturnos, se impleme
 <img alt="Página de inicio de sesión" src="browser_frames\login-darkmode.png" width="400">
 <img alt="Portada" src="browser_frames\portada-darkmode.png" width="400">
 <img alt="Información de producto" src="browser_frames\info_de_producto_darkmode.png" width="400">
-<img alt="Carrito de compras" src="browser_frames\carrito-darkmode.png" width="410">
+<img alt="Carrito de compras" src="browser_frames\carrito-darkmode.png" width="400">
 <br><br>
 
 ## Api utilizada para este proyecto  
