@@ -3,7 +3,7 @@
 
 ## [Enlace a página web](https://elios11.github.io/e-commerce_jap/)
 
-### Proyecto de e-commerce para el programa de *Desarrollo Web* de **Jóvenes a Programar(JaP)**.  
+### Proyecto de e-commerce para el programa de *Desarrollo Web* de [**Jóvenes a Programar(JaP)**](https://jovenesaprogramar.edu.uy/).  
 
 ### **Tecnologías utilizadas:**
 - JavaScript
@@ -22,7 +22,7 @@ Página de inicio de sesión con posibilidad de inicio con cuenta de Google.
 <br><br>
 
 ## Categorías y productos
-Navegá entre las distintas categorías y productos que ofrece el e-commerce, y si algún te interesa lo podés agregar al carrito de compras.
+Navegá entre las distintas categorías y productos que ofrece el e-commerce, y si alguno te interesa lo podés agregar al carrito de compras.
 
 <img alt="Categorías" src="browser_frames\categorias.png" width="400">
 <img alt="Productos" src="browser_frames\productos.png" width="400">
