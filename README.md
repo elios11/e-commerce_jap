@@ -3,7 +3,7 @@
 
 ## [Enlace a página web](https://elios11.github.io/e-commerce_jap/)
 
-### Proyecto de e-commerce para el programa de *Desarrollo Web* de [**Jóvenes a Programar(JaP)**](https://jovenesaprogramar.edu.uy/).  
+### Proyecto de e-commerce para el programa de *Desarrollo Web* de [**Jóvenes a Programar**](https://jovenesaprogramar.edu.uy/).  
 
 ### **Tecnologías utilizadas:**
 - JavaScript
