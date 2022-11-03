@@ -9,6 +9,7 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link href="css/my-profile.css" rel="stylesheet">
   <link rel="stylesheet" href="css/dark_mode.css">
   <style>
     .bd-placeholder-img {
@@ -52,9 +53,48 @@
     </div>
   </nav>
   <main>
+    <h1 class="text-center mt-4">Mi perfil</h1>
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <hr>
+      <div class="row justify-content-center align-items-center">
+        <div class="col-12 col-lg-3 text-center">
+          <img src="img/img_perfil.png" 
+               class="border border-secondary rounded-circle"
+               width="200" height="200"
+               alt="Profile image">
+        </div>
+        <div class="col-9 mt-4">
+          <div class="row gy-5 gx-lg-5">
+            <div class="col-12 col-lg-6">
+              <div class="input-group profile-input">
+                <span class="input-group-text">Primer nombre</span>
+                <input type="text" class="form-control" id="name">
+              </div>
+            </div>
+            <div class="col-12 col-lg-6">
+              <div class="input-group profile-input">
+                <span class="input-group-text">Segundo nombre</span>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-12 col-lg-6">
+              <div class="input-group profile-input">
+                <span class="input-group-text">Primer apellido</span>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-12 col-lg-6">
+              <div class="input-group profile-input">
+                <span class="input-group-text">Segundo apellido</span>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="mt-4 mb-4">
+      <div class="d-flex justify-content-center justify-content-lg-end">
+          <button class="btn btn-success" id="saveChangesBtn">Guardar cambios</button>
       </div>
     </div>
   </main>
