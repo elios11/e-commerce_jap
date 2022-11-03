@@ -20,7 +20,6 @@ function setTheme() {
         if (document.querySelector(".jumbotron")) {
             document.querySelector(".jumbotron").style.backgroundImage="url(img/cover_back-dark.png)";
         }
-        document.getElementById("themeImg").src = "img/bx-sun.svg";
         document.body.classList.add("darkMode");
         document.querySelector("nav").classList.remove("navbar-light");
         document.querySelector("nav").classList.add("navbar-dark");
@@ -49,7 +48,6 @@ function setTheme() {
         if (document.querySelector(".jumbotron")) {
             document.querySelector(".jumbotron").style.backgroundImage="url(img/cover_back.png)";
         }
-        document.getElementById("themeImg").src = "img/bx-moon.svg";
         document.body.classList.remove("darkMode");
         document.querySelector("nav").classList.remove("navbar-dark");
         document.querySelector("nav").classList.add("navbar-light");
