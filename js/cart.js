@@ -159,7 +159,7 @@ function updateSubtotal(objCartArticles) {
     const localStorageCartItems = JSON.parse(localStorage.getItem("storedCartProducts"));
     objCartArticles.forEach(product => {
         const productCountInput = document.getElementById(product.id);
-        productCountInput.addEventListener("input", () => {
+        productCountInput.addEventListener("change", () => {
             localStorageCartItems.forEach(item => {
                 if (item.id === product.id) {
                     if (productCountInput.value) {
