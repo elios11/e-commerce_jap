@@ -55,9 +55,19 @@ document.addEventListener("DOMContentLoaded", function() {
       <button class="btn dropdown-toggle nav-item userProfileButton" type="button" id="showUserEmail"
       data-bs-toggle="dropdown" aria-expanded="false">${userEmail}</button>
       <ul class="dropdown-menu dropdown-menu-end">
-        <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
-        <li><a class="dropdown-item" href="cart.html">Carrito</a></li>
-        <li><a onclick="logout()" class="dropdown-item" href="index.html">Cerrar sesión</a></li>
+        <a class="dropdown-item d-flex justify-content-between align-items-center" href="my-profile.html">
+            Mi perfil
+            <i class="fas fa-user nav-link ps-5"></i>
+        </a>
+        <a class="dropdown-item d-flex justify-content-between align-items-center" href="cart.html">
+            Carrito
+            <i class="fas fa-shopping-cart nav-link ps-5"></i>
+        </a>
+        <a onclick="logout()" class="dropdown-item d-flex justify-content-between align-items-center"
+        href="index.html">
+            Cerrar sesión
+            <i class="fas fa-sign-out-alt nav-link ps-5"></i>
+        </a>
       </ul>
     </li>
     `
