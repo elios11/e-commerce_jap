@@ -46,7 +46,8 @@ function logout() {
   localStorage.removeItem("userEmail");
 }
 
-//Muestra el correo electrónico del login en la barra de navegación
+//Muestra el correo electrónico del login en la barra de navegación y dropdown de acceso a
+//otras páginas del e-commerce y cierre de sesión
 document.addEventListener("DOMContentLoaded", function() {
   if (localStorage.getItem("userEmail")) {
     userEmail = localStorage.getItem("userEmail");
