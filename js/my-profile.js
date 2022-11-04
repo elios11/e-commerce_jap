@@ -8,11 +8,13 @@ const IMAGE_INPUT = document.getElementById("uploadProfileImage");
 const PROFILE_IMAGE = document.getElementById("profile-image");
 const SAVE_CHANGES = document.getElementById("saveChangesBtn");
 const INVALID_FB_MSG = document.getElementById("invalidDataFB");
+const EMAIL_IN_USE_MSG = document.getElementById("emailAlreadyExists");
 const MODIFY_EMAIL_BTN = document.getElementById("modifyEmail");
+
 let LSProfileData = JSON.parse(localStorage.getItem("profile-data"));
 
 document.addEventListener("DOMContentLoaded", () => {
-    if (!localStorage.getItem("userEmail")) {
+    if (!userEmail) {
         document.querySelector("main").innerHTML = `
         <div class="alert alert-warning lead text-center w-50 mt-5" role="alert">
             Para ver su perfil, por favor
@@ -21,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `
         return false;
     }
-    EMAIL.value = localStorage.getItem("userEmail");
+    EMAIL.value = userEmail;
     fillDataFromLocalStorage();
 })
 
@@ -69,6 +71,15 @@ function checkProfileInfoValidity() {
     else {
         EMAIL.classList.remove("invalid-input");
     }
+    if (LSProfileData[EMAIL.value] && EMAIL.value != userEmail) {
+        allValid = false;
+        EMAIL.classList.add("invalid-input");
+        EMAIL_IN_USE_MSG.classList.add("d-block");
+    }
+    else {
+        EMAIL.classList.remove("invalid-input");
+        EMAIL_IN_USE_MSG.classList.remove("d-block");
+    }
     if (allValid) {
         INVALID_FB_MSG.classList.remove("d-block");
     }
@@ -91,23 +102,31 @@ SAVE_CHANGES.addEventListener("click", () => {
         if (!window.confirm("¿Estás seguro de que quieres cambiar los datos de tu perfil?")) {
             return false;
         }
+        const successMessage = document.getElementById("successMessage");
         let profileData = {};
         if (LSProfileData) {
             profileData = LSProfileData;
         }
-        profileData = {
+        if (userEmail != EMAIL.value) {
+            delete profileData[userEmail];
+        }
+        profileData[EMAIL.value] = {
             "first_name": FIRST_NAME.value,
             "second_name": SECOND_NAME.value,
             "second_surname": SECOND_SURNAME.value,
             "first_surname": FIRST_SURNAME.value,
             "second_surname": SECOND_SURNAME.value,
-            "user_email": EMAIL.value,
             "phone_number": PHONE_NUMBER.value,
             "profile_image": PROFILE_IMAGE.src
         }
         localStorage.setItem("userEmail", EMAIL.value);
         localStorage.setItem("profile-data", JSON.stringify(profileData));
-        window.location = "my-profile.html";
+
+        successMessage.innerHTML = "¡Tus datos se actualizaron correctamente!";
+        successMessage.classList.remove("d-none");
+        setTimeout(() => {
+            window.location = "my-profile.html";
+        }, 2200)
     }
     else {
         continuallyCheckValidity();
@@ -117,12 +136,12 @@ SAVE_CHANGES.addEventListener("click", () => {
 //Rellena campos de datos si ya fueron guardados anteriormente
 function fillDataFromLocalStorage() {
     if (LSProfileData) {
-        FIRST_NAME.value = LSProfileData.first_name;
-        SECOND_NAME.value = LSProfileData.second_name;
-        FIRST_SURNAME.value = LSProfileData.first_surname;
-        SECOND_SURNAME.value = LSProfileData.second_surname;
-        EMAIL.value = LSProfileData.user_email;
-        PHONE_NUMBER.value = LSProfileData.phone_number;
-        PROFILE_IMAGE.src = LSProfileData.profile_image;
+        let currentUserPath = LSProfileData[userEmail];
+        FIRST_NAME.value = currentUserPath.first_name;
+        SECOND_NAME.value = currentUserPath.second_name;
+        FIRST_SURNAME.value = currentUserPath.first_surname;
+        SECOND_SURNAME.value = currentUserPath.second_surname;
+        PHONE_NUMBER.value = currentUserPath.phone_number;
+        PROFILE_IMAGE.src = currentUserPath.profile_image;
     }
 }
