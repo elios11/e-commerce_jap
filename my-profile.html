@@ -4,7 +4,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Todo lo que busques está aquí</title>
+  <title>eMercado - Perfil de usuario</title>
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -56,41 +56,63 @@
     <h1 class="text-center mt-4">Mi perfil</h1>
     <div class="container">
       <hr>
-      <div class="row justify-content-center align-items-center">
+      <div class="row justify-content-center gx-5 align-items-center">
         <div class="col-12 col-lg-3 text-center">
           <img src="img/img_perfil.png" 
                class="border border-secondary rounded-circle"
                width="200" height="200"
-               alt="Profile image">
+               alt="Profile image"
+               id="profile-image">
+          <label for="uploadProfileImage" class="btn btn-dark ms-sm-3 ms-lg-0 mt-3 mt-0 mt-lg-3">
+              Subir nueva imagen
+              <i class="far fa-image ms-3"></i>
+          </label>
+          <input type="file" class="d-none" accept=".png, .jpg, .jpeg" id="uploadProfileImage">
         </div>
-        <div class="col-9 mt-4">
+        <div class="col-9 mt-5 mt-sm-4">
           <div class="row gy-5 gx-lg-5">
-            <div class="col-12 col-lg-6">
-              <div class="input-group profile-input">
-                <span class="input-group-text">Primer nombre</span>
-                <input type="text" class="form-control" id="name">
+            <div class="col-12 col-xl-6">
+              <div class="profile-input">
+                <span class="input-group-text">Primer nombre*</span>
+                <input type="text" class="form-control" id="first-name" required>
               </div>
             </div>
-            <div class="col-12 col-lg-6">
-              <div class="input-group profile-input">
-                <span class="input-group-text">Segundo nombre</span>
-                <input type="text" class="form-control">
+            <div class="col-12 col-xl-6">
+              <div class="profile-input">
+                <span class="input-group-text text-center">Segundo nombre</span>
+                <input type="text" class="form-control" id="second-name" required>
               </div>
             </div>
-            <div class="col-12 col-lg-6">
-              <div class="input-group profile-input">
-                <span class="input-group-text">Primer apellido</span>
-                <input type="text" class="form-control">
+            <div class="col-12 col-xl-6">
+              <div class="profile-input">
+                <span class="input-group-text">Primer apellido*</span>
+                <input type="text" class="form-control" id="first-surname" required>
               </div>
             </div>
-            <div class="col-12 col-lg-6">
-              <div class="input-group profile-input">
+            <div class="col-12 col-xl-6">
+              <div class="profile-input">
                 <span class="input-group-text">Segundo apellido</span>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" id="second-surname" required>
+              </div>
+            </div>
+            <div class="col-12 col-xl-6">
+              <div class="profile-input">
+                <span class="input-group-text">
+                  Correo electrónico*
+                  <i class="far fa-edit ms-3 mb-1" id="modifyEmail" role="button"></i>
+                </span>
+                <input type="email" class="form-control" id="email" required disabled>
+              </div>
+            </div>
+            <div class="col-12 col-xl-6">
+              <div class="profile-input">
+                <span class="input-group-text">Número de teléfono</span>
+                <input type="tel" class="form-control" id="phone-number" required>
               </div>
             </div>
           </div>
         </div>
+        <div class="invalid-feedback text-end mt-4" id="invalidDataFB">Rellene los campos requeridos (*)</div>
       </div>
       <hr class="mt-4 mb-4">
       <div class="d-flex justify-content-center justify-content-lg-end">
