@@ -1,0 +1,27 @@
+@media (max-width: 768px) {
+    .input-group-text {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+	.form-control {
+		border-top-left-radius: 0;
+        border-top-right-radius: 0;
+	}
+}
+
+@media (min-width: 768px) {
+    .profile-input {
+        position: relative;
+        display: flex;
+        align-items: stretch;
+        width: 100%;
+    }
+    .input-group-text {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+	.form-control {
+		border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+	}
+}
