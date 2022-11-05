@@ -10,7 +10,6 @@ const SAVE_CHANGES = document.getElementById("saveChangesBtn");
 const INVALID_FB_MSG = document.getElementById("invalidDataFB");
 const EMAIL_IN_USE_MSG = document.getElementById("emailAlreadyExists");
 const MODIFY_EMAIL_BTN = document.getElementById("modifyEmail");
-
 let LSProfileData = JSON.parse(localStorage.getItem("profile-data"));
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -71,7 +70,7 @@ function checkProfileInfoValidity() {
     else {
         EMAIL.classList.remove("invalid-input");
     }
-    if (LSProfileData[EMAIL.value] && EMAIL.value != userEmail) {
+    if (LSProfileData !== null && LSProfileData[EMAIL.value] && EMAIL.value != userEmail) {
         allValid = false;
         EMAIL.classList.add("invalid-input");
         EMAIL_IN_USE_MSG.classList.add("d-block");
