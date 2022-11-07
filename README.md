@@ -42,10 +42,10 @@ Agregá productos al carrito de compras y configurá tus datos de envío.
 <br><br>
 
 ## Perfil de usuario
-_En desarrollo..._
+Guardá tus datos de usuario vinculados al correo electrónico que utilizaste para ingresar al sitio.
 
-<!-- <img alt="Perfil de usuario" src="browser_frames\perfil.png" width="400">
- --><br><br>
+<img alt="Perfil de usuario" src="browser_frames\perfil-de-usuario.png" width="400">
+<br><br>
 
 # Funcionalidades
 
@@ -68,6 +68,7 @@ Con el fin de otorgar una mejor experiencia a los usuarios nocturnos, se impleme
 <img alt="Portada" src="browser_frames\portada-darkmode.png" width="400">
 <img alt="Información de producto" src="browser_frames\info_de_producto_darkmode.png" width="400">
 <img alt="Carrito de compras" src="browser_frames\carrito-darkmode.png" width="400">
+<img alt="Perfil de usuario" src="browser_frames\perfil-de-usuario_darkmode.png" width="400">
 <br><br>
 
 ## Api utilizada para este proyecto  
