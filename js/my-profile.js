@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fillDataFromLocalStorage();
 })
 
-//Permite modificar el correo
+//Habilita el campo de modificación de correo electrónico
 MODIFY_EMAIL_BTN.addEventListener("click", () => {
     EMAIL.toggleAttribute("disabled");
     checkProfileInfoValidity();
