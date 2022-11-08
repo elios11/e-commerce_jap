@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
 //Habilita el campo de modificación de correo electrónico
 MODIFY_EMAIL_BTN.addEventListener("click", () => {
     EMAIL.toggleAttribute("disabled");
-    checkProfileInfoValidity();
 })
 
 //Transforma imagen elegida en el input a URL
@@ -98,7 +97,7 @@ function continuallyCheckValidity() {
 //Guarda información de usuario en el localStorage
 SAVE_CHANGES.addEventListener("click", () => {
     if (checkProfileInfoValidity()) {
-        if (!window.confirm("¿Estás seguro de que quieres cambiar los datos de tu perfil?")) {
+        if (!window.confirm("¿Estás segur@ de que quieres cambiar los datos de tu perfil?")) {
             return false;
         }
         const successMessage = document.getElementById("successMessage");
