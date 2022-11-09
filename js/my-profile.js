@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 //Habilita el campo de modificación de correo electrónico
 MODIFY_EMAIL_BTN.addEventListener("click", () => {
     EMAIL.toggleAttribute("disabled");
+    checkProfileInfoValidity();
 })
 
 //Transforma imagen elegida en el input a URL
