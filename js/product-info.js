@@ -40,6 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function showProductInfo() {
+    document.getElementById("productName").innerHTML = `e-Mercado - ${productInfoArray.name}`;
+
     let htmlContentToAppend = `
     <div class="row d-flex align-items-center">
         <div class="col-xl-7 text-center">

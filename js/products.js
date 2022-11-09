@@ -49,6 +49,8 @@ function setProductID(id) {
 
 //Muestra una lista de los productos del objeto "productsArray" en filas y columnas de HTML
 function showProductsList() {
+    document.getElementById("categoryName").innerHTML = `e-Mercado - ${productsArray.catName}`;
+    
     categoryTitle.innerHTML = `Verás aquí todos los productos de la categoría ${productsArray.catName}`;
     let htmlContentToAppend = "";
     for (let i = 0; i < productsArray.products.length; i++) {
