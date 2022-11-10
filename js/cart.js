@@ -7,6 +7,13 @@ const CART_CONTAINER = document.getElementById("cart");
 const PRODUCTS_COST_TEXT = document.getElementById("productsCost");
 const SHIPPING_COST_TEXT = document.getElementById("shippingCost");
 const TOTAL_COST_TEXT = document.getElementById("totalCost");
+const paymentMethods = document.getElementsByName("paymentMethod");
+const creditCardFields = document.getElementsByName("creditCardItem");
+const bankTransferField = document.getElementById("accoutNumber");
+const selectedPaymentMethod = document.getElementById("selectedPaymentMethod");
+const paymentMethodMessage = document.getElementById("paymentMethodMessage");
+const selectPaymentMethodBTN = document.getElementById("selectPaymentMethod");
+const paymentMethodModal = document.getElementById("paymentMethodModal");
 
 // Guarda el precio actual del dólar en una variable
 async function getLatestCotizations(url) {
@@ -36,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     updateFromLocalStorage();
     if (checkForEmptyCart(userCartItems)) {
-        console.log(userCartItems);
         return false;
     }
     getCartData();
@@ -61,6 +67,9 @@ function checkForEmptyCart(cartItems) {
 }
 // Muestra carrito de compra y sus elementos
 function showUserCart(cartItems) {
+    if (checkForEmptyCart(userCartItems)) {
+        return false;
+    }
     let htmlContentToAppend = `
     <h1 class="text-center mt-4 mb-4">Carrito de compras</h1>
     <div class="table-responsive">
@@ -191,11 +200,12 @@ function removeItemFromCartBtn(objCartArticles) {
 
     Object.keys(objCartArticles).forEach(product => {
         const item = objCartArticles[product];
-
         const removeItemBtn = document.getElementById(`rmvItem_${item.id}`);
+
         removeItemBtn.addEventListener("click", () => {
             delete LSCartItems[`productID_${item.id}`];
             localStorage.setItem("storedCartProducts", JSON.stringify(LSCartItems));
+            updateFromLocalStorage();
             getCartData();
         })
     })
@@ -253,12 +263,6 @@ async function getSubtotalValue() {
 
 // Deshabilita los campos del método de pago no elegido
 function paymentMethodFields() {
-    const paymentMethods = document.getElementsByName("paymentMethod");
-    const creditCardFields = document.getElementsByName("creditCardItem");
-    const bankTransferField = document.getElementById("accoutNumber");
-    const selectedPaymentMethod = document.getElementById("selectedPaymentMethod");
-    const paymentMethodMessage = document.getElementById("paymentMethodMessage");
-
     paymentMethods.forEach(element => {
         element.addEventListener("change", () => {
             paymentMethodMessage.classList.remove("d-block");
@@ -295,6 +299,21 @@ function validateProductsQuantity() {
     return allValid;
 }
 
+// Muestra error si no se rellenaron los campos de método de pago
+function checkPaymentMethodFields() {
+    creditCardFields.forEach(element => {
+        if (!element.checkValidity() || !bankTransferField.checkValidity()) {
+            selectPaymentMethodBTN.classList.add("link-danger");
+        }
+        else {
+            selectPaymentMethodBTN.classList.remove("link-danger");
+        }
+    });
+}
+paymentMethodModal.addEventListener("input", () => {
+    checkPaymentMethodFields();
+})
+
 // Muestra mensaje de método de pago no elegido
 function unselectedPaymentMethodMsg() {
     let checkedPaymentMethod = document.querySelector("input[name='paymentMethod']:checked");
@@ -312,6 +331,7 @@ function checkFormValidity() {
         alreadyTriedSubmitting = true;
         event.preventDefault();
         if (!paymentMethodForm.checkValidity() || !validateProductsQuantity()) {
+            checkPaymentMethodFields();
             unselectedPaymentMethodMsg();
         }
         else {
