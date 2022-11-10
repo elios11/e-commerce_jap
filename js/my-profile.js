@@ -124,6 +124,9 @@ SAVE_CHANGES.addEventListener("click", () => {
         successMessage.innerHTML = "¡Tus datos se actualizaron correctamente!";
         successMessage.classList.remove("d-none");
         setTimeout(() => {
+            showSpinner();
+        }, 1000)
+        setTimeout(() => {
             window.location = "my-profile.html";
         }, 2200)
     }
