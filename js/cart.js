@@ -1,4 +1,4 @@
-let userCartArray = [];
+let userCartItems = {};
 let currentUSDPrice;
 let shippingTaxes;
 let alreadyTriedSubmitting = false;
@@ -16,10 +16,9 @@ async function getLatestCotizations(url) {
 }
 
 function getCartData() {
-    updateFromLocalStorage(userCartArray);
-    showUserCart(userCartArray);
-    removeItemFromCartBtn(userCartArray.articles);
-    updateSubtotal(userCartArray.articles);
+    showUserCart(userCartItems);
+    removeItemFromCartBtn(userCartItems);
+    updateSubtotal(userCartItems);
     getShippingTypeTax("shippingType");
     showCostsValues();
 }
@@ -35,14 +34,18 @@ document.addEventListener("DOMContentLoaded", () => {
         `
         return false;
     }
+    updateFromLocalStorage();
+    if (checkForEmptyCart(userCartItems)) {
+        console.log(userCartItems);
+        return false;
+    }
     getCartData();
     paymentMethodFields();
     checkFormValidity();
 })
 
-// Muestra carrito de compra y sus elementos
-function showUserCart(cartArray) {
-    if (!cartArray.articles || cartArray.articles.length === 0) {
+function checkForEmptyCart(cartItems) {
+    if (Object.keys(cartItems).length === 0) {
         document.getElementById("shippingDetails").innerHTML = "";
         document.getElementById("costsContainer").innerHTML = "";
         document.getElementById("paymentMethodContainer").innerHTML = "";
@@ -52,8 +55,12 @@ function showUserCart(cartArray) {
             <a href="categories.html" class="alert-link">categorías</a>.
         </h2>
         `
-        return false;
+        return true;
     }
+    return false;
+}
+// Muestra carrito de compra y sus elementos
+function showUserCart(cartItems) {
     let htmlContentToAppend = `
     <h1 class="text-center mt-4 mb-4">Carrito de compras</h1>
     <div class="table-responsive">
@@ -75,7 +82,7 @@ function showUserCart(cartArray) {
                 <th scope="col"></th>
             </thead>
             <tbody>
-                ${getArticles(cartArray)}
+                ${getArticles(cartItems)}
             </tbody>
         </table>
     </div>
@@ -89,42 +96,44 @@ function goToProduct(id) {
 }
 
 // Agrega los artículos de un array como filas de tabla
-function getArticles(cartArray) {
+function getArticles(cartItems) {
     let articlesHTMLContent = "";
-    cartArray.articles.forEach(element => {
-        element.subtotal = element.count * element.unitCost;
+    Object.keys(cartItems).forEach(element => {
+        const item = cartItems[element];
+        item.subtotal = item.count * item.unitCost;
+
         articlesHTMLContent += `
         <tr class="align-middle">
             <td>
-                <img class="cart-img rounded" src="${element.image}" alt="${element.name}">
+                <img class="cart-img rounded" src="${item.image}" alt="${item.name}">
             </td>
             <td>
-                <span onclick="goToProduct(${element.id})" class="text-decoration-underline" role="button">
-                    ${element.name}
+                <span onclick="goToProduct(${item.id})" class="text-decoration-underline" role="button">
+                    ${item.name}
                 </span>
             </td>
             <td>
-                ${element.currency} 
-                ${element.currency == "UYU" ? 
-                    element.unitCost.toLocaleString("ES") : 
-                    element.unitCost.toLocaleString("EN")
-                }
+                ${item.currency} 
+                ${item.currency == "UYU" ?
+                item.unitCost.toLocaleString("ES") :
+                item.unitCost.toLocaleString("EN")
+            }
             </td>
             <td>
-                <input class="form-control" type="number" value=${element.count} 
-                min="1" max="99" id="${element.id}" required>
+                <input class="form-control" type="number" value=${item.count} 
+                min="1" max="99" id="${item.id}" required>
             </td>
             <td>
                 <b>
-                    ${element.currency} 
-                    ${element.currency == "UYU" ? 
-                        element.subtotal.toLocaleString("ES") : 
-                        element.subtotal.toLocaleString("EN")
-                    }
+                    ${item.currency} 
+                    ${item.currency == "UYU" ?
+                item.subtotal.toLocaleString("ES") :
+                item.subtotal.toLocaleString("EN")
+            }
                 </b>
             </td>
             <td>
-                <i class="fas fa-trash" id="rmvItem_${element.id}" alt="Eliminar producto del carrito"></i>
+                <i class="fas fa-trash" id="rmvItem_${item.id}" alt="Eliminar producto del carrito"></i>
             </td>
         </tr>
         `
@@ -145,30 +154,30 @@ async function showCostsValues() {
 }
 
 // Reemplaza los productos actuales del carrito por los del almacenamiento local
-function updateFromLocalStorage(array) {
+function updateFromLocalStorage() {
     if (localStorage.getItem("storedCartProducts")) {
-        array.articles = JSON.parse(localStorage.getItem("storedCartProducts"));
+        userCartItems = JSON.parse(localStorage.getItem("storedCartProducts"));
     }
     else {
-        array.articles = [];
+        userCartItems = {};
     }
 }
 
 // Agrega evento input al input de cantidad de cada producto
 function updateSubtotal(objCartArticles) {
-    const localStorageCartItems = JSON.parse(localStorage.getItem("storedCartProducts"));
-    objCartArticles.forEach(product => {
-        const productCountInput = document.getElementById(product.id);
+    const LSCartItems = JSON.parse(localStorage.getItem("storedCartProducts"));
+    Object.keys(objCartArticles).forEach(product => {
+        const item = objCartArticles[product];
+        const productCountInput = document.getElementById(item.id);
+
         productCountInput.addEventListener("change", () => {
-            localStorageCartItems.forEach(item => {
-                if (item.id === product.id) {
-                    if (productCountInput.value) {
-                        item.count = productCountInput.value;
-                        localStorage.setItem("storedCartProducts", JSON.stringify(localStorageCartItems));
-                    }
-                }
-            })
+            if (productCountInput.value) {
+                item.count = productCountInput.value;
+                LSCartItems[`productID_${item.id}`]["count"] = item.count;
+                localStorage.setItem("storedCartProducts", JSON.stringify(LSCartItems));
+            }
             getCartData();
+
             if (alreadyTriedSubmitting) {
                 validateProductsQuantity();
             }
@@ -178,17 +187,15 @@ function updateSubtotal(objCartArticles) {
 
 // Elimina producto elegido del carrito de compras y del almacenamiento local
 function removeItemFromCartBtn(objCartArticles) {
-    const localStorageCartItems = JSON.parse(localStorage.getItem("storedCartProducts"));
+    const LSCartItems = JSON.parse(localStorage.getItem("storedCartProducts"));
 
-    objCartArticles.forEach(product => {
-        const removeItemBtn = document.getElementById(`rmvItem_${product.id}`);
+    Object.keys(objCartArticles).forEach(product => {
+        const item = objCartArticles[product];
+
+        const removeItemBtn = document.getElementById(`rmvItem_${item.id}`);
         removeItemBtn.addEventListener("click", () => {
-            localStorageCartItems.forEach(function (item, index) {
-                if (item.id === product.id) {
-                    localStorageCartItems.splice(index, 1);
-                    localStorage.setItem("storedCartProducts", JSON.stringify(localStorageCartItems));
-                }
-            })
+            delete LSCartItems[`productID_${item.id}`];
+            localStorage.setItem("storedCartProducts", JSON.stringify(LSCartItems));
             getCartData();
         })
     })
@@ -197,12 +204,14 @@ function removeItemFromCartBtn(objCartArticles) {
 // Devuelve un array con todos los subtotales en dólares
 function extractSubtotals(objCartArticles) {
     let subtotalsArray = [];
-    objCartArticles.forEach(element => {
-        if (element.currency === "UYU") {
-            subtotalsArray.push(Math.round((element.subtotal / currentUSDPrice)*100) / 100);
+    Object.keys(objCartArticles).forEach(element => {
+        const item = objCartArticles[element];
+
+        if (item.currency === "UYU") {
+            subtotalsArray.push(Math.round((item.subtotal / currentUSDPrice) * 100) / 100);
         }
         else {
-            subtotalsArray.push(element.subtotal);
+            subtotalsArray.push(item.subtotal);
         }
     });
     return subtotalsArray;
@@ -238,7 +247,7 @@ function calculateShippingCost(subcost, shippingTax) {
 // Espera cotización del dolar y devuelve el subtotal sumado de todos los elementos en dólares
 async function getSubtotalValue() {
     await getLatestCotizations(BROU_COTIZATION_API);
-    let subtotal = sumOfSubtotals(extractSubtotals(userCartArray.articles));
+    let subtotal = sumOfSubtotals(extractSubtotals(userCartItems));
     return subtotal;
 }
 

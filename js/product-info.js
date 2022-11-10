@@ -313,33 +313,29 @@ function showRelatedProducts(array) {
 function addToCart() {
     const addToCartAlert = document.getElementById("addToCartAlert");
     const localStorageCartItems = JSON.parse(localStorage.getItem("storedCartProducts"));
-    let cartItems = [];
+    let cartItems = {};
     let alreadyInCart = false;
-
+    
     if (localStorageCartItems) {
         cartItems = localStorageCartItems;
     }
 
-    if (cartItems.length !== 0) {
-        cartItems.forEach(item => {
-            if (item.id === productInfoArray.id) {
-                alreadyInCart = true;
-                addToCartAlert.classList.add("alert-warning");
-                addToCartAlert.classList.add("alert-warning");
-                addToCartAlert.innerHTML = `
-                <h6 class="pb-1 pt-2 px-2 text-center">¡Este producto ya está en el 
-                <a class="link-secondary fst-italic" href="cart.html">carrito</a> de compras!</h6>
-                `
-                setTimeout(() => {
-                    addToCartAlert.innerHTML = "";
-                    addToCartAlert.classList.remove("alert-warning");
-                }, 4000);
-            }
-        })
+    if (cartItems[`productID_${productInfoArray.id}`]) {
+        alreadyInCart = true;
+        addToCartAlert.classList.add("alert-warning");
+        addToCartAlert.classList.add("alert-warning");
+        addToCartAlert.innerHTML = `
+        <h6 class="pb-1 pt-2 px-2 text-center">¡Este producto ya está en el 
+        <a class="link-secondary fst-italic" href="cart.html">carrito</a> de compras!</h6>
+        `
+        setTimeout(() => {
+            addToCartAlert.innerHTML = "";
+            addToCartAlert.classList.remove("alert-warning");
+        }, 4000);
     }
 
     if (!alreadyInCart) {
-        cartItems.push(
+        cartItems[`productID_${productInfoArray.id}`] =
             {
                 id: productInfoArray.id,
                 name: productInfoArray.name,
@@ -347,7 +343,7 @@ function addToCart() {
                 unitCost: productInfoArray.cost,
                 currency: productInfoArray.currency,
                 image: productInfoArray.images[0]
-            })
+            }
         addToCartAlert.classList.add("alert-success");
         addToCartAlert.innerHTML = `
         <h6 class="pb-1 pt-2 px-2 text-center">¡El producto fue añadido al 
