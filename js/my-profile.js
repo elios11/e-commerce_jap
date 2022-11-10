@@ -28,8 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //Habilita el campo de modificación de correo electrónico
 MODIFY_EMAIL_BTN.addEventListener("click", () => {
-    EMAIL.toggleAttribute("disabled");
-    checkProfileInfoValidity();
+    EMAIL.removeAttribute("disabled");
 })
 
 //Transforma imagen elegida en el input a URL
@@ -76,7 +75,6 @@ function checkProfileInfoValidity() {
         EMAIL_IN_USE_MSG.classList.add("d-block");
     }
     else {
-        EMAIL.classList.remove("invalid-input");
         EMAIL_IN_USE_MSG.classList.remove("d-block");
     }
     if (allValid) {
@@ -139,11 +137,13 @@ SAVE_CHANGES.addEventListener("click", () => {
 function fillDataFromLocalStorage() {
     if (LSProfileData) {
         let currentUserPath = LSProfileData[userEmail];
-        FIRST_NAME.value = currentUserPath.first_name;
-        SECOND_NAME.value = currentUserPath.second_name;
-        FIRST_SURNAME.value = currentUserPath.first_surname;
-        SECOND_SURNAME.value = currentUserPath.second_surname;
-        PHONE_NUMBER.value = currentUserPath.phone_number;
-        PROFILE_IMAGE.src = currentUserPath.profile_image;
+        if (currentUserPath) {
+            FIRST_NAME.value = currentUserPath.first_name;
+            SECOND_NAME.value = currentUserPath.second_name;
+            FIRST_SURNAME.value = currentUserPath.first_surname;
+            SECOND_SURNAME.value = currentUserPath.second_surname;
+            PHONE_NUMBER.value = currentUserPath.phone_number;
+            PROFILE_IMAGE.src = currentUserPath.profile_image;
+        }
     }
 }
