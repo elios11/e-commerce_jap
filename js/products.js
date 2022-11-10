@@ -49,9 +49,18 @@ function setProductID(id) {
 
 //Muestra una lista de los productos del objeto "productsArray" en filas y columnas de HTML
 function showProductsList() {
+    if (productsArray.products.length === 0) {
+        document.getElementById("pageContent").innerHTML = `
+        <h2 class="text-center mt-5 lh-base">
+            Lo sentimos, actualmente no se encuentran productos en la categoría de ${productsArray.catName},
+            seguí explorando otros productos en <a href="categories.html" class="alert-link">categorías</a>.
+        </h2>
+        `;
+        return false;
+    }
     document.getElementById("categoryName").innerHTML = `e-Mercado - ${productsArray.catName}`;
-    
     categoryTitle.innerHTML = `Verás aquí todos los productos de la categoría ${productsArray.catName}`;
+
     let htmlContentToAppend = "";
     for (let i = 0; i < productsArray.products.length; i++) {
         let currentProduct = productsArray.products[i];
@@ -93,6 +102,9 @@ document.getElementById("clearRangeFilter").addEventListener("click", function()
     maxCostField.value = "";
     minCost = undefined;
     maxCost = undefined;
+    if (document.querySelector("input:checked")) {
+        document.querySelector("input:checked").checked = false;
+    }
     document.getElementById("searchBar").value = "";
     inputSearch = "";
     getData();
