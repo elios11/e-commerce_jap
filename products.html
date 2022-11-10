@@ -38,52 +38,56 @@
     </div>
   </nav>
 
-  <div class="text-center p-4">
-      <h2>Productos</h2>
-      <p class="lead" id="categoryTitle"></p>
-  </div>
-
-<div class="container">
-    <!-- Contenedor de filtros de órden -->
-    <div class="text-end">
-      <div class="mb-2 btn-group btn-group-toggle">
-        <button class="btn btn-light btn-block" id="sortDescendingBtn">
-          <i class="fas fa-sort-amount-down sort-icon"></i>$
-        </button>
-        <button class="btn btn-light btn-block" id="sortAscendingBtn">
-          <i class="fas fa-sort-amount-up sort-icon"></i>$
-        </button>
-        <button class="btn btn-light btn-block" id="sortByRelevanceBtn">
-          <i class="fas fa-sort-amount-down sort-icon"></i>Rel.
-        </button>
+  <main>
+    <div class="container" id="pageContent">
+      <div class="text-center p-4">
+          <h2>Productos</h2>
+          <p class="lead" id="categoryTitle"></p>
+      </div>
+      <!-- Contenedor de filtros de órden -->
+      <div class="text-end">
+        <div class="mb-2 btn-group btn-group-toggle">
+          <input type="radio" class="btn-check" name="sortingOptions" id="sortDescendingBtn">
+          <label for="sortDescendingBtn" class="btn btn-light">
+              <i class="fas fa-sort-amount-down sort-icon"></i>$
+          </label>
+          
+          <input type="radio" class="btn-check" name="sortingOptions" id="sortAscendingBtn">
+          <label for="sortAscendingBtn" class="btn btn-light">
+              <i class="fas fa-sort-amount-up sort-icon"></i>$
+          </label>
+          <input type="radio" class="btn-check" name="sortingOptions" id="sortByRelevanceBtn">
+          <label for="sortByRelevanceBtn" class="btn btn-light">
+              <i class="fas fa-sort-amount-down sort-icon"></i>Rel.
+          </label>
+        </div>
+      </div>
+      <!-- Contenedor de filtros de precio -->
+      <div class="row mb-3 justify-content-end me-1 me-sm-0">
+          <div class="col-12 col-md-4 mb-2 mb-md-0 col-xl-5">
+              <input type="search" class="form-control" id="searchBar" placeholder="Búsqueda..." name="searchBar">
+          </div>
+          <div class="col-2 col-md-1 offset-md-1 offset-xl-2">
+              <p class="font-weight-normal text-end my-2">Precio</p>
+          </div>
+          <div class="col-3 col-sm-2 col-xl-1">
+              <input class="form-control" type="number" placeholder="min." id="rangeFilterCostMin">
+          </div>
+          <div class="col-3 col-sm-2 col-xl-1 pe-4 ps-0">
+              <input class="form-control" type="number" placeholder="máx." id="rangeFilterCostMax">
+          </div>
+          <div class="col-4 ps-0 offset-sm-2 offset-md-0 col-md-2 p-0">
+              <div class="btn-group" role="group">
+                    <button class="btn btn-light btn-block" id="rangeFilterCost">Filtrar</button>
+                    <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
+              </div>
+          </div>
       </div>
     </div>
-    <!-- Contenedor de filtros de precio -->
-    <div class="row mb-3 justify-content-end me-1 me-sm-0">
-        <div class="col-12 col-md-4 mb-2 mb-md-0 col-xl-5">
-            <input type="search" class="form-control" id="searchBar" placeholder="Búsqueda..." name="searchBar">
-        </div>
-        <div class="col-2 col-md-1 offset-md-1 offset-xl-2">
-            <p class="font-weight-normal text-end my-2">Precio</p>
-        </div>
-        <div class="col-3 col-sm-2 col-xl-1">
-            <input class="form-control" type="number" placeholder="min." id="rangeFilterCostMin">
-        </div>
-        <div class="col-3 col-sm-2 col-xl-1 pe-4 ps-0">
-            <input class="form-control" type="number" placeholder="máx." id="rangeFilterCostMax">
-        </div>
-        <div class="col-4 ps-0 offset-sm-2 offset-md-0 col-md-2 p-0">
-            <div class="btn-group" role="group">
-                  <button class="btn btn-light btn-block" id="rangeFilterCost">Filtrar</button>
-                  <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
-            </div>
-        </div>
+    <!-- Contenedor para lista de productos -->
+    <div class="container" id="productsContainer">
     </div>
-  </div>
-
-  <!-- Contenedor para lista de productos -->
-  <div class="container" id="productsContainer">
-  </div>
+  </main>
 
   <footer class="text-muted">
     <div class="container">
