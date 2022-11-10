@@ -1,6 +1,7 @@
 const ORDER_ASC_BY_NAME = "AZ";
 const ORDER_DESC_BY_NAME = "ZA";
 const ORDER_BY_PROD_COUNT = "Cant.";
+let inputSearch = "";
 let currentCategoriesArray = [];
 let currentSortCriteria = undefined;
 let minCount = undefined;
@@ -45,9 +46,10 @@ function showCategoriesList(){
     let htmlContentToAppend = "";
     for(let i = 0; i < currentCategoriesArray.length; i++){
         let category = currentCategoriesArray[i];
+        let categoryNameAndDesc = (category.name + category.description).toLowerCase();
 
-        if (((minCount == undefined) || (minCount != undefined && parseInt(category.productCount) >= minCount)) &&
-            ((maxCount == undefined) || (maxCount != undefined && parseInt(category.productCount) <= maxCount))){
+        if (!(minCount > parseInt(category.productCount) || maxCount < parseInt(category.productCount)) &&
+             (inputSearch == "" || categoryNameAndDesc.includes(inputSearch))) {
 
             htmlContentToAppend += `
             <div onclick="setCatID(${category.id})" class="list-group-item list-group-item-action cursor-active">
@@ -84,17 +86,25 @@ function sortAndShowCategories(sortCriteria, categoriesArray){
     showCategoriesList();
 }
 
-//Función que se ejecuta una vez que se haya lanzado el evento de
-//que el documento se encuentra cargado, es decir, se encuentran todos los
-//elementos HTML presentes.
-document.addEventListener("DOMContentLoaded", function(e){
+document.getElementById("searchBar").addEventListener("input", function() {
+    inputSearch = (document.getElementById("searchBar").value).toLowerCase();
+    showCategoriesList();
+})
+
+function getCategoriesData() {
     getJSONData(CATEGORIES_URL).then(function(resultObj){
         if (resultObj.status === "ok"){
             currentCategoriesArray = resultObj.data
             showCategoriesList()
-            //sortAndShowCategories(ORDER_ASC_BY_NAME, resultObj.data);
         }
     });
+}
+
+//Función que se ejecuta una vez que se haya lanzado el evento de
+//que el documento se encuentra cargado, es decir, se encuentran todos los
+//elementos HTML presentes.
+document.addEventListener("DOMContentLoaded", function(){
+    getCategoriesData();
 
     document.getElementById("sortAsc").addEventListener("click", function(){
         sortAndShowCategories(ORDER_ASC_BY_NAME);
@@ -111,11 +121,15 @@ document.addEventListener("DOMContentLoaded", function(e){
     document.getElementById("clearRangeFilter").addEventListener("click", function(){
         document.getElementById("rangeFilterCountMin").value = "";
         document.getElementById("rangeFilterCountMax").value = "";
-
+        if (document.querySelector("input:checked")) {
+            document.querySelector("input:checked").checked = false;
+        }
+        document.getElementById("searchBar").value = "";
+        inputSearch = "";
         minCount = undefined;
         maxCount = undefined;
 
-        showCategoriesList();
+        getCategoriesData();
     });
 
     document.getElementById("rangeFilterCount").addEventListener("click", function(){
