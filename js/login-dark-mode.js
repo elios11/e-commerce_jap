@@ -9,9 +9,17 @@ document.addEventListener("DOMContentLoaded", () => {
      setTheme();
 })
 
+document.getElementById("themeImg").addEventListener("click", () => {
+    isDarkModeEnabled = !isDarkModeEnabled;
+    localStorage.setItem("isDarkModeEnabled", isDarkModeEnabled);
+    setTheme();
+})
+
 function setTheme() {
     if (isDarkModeEnabled) {
         document.body.classList.add("darkMode");
-        document.querySelector(".g_id_signin").setAttribute("data-theme", "filled_black");
+    }
+    else {
+        document.body.classList.remove("darkMode");
     }
 }
