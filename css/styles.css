@@ -218,11 +218,6 @@ input::placeholder {
   cursor: pointer;
 }
 
-.col-1-5 {
-  flex: 0 0 auto;
-  width: 12.5%;
-}
-
 .w-8 {
   width: 8%;
 }
