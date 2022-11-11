@@ -162,16 +162,6 @@ async function showCostsValues() {
     }
 }
 
-// Reemplaza los productos actuales del carrito por los del almacenamiento local
-function updateFromLocalStorage() {
-    if (localStorage.getItem("storedCartProducts")) {
-        userCartItems = JSON.parse(localStorage.getItem("storedCartProducts"));
-    }
-    else {
-        userCartItems = {};
-    }
-}
-
 // Agrega evento input al input de cantidad de cada producto
 function updateSubtotal(objCartArticles) {
     const LSCartItems = JSON.parse(localStorage.getItem("storedCartProducts"));
@@ -182,7 +172,7 @@ function updateSubtotal(objCartArticles) {
         productCountInput.addEventListener("change", () => {
             if (productCountInput.value) {
                 item.count = productCountInput.value;
-                LSCartItems[`productID_${item.id}`]["count"] = item.count;
+                LSCartItems[userEmail][`productID_${item.id}`]["count"] = item.count;
                 localStorage.setItem("storedCartProducts", JSON.stringify(LSCartItems));
             }
             getCartData();
@@ -203,7 +193,7 @@ function removeItemFromCartBtn(objCartArticles) {
         const removeItemBtn = document.getElementById(`rmvItem_${item.id}`);
 
         removeItemBtn.addEventListener("click", () => {
-            delete LSCartItems[`productID_${item.id}`];
+            delete LSCartItems[userEmail][`productID_${item.id}`];
             localStorage.setItem("storedCartProducts", JSON.stringify(LSCartItems));
             updateFromLocalStorage();
             getCartData();
@@ -345,11 +335,24 @@ function checkFormValidity() {
                 showSpinner();
             }, 1000);
             setTimeout(() => {
-                localStorage.removeItem("storedCartProducts");
+                let LSCart = JSON.parse(localStorage.getItem("storedCartProducts"));
+                delete LSCart[userEmail];
+                localStorage.setItem("storedCartProducts", JSON.stringify(LSCart));
                 paymentMethodForm.submit();
             }, 2000);
         }
         validateProductsQuantity();
         paymentMethodForm.classList.add("was-validated");
     })
+}
+
+// Reemplaza los productos actuales del carrito por los del almacenamiento local
+function updateFromLocalStorage() {
+    let cartFromLocal = JSON.parse(localStorage.getItem("storedCartProducts"));
+    if (cartFromLocal && cartFromLocal[userEmail]) {
+        userCartItems = cartFromLocal[userEmail];
+    }
+    else {
+        userCartItems = {};
+    }
 }
