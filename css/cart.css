@@ -1,15 +1,30 @@
 .cart-img {
-    max-width: 5em;
+    max-width: 10em;
 }
+
+li span .form-control {
+    max-width: 70%;
+}
+
 @media (max-width: 576px) {
-    .cart-img {
-        max-width: 4em;        
+    #cart {
+        overflow: auto;
     }
     .container {
         padding: 0;
     }
     #confirmPurchase {
         width: 50% !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .cart-img {
+        max-width: 15em;        
+    }
+    li span .form-control {
+        max-width: 40%;
+        color: blue;
     }
 }
 

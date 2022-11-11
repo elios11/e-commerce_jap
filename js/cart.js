@@ -71,83 +71,75 @@ function showUserCart(cartItems) {
         return false;
     }
     let htmlContentToAppend = `
-    <h1 class="text-center mt-4 mb-4">Carrito de compras</h1>
-    <div class="table-responsive">
-        <table class="table text-center" id="table">
-            <thead>
-                <th></th>
-                <th scope="col">
-                    Nombre
-                </th>
-                <th scope="col">
-                    Costo
-                </th>
-                <th class="w-8" scope="col">
-                    Cantidad
-                </th>
-                <th scope="col">
-                    Subtotal
-                </th>
-                <th scope="col"></th>
-            </thead>
-            <tbody>
-                ${getArticles(cartItems)}
-            </tbody>
-        </table>
-    </div>
-    `
+    <h1 class="text-center mb-5">Carrito de compras</h1>
+    <li class="list-group-item row text-center d-none d-md-flex justify-content-between align-items-center">
+        <span class="offset-2 col-3">Nombre</span>
+        <span class="col-2">Costo</span>
+        <span class="col-1">Cantidad</span>
+        <span class="col-3">Subtotal</span>
+        <span class="col-1"></span>
+    </li>
+    `;
+    console.log(cartItems);
+    Object.keys(cartItems).forEach(element => {
+        const item = cartItems[element];
+        item.subtotal = item.count * item.unitCost;
+
+        htmlContentToAppend += `
+        <li class="list-group-item row text-center d-flex align-items-center">
+            <span class="col-12 mt-3 mt-md-0 col-md-3 col-lg-2">
+                <img class="cart-img rounded" src="${item.image}" alt="${item.name}">
+            </span>
+
+            <span class="col-12 my-2 my-md-0 col-md-2 col-lg-3 text-decoration-underline" 
+                onclick="goToProduct(${item.id})" role="button">
+                ${item.name}
+            </span>
+
+            <span class="col-5 text-end d-md-none mb-3">
+                <b>Precio:</b>
+            </span>
+            <span class="col-7 text-start mb-3 mb-md-0 col-md-2">
+                ${item.currency} 
+                ${item.currency == "UYU" ?
+                    item.unitCost.toLocaleString("ES") :
+                    item.unitCost.toLocaleString("EN")
+                }
+            </span>
+
+            <span class="col-5 text-end mb-3 mb-md-0 d-md-none">
+                <b>Cantidad:</b>
+            </span>
+            <span class="col-7 text-center mb-3 mb-md-0 col-md-2">
+                <input class="form-control" type="number" value=${item.count}
+                min="1" max="99" id="${item.id}" required>
+            </span>
+
+            <span class="col-5 text-end d-md-none">
+                <b>Subtotal:</b>
+            </span>
+            <span class="col-7 text-start col-md-2">
+                <b>
+                    ${item.currency} 
+                    ${item.currency == "UYU" ?
+                        item.subtotal.toLocaleString("ES") :
+                        item.subtotal.toLocaleString("EN")
+                    }
+                </b>
+            </span>
+
+            <span class="col-12 mt-3 mt-md-0 col-md-1">
+                <i class="fas fa-trash" id="rmvItem_${item.id}" alt="Eliminar producto del carrito"></i>
+            </span>
+        </li>
+        `
+    });
     CART_CONTAINER.innerHTML = htmlContentToAppend;
 }
 
 function goToProduct(id) {
     localStorage.setItem("productID", id);
     window.location = "product-info.html";
-}
-
-// Agrega los artículos de un array como filas de tabla
-function getArticles(cartItems) {
-    let articlesHTMLContent = "";
-    Object.keys(cartItems).forEach(element => {
-        const item = cartItems[element];
-        item.subtotal = item.count * item.unitCost;
-
-        articlesHTMLContent += `
-        <tr class="align-middle">
-            <td>
-                <img class="cart-img rounded" src="${item.image}" alt="${item.name}">
-            </td>
-            <td>
-                <span onclick="goToProduct(${item.id})" class="text-decoration-underline" role="button">
-                    ${item.name}
-                </span>
-            </td>
-            <td>
-                ${item.currency} 
-                ${item.currency == "UYU" ?
-                item.unitCost.toLocaleString("ES") :
-                item.unitCost.toLocaleString("EN")
-            }
-            </td>
-            <td>
-                <input class="form-control" type="number" value=${item.count} 
-                min="1" max="99" id="${item.id}" required>
-            </td>
-            <td>
-                <b>
-                    ${item.currency} 
-                    ${item.currency == "UYU" ?
-                item.subtotal.toLocaleString("ES") :
-                item.subtotal.toLocaleString("EN")
-            }
-                </b>
-            </td>
-            <td>
-                <i class="fas fa-trash" id="rmvItem_${item.id}" alt="Eliminar producto del carrito"></i>
-            </td>
-        </tr>
-        `
-    });
-    return articlesHTMLContent;
 }
 
 // Muestra el subcosto de los productos, el costo de envío, y el costo total
