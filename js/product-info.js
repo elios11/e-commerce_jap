@@ -314,13 +314,17 @@ function addToCart() {
     const addToCartAlert = document.getElementById("addToCartAlert");
     const localStorageCartItems = JSON.parse(localStorage.getItem("storedCartProducts"));
     let cartItems = {};
+    cartItems[userEmail] = {};
     let alreadyInCart = false;
     
     if (localStorageCartItems) {
         cartItems = localStorageCartItems;
+        if (!localStorageCartItems[userEmail]) {
+            cartItems[userEmail] = {};
+        }
     }
 
-    if (cartItems[`productID_${productInfoArray.id}`]) {
+    if (cartItems[userEmail][`productID_${productInfoArray.id}`]) {
         alreadyInCart = true;
         addToCartAlert.classList.add("alert-warning");
         addToCartAlert.classList.add("alert-warning");
@@ -333,9 +337,8 @@ function addToCart() {
             addToCartAlert.classList.remove("alert-warning");
         }, 4000);
     }
-
     if (!alreadyInCart) {
-        cartItems[`productID_${productInfoArray.id}`] =
+        cartItems[userEmail][`productID_${productInfoArray.id}`] =
             {
                 id: productInfoArray.id,
                 name: productInfoArray.name,
