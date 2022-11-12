@@ -64,12 +64,21 @@ A la hora de finalizar la compra, tendrás que otorgar tus detalles de envío, y
 ## Modo oscuro
 Con el fin de otorgar una mejor experiencia a los usuarios nocturnos, se implementó la posibilidad de utilizar el *modo oscuro*.
 
-<img alt="Página de inicio de sesión" src="browser_frames\login-darkmode.png" width="400">
-<img alt="Portada" src="browser_frames\portada-darkmode.png" width="400">
-<img alt="Información de producto" src="browser_frames\info_de_producto_darkmode.png" width="400">
-<img alt="Carrito de compras" src="browser_frames\carrito-darkmode.png" width="400">
-<img alt="Perfil de usuario" src="browser_frames\perfil-de-usuario_darkmode.png" width="400">
+<img alt="Página de inicio de sesión en modo oscuro" src="browser_frames\login-darkmode.png" width="400">
+<img alt="Portada en modo oscuro" src="browser_frames\portada-darkmode.png" width="400">
+<img alt="Información de producto en modo oscuro" src="browser_frames\info_de_producto_darkmode.png" width="400">
+<img alt="Carrito de compras en modo oscuro" src="browser_frames\carrito-darkmode.png" width="400">
+<img alt="Perfil de usuario en modo oscuro" src="browser_frames\perfil-de-usuario_darkmode.png" width="400">
 <br><br>
+
+## Adaptabilidad a pantallas pequeñas
+También podrás ingresar al sitio desde tu celular y utilizar la página cómodamente.
+
+<img alt="Portada de página en dispositivo móvil" src="browser_frames\portada_mobile.png" width="200">
+<img alt="Información de producto en dispositivo móvil" src="browser_frames\product-info_mobile.png" width="200">
+<img alt="Carrito de compra en dispositivo móvil" src="browser_frames\cart_mobile.png" width="200">
+<img alt="Perfil de usuario en dispositivo móvil" src="browser_frames\my-profile_mobile.png" width="200">
+
 
 ## Api utilizada para este proyecto  
 https://japceibal.github.io/emercado-api/
