@@ -250,3 +250,9 @@ input::placeholder {
 .floating-btn:active {
   background: #014c72;
 }
+
+@media (max-width: 576px) {
+  #profile-container {
+    overflow: auto;
+  }
+}
