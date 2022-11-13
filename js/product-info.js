@@ -296,7 +296,7 @@ function showRelatedProducts(array) {
     array.relatedProducts.forEach(element => {
         relatedProductsString += `
         <div class="col-6 col-md-5 col-lg-5 col-xl-3">
-            <div class="card bg-dark text-white" onclick="goToRelatedProd(${element.id})" 
+            <div class="card" onclick="goToRelatedProd(${element.id})" 
             role="button">
                 <img src="${element.image}" class="card-img-top" alt="${element.name}">
                 <div class="card-body">
