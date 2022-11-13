@@ -78,7 +78,13 @@ También podrás ingresar al sitio desde tu celular y utilizar la página cómod
 <img alt="Información de producto en dispositivo móvil" src="browser_frames\product-info_mobile.png" width="200">
 <img alt="Carrito de compra en dispositivo móvil" src="browser_frames\cart_mobile.png" width="200">
 <img alt="Perfil de usuario en dispositivo móvil" src="browser_frames\my-profile_mobile.png" width="200">
+<br><br>
 
+## Eliminar cuenta
+Tendrás la posibilidad de eliminar tus datos almacenados en la página.
+
+<img alt="Sección de eliminar cuenta" src="browser_frames\delete-account.png" width="400">
+<br><br>
 
 ## Api utilizada para este proyecto  
 https://japceibal.github.io/emercado-api/
