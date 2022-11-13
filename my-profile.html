@@ -57,8 +57,8 @@
     <h1 class="text-center mt-4">Mi perfil</h1>
     <div class="container" id="profile-container">
       <hr>
-      <div class="row justify-content-center gx-5 align-items-center">
-        <div class="col-12 col-lg-3 text-center">
+      <div class="row justify-content-center gx-lg-5 align-items-center">
+        <div class="col-12 col-lg-3 mx-0 text-center">
           <img src="img/img_perfil.png" 
                class="border border-secondary rounded-circle"
                width="200" height="200"
@@ -72,7 +72,7 @@
         </div>
         <div class="col-9 mt-5 mt-sm-4">
           <div class="row gy-5 gx-lg-5">
-            <div class="col-12 col-xl-6">
+            <div class="col-12 mx-0 col-xl-6">
               <div class="profile-input">
                 <span class="input-group-text">Primer nombre<span class="text-danger">*</span></span>
                 <input type="text" class="form-control" id="first-name" required>
@@ -117,11 +117,15 @@
         <div class="invalid-feedback text-end mt-4" id="invalidDataFB">Rellene los campos requeridos (*)</div>
       </div>
       <hr class="mt-4 mb-4">
-      <div class="d-flex justify-content-between">
-          <a class="ms-4 text-primary" data-bs-toggle="collapse" href="#advancedSettings" role="button">
+      <div class="row justify-content-center justify-content-md-between">
+        <div class="col-12 col-md-6 text-center text-md-end order-md-last">
+          <button class="btn btn-success" id="saveChangesBtn">Guardar cambios</button>
+        </div>
+        <div class="col-12 col-md-6 text-center text-md-start">
+          <a class="ms-4 text-primary text-align-center" data-bs-toggle="collapse" href="#advancedSettings" role="button">
             <p>Configuración avanzada</p>
           </a>
-          <button class="btn btn-success" id="saveChangesBtn">Guardar cambios</button>
+        </div>
       </div>
       <div class="alert alert-success text-center d-none" id="successMessage"></div>
       
@@ -140,9 +144,9 @@
   </main>
   <footer class="text-muted">
     <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
+      <div class="float-end floating-btn" id="scrollToTopBtn">
+        <i class="fas fa-arrow-up"></i>
+      </div>
       <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a> -
         2022</p>
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
@@ -167,7 +171,7 @@
             El correo ingresado no coincide con el de tu cuenta
           </div>
           <label class="mt-3" for="deleteAccountEmail">Contraseña:</label>
-          <input type="" class="form-control rounded mt-1" 
+          <input type="password" class="form-control rounded mt-1" 
                  id="deleteAccountPassword" minlength="8" required>
           <div class="invalid-feedback" id="pwInvalidFeedback"></div>
         </div>

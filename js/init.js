@@ -6,6 +6,7 @@ const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/prod
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
+const SCROLL_TO_TOP_BTN = document.getElementById("scrollToTopBtn");
 let navBarUl = document.getElementById("navBarUl");
 let userEmail = "";
 
@@ -78,4 +79,19 @@ document.addEventListener("DOMContentLoaded", function() {
     <li class="nav-item"><a class="nav-link" href="index.html">Iniciar sesión</a></li>
     `
   }
+})
+
+// Muestra el botón de scroll to top solo cuando el usuario ya ha scrolleado
+document.addEventListener("scroll", () => {
+    if (document.documentElement.scrollTop > 50 || document.body.scrollTop > 50) {
+        SCROLL_TO_TOP_BTN.classList.add("d-flex");
+    }
+    else {
+        SCROLL_TO_TOP_BTN.classList.remove("d-flex");
+    }
+})
+
+SCROLL_TO_TOP_BTN.addEventListener("click", () => {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
 })
