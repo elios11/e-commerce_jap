@@ -111,6 +111,12 @@ SAVE_CHANGES.addEventListener("click", () => {
             profileData = LSProfileData;
         }
         if (userEmail != EMAIL.value) {
+            let storedCartProducts = JSON.parse(localStorage.getItem("storedCartProducts"));
+            if (storedCartProducts[userEmail]) {
+                storedCartProducts[EMAIL.value] = storedCartProducts[userEmail];
+                delete storedCartProducts[userEmail];
+                localStorage.setItem("storedCartProducts", JSON.stringify(storedCartProducts));
+            }
             delete profileData[userEmail];
         }
         profileData[EMAIL.value] = {
