@@ -58,6 +58,9 @@
 .darkMode .dropdown-menu .dropdown-item:hover {
   background-color: rgb(35, 38, 39);
 }
+.darkMode .dropdown-menu .dropdown-item:focus {
+  background-color: rgb(35, 38, 39);
+}
 .darkMode input:-webkit-autofill,
 .darkMode input:-webkit-autofill:focus {
   -webkit-transition: background-color 600000s 0s, color 600000s 0s;
@@ -97,7 +100,7 @@
   outline-color: initial;
 }
 .darkMode .floating-btn {
-  color: rgb(209, 205, 199);
+  color: rgb(209, 205, 199) !important;
 }
 .darkMode .card {
   background-color: #212529 !important;

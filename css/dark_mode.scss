@@ -61,6 +61,9 @@ $font-color: rgb(209, 205, 199);
             &:hover {
                 background-color: rgb(35, 38, 39);
             }
+            &:focus {
+                background-color: rgb(35, 38, 39);
+            }
         }
     }
 
@@ -106,7 +109,7 @@ $font-color: rgb(209, 205, 199);
     }
 
     .floating-btn {
-        color: $font-color;
+        color: $font-color !important;
     }
 
     .card {
