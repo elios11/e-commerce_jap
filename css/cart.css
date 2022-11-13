@@ -35,3 +35,14 @@ li span .form-control {
 #successfulPurchaseAlert {
     z-index: 999;
 }
+
+.invalid-flex {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+}
+
+#paymentMethodForm .btn-check:checked + .btn-dark{
+    box-shadow: none;
+    border-color: rgb(160, 160, 160);
+}
