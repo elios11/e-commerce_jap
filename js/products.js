@@ -70,23 +70,25 @@ function showProductsList() {
         if (!(minCost > parseInt(currentProduct.cost) || maxCost < parseInt(currentProduct.cost)) &&
              (inputSearch == "" || nameAndDescLowerCase.includes(inputSearch))) {
             htmlContentToAppend += `
-            <div onclick="setProductID(${currentProduct.id})" class="list-group-item list-group-item-action cursor-active">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="${currentProduct.image}" alt="${currentProduct.description}" class="img-thumbnail">
-                    </div>
-                    <div class="col">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">
-                                ${currentProduct.name} - ${currentProduct.currency}
-                                ${currentProduct.currency == "UYU" ? 
-                                    currentProduct.cost.toLocaleString("ES") : 
+            <div class="col-6 col-md-4 col-xxl-3 d-flex">
+                <div class="card" role="button" onclick="setProductID(${currentProduct.id})">
+                    <img src="${currentProduct.image}" alt="Imagen de ${currentProduct.name}" 
+                         class="card-img-top">
+                    <div class="card-body">
+                        <div class="card-title text-center fs-5">
+                            <b>${currentProduct.name}</b>
+                            <div class="mt-2 fs-6">
+                                ${currentProduct.currency}
+                                ${currentProduct.currency == "UYU" ?
+                                    currentProduct.cost.toLocaleString("ES") :
                                     currentProduct.cost.toLocaleString("EN")
                                 }
-                            </h4>
-                            <small class="text-muted">${currentProduct.soldCount} artículos</small>
+                            </div>
                         </div>
-                        <p class="mb-1">${currentProduct.description}</p>
+                        <div class="card-text mt-1 text-center">
+                            <p class="mb-1">${currentProduct.description}</p>
+                        </div>
+                        <p class="mb-0 text-center text-muted">${currentProduct.soldCount} artículos</p>
                     </div>
                 </div>
             </div>
