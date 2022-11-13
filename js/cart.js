@@ -72,7 +72,7 @@ function showUserCart(cartItems) {
     }
     let htmlContentToAppend = `
     <h1 class="text-center mb-4">Carrito de compras</h1>
-    <li class="list-group-item row text-center d-none rounded-top d-md-flex 
+    <li class="list-group-item row text-center gx-0 gx-lg-5 d-none rounded-top d-md-flex 
     justify-content-between align-items-center">
         <span class="offset-3 offset-lg-2 col-2 col-lg-3">Nombre</span>
         <span class="col-2">Costo</span>
@@ -86,7 +86,7 @@ function showUserCart(cartItems) {
         item.subtotal = item.count * item.unitCost;
 
         htmlContentToAppend += `
-        <li class="list-group-item row text-center d-flex align-items-center">
+        <li class="list-group-item row text-center gx-0 gx-lg-5 d-flex align-items-center">
             <span class="col-12 mt-3 mt-md-0 col-md-3 col-lg-2">
                 <img class="cart-img rounded" src="${item.image}" alt="${item.name}">
             </span>
@@ -99,7 +99,7 @@ function showUserCart(cartItems) {
             <span class="col-5 text-end d-md-none mb-3">
                 <b>Precio:</b>
             </span>
-            <span class="col-7 text-start text-md-center mb-3 mb-md-0 col-md-2">
+            <span class="col-7 text-start text-md-center ps-4 ps-md-0 mb-3 mb-md-0 col-md-2">
                 ${item.currency}
                 ${item.currency == "UYU" ?
                     item.unitCost.toLocaleString("ES") :
@@ -110,7 +110,8 @@ function showUserCart(cartItems) {
             <span class="col-5 text-end mb-3 mb-md-0 d-md-none">
                 <b>Cantidad:</b>
             </span>
-            <span class="col-7 d-flex justify-content-start justify-content-md-center mb-3 mb-md-0 col-md-2">
+            <span class="col-7 d-flex justify-content-start justify-content-md-center
+                         ps-4 ps-md-0 mb-3 mb-md-0 col-md-2">
                 <input class="form-control" type="number" value=${item.count}
                 min="1" max="99" id="${item.id}" required>
             </span>
@@ -118,7 +119,7 @@ function showUserCart(cartItems) {
             <span class="col-5 text-end d-md-none">
                 <b>Subtotal:</b>
             </span>
-            <span class="col-7 text-start text-md-center col-md-2">
+            <span class="col-7 ps-4 ps-md-0 text-start text-md-center col-md-2">
                 <b>
                     ${item.currency} 
                     ${item.currency == "UYU" ?
