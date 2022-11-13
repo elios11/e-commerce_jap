@@ -98,4 +98,7 @@
 }
 .darkMode .floating-btn {
   color: rgb(209, 205, 199);
+}
+.darkMode .card {
+  background-color: #212529 !important;
 }/*# sourceMappingURL=dark_mode.css.map */
