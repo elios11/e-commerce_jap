@@ -251,6 +251,13 @@ input::placeholder {
   background: #014c72;
 }
 
+#scrollToTopBtn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  color: rgb(0, 0, 0, 0.75);
+}
+
 @media (max-width: 576px) {
   #profile-container {
     overflow: auto;
