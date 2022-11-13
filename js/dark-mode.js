@@ -23,20 +23,16 @@ function setTheme() {
         document.body.classList.add("darkMode");
         document.querySelector("nav").classList.remove("navbar-light");
         document.querySelector("nav").classList.add("navbar-dark");
-
+        
         document.querySelectorAll(".bg-light").forEach(element => {
             element.classList.remove("bg-light");
             element.classList.add("bg-dark");
         });
-
-        document.querySelectorAll(".card").forEach(element => {
-            element.classList.add("bg-dark");
-        });
-
+        
         document.querySelector("nav").classList.add("bg-dark");
         
-        document.querySelectorAll(".btn-light").forEach(element => {
-            element.classList.remove("btn-light");
+        document.querySelectorAll(".btn-outline-dark").forEach(element => {
+            element.classList.remove("btn-outline-dark");
             element.classList.add("btn-dark");
         });
 
@@ -63,7 +59,7 @@ function setTheme() {
 
         document.querySelectorAll(".btn-dark").forEach(element => {
             element.classList.remove("btn-dark");
-            element.classList.add("btn-light");
+            element.classList.add("btn-outline-dark");
         });
     }
 }
