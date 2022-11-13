@@ -44,25 +44,22 @@
     <form id="paymentMethodForm" method="get" class="needs-validation" novalidate>
       <div class="container mt-5" id="shippingDetails">
         <h2 class="ms-2">Detalles de envío</h2>
-        <div class="form-check ms-3 mt-3">
-          <input class="form-check-input" type="radio" id="premium" name="shippingType" 
+        <div class="mt-4 mt-md-5 d-flex flex-column d-md-block text-md-center justify-content-center">
+          <input class="btn-check" type="radio" id="standard" name="shippingType" 
+          value="5" required>
+          <label class="btn btn-outline-dark mx-4 mx-md-2" for="standard">Standard 12 a 15 días (5%)</label>
+          <input class="btn-check" type="radio" id="express" name="shippingType" 
+          value="7" required>
+          <label class="btn btn-outline-dark mb-2 mb-md-0 mx-4 mx-md-2" for="express">Express 5 a 8 días (7%)</label>
+          <input class="btn-check" type="radio" id="premium" name="shippingType" 
                 value="15" required>
-          <label class="form-check-label" for="premium">Premium 2 a 5 días (15%)</label>
-        </div>
-        <div class="form-check ms-3">
-          <input class="form-check-input" type="radio" id="express" name="shippingType" 
-                value="7" required>
-          <label class="form-check-label" for="express">Express 5 a 8 días (7%)</label>
-        </div>
-        <div class="form-check ms-3">
-          <input class="form-check-input" type="radio" id="standard" name="shippingType" 
-                value="5" required>
-          <label class="form-check-label" for="standard">Standard 12 a 15 días (5%)</label>
-          <div class="invalid-feedback">
+          <label class="btn btn-outline-dark mb-2 mb-md-0 mx-4 mx-md-2" for="premium">Premium 2 a 5 días (15%)</label>
+          <div class="invalid-feedback text-center">
             Por favor elija un tipo de envío
           </div>
         </div>
-        <h3 class="mt-5 mb-3">Dirección</h3>
+        
+        <h3 class="mt-5 mb-3 ms-3 ms-md-2">Dirección</h3>
         <div class="row gy-4 gx-0 gx-md-5">
           <div class="col-12 col-md-6">
             <div class="input-group px-2 px-md-0">
@@ -78,7 +75,7 @@
               <span class="input-group-text">Número</span>
               <input type="number" aria-label="apellido" class="form-control" required>
               <div class="invalid-feedback ms-1">
-                Ingrese un número
+                Ingrese un número de casa
               </div>
             </div>
           </div>
@@ -158,7 +155,7 @@
     </form>
       
     <div class="container" id="costsContainer">
-      <h3 class="ms-2 mb-3">Costos</h3>
+      <h3 class="ms-3 ms-md-2 mb-3">Costos</h3>
       <ul class="list-group">
         <li class="list-group-item d-flex justify-content-between">
           <div>
