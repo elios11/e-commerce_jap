@@ -74,7 +74,7 @@
           <div class="row gy-5 gx-lg-5">
             <div class="col-12 col-xl-6">
               <div class="profile-input">
-                <span class="input-group-text">Primer nombre*</span>
+                <span class="input-group-text">Primer nombre<span class="text-danger">*</span></span>
                 <input type="text" class="form-control" id="first-name" required>
               </div>
             </div>
@@ -86,7 +86,7 @@
             </div>
             <div class="col-12 col-xl-6">
               <div class="profile-input">
-                <span class="input-group-text">Primer apellido*</span>
+                <span class="input-group-text">Primer apellido<span class="text-danger">*</span></span>
                 <input type="text" class="form-control" id="first-surname" required>
               </div>
             </div>
@@ -99,7 +99,7 @@
             <div class="col-12 col-xl-6">
               <div class="profile-input">
                 <span class="input-group-text">
-                  Correo electrónico*
+                  Correo electrónico<span class="text-danger">*</span>
                   <i class="far fa-edit ms-3 mb-1" id="modifyEmail" role="button"></i>
                 </span>
                 <input type="email" class="form-control" id="email" required disabled>
@@ -117,10 +117,25 @@
         <div class="invalid-feedback text-end mt-4" id="invalidDataFB">Rellene los campos requeridos (*)</div>
       </div>
       <hr class="mt-4 mb-4">
-      <div class="d-flex justify-content-center justify-content-lg-end">
+      <div class="d-flex justify-content-between">
+          <a class="ms-4 text-primary" data-bs-toggle="collapse" href="#advancedSettings" role="button">
+            <p>Configuración avanzada</p>
+          </a>
           <button class="btn btn-success" id="saveChangesBtn">Guardar cambios</button>
       </div>
       <div class="alert alert-success text-center d-none" id="successMessage"></div>
+      
+      <div class="collapse" id="advancedSettings">
+        <div class="ms-4 mt-3 d-flex align-items-center">
+          <button class="btn btn-outline-danger" 
+                  type="button"
+                  data-bs-toggle="modal" 
+                  data-bs-target="#deleteAccountModal">
+                      Eliminar cuenta
+          </button>
+          <p class="mb-0 ms-3">Esta acción no se puede deshacer, y perderás todos tus datos guardados.</p>
+        </div>
+      </div>
     </div>
   </main>
   <footer class="text-muted">
@@ -133,6 +148,38 @@
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
+
+  <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header justify-content-center">
+          <h5 class="modal-title text-danger" id="exampleModalLabel">Eliminar cuenta</h5>
+        </div>
+        <div class="modal-body">
+          <p>
+            Al eliminar tu cuenta perderás acceso a tus datos guardados, tales como tus datos
+            de perfil o los productos guardados en el carrito de compras.
+            Si aún así quieres continuar, rellena tus datos:
+          </p>
+          <label for="deleteAccountEmail">Correo electrónico:</label>
+          <input type="email" class="form-control rounded mt-1" id="deleteAccountEmail" required>
+          <div class="invalid-feedback">
+            El correo ingresado no coincide con el de tu cuenta
+          </div>
+          <label class="mt-3" for="deleteAccountEmail">Contraseña:</label>
+          <input type="" class="form-control rounded mt-1" 
+                 id="deleteAccountPassword" minlength="8" required>
+          <div class="invalid-feedback" id="pwInvalidFeedback"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-danger" id="deleteAccountBtn" disabled>Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-success text-center d-none" id="deletedAccountAlert"></div>
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>

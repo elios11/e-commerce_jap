@@ -10,6 +10,12 @@ const SAVE_CHANGES = document.getElementById("saveChangesBtn");
 const INVALID_FB_MSG = document.getElementById("invalidDataFB");
 const EMAIL_IN_USE_MSG = document.getElementById("emailAlreadyExists");
 const MODIFY_EMAIL_BTN = document.getElementById("modifyEmail");
+
+const DELETE_ACCOUNT_PW_FIELD = document.getElementById("deleteAccountPassword");
+const DELETE_ACCOUNT_EMAIL_FIELD = document.getElementById("deleteAccountEmail");
+const DELETE_ACCOUNT_BTN = document.getElementById("deleteAccountBtn");
+let deleteAccountModal = new bootstrap.Modal(document.getElementById("deleteAccountModal"), {});
+
 let LSProfileData = JSON.parse(localStorage.getItem("profile-data"));
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -147,3 +153,70 @@ function fillDataFromLocalStorage() {
         }
     }
 }
+
+document.getElementById("deleteAccountModal").addEventListener("input", () => {
+    if (DELETE_ACCOUNT_EMAIL_FIELD.value.length > 0 && DELETE_ACCOUNT_PW_FIELD.value.length > 0) {
+        DELETE_ACCOUNT_BTN.removeAttribute("disabled");
+    }
+    else {
+        DELETE_ACCOUNT_BTN.setAttribute("disabled", "");
+    }
+})
+
+
+DELETE_ACCOUNT_BTN.addEventListener("click", () => {
+    let pwInvalidFeedback = document.getElementById("pwInvalidFeedback");
+    let deletedAccountAlert = document.getElementById("deletedAccountAlert");
+    let validatedFields = true;
+
+    document.getElementById("deleteAccountModal").classList.add("hidden");
+    if (DELETE_ACCOUNT_EMAIL_FIELD.value !== userEmail) {
+        validatedFields = false;
+        DELETE_ACCOUNT_EMAIL_FIELD.classList.add("invalid-input");
+        document.querySelector("#deleteAccountEmail + .invalid-feedback").classList.add("d-block");
+    }
+    else {
+        DELETE_ACCOUNT_EMAIL_FIELD.classList.remove("invalid-input");
+        document.querySelector("#deleteAccountEmail + .invalid-feedback").classList.remove("d-block");
+    }
+    if (!DELETE_ACCOUNT_PW_FIELD.checkValidity()) {
+        validatedFields = false;
+        if (DELETE_ACCOUNT_PW_FIELD.length > 0) {
+            pwInvalidFeedback.innerHTML = "Tienes que ingresar tu contraseña";
+        }
+        else {
+            pwInvalidFeedback.innerHTML = "La contraseña ingresada es incorrecta";
+        }
+        DELETE_ACCOUNT_PW_FIELD.classList.add("invalid-input");
+        pwInvalidFeedback.classList.add("d-block");
+    }
+    else {
+        DELETE_ACCOUNT_PW_FIELD.classList.remove("invalid-input");
+        pwInvalidFeedback.classList.remove("d-block");
+    }
+
+    if (validatedFields) {
+        let userCartData = JSON.parse(localStorage.getItem("storedCartProducts"));
+        let userProfileData = JSON.parse(localStorage.getItem("profile-data"));
+        
+        if (userCartData[userEmail]) {
+            delete userCartData[userEmail];
+            localStorage.setItem("storedCartProducts", JSON.stringify(userCartData));
+        }
+        if (userProfileData[userEmail]) {
+            delete userProfileData[userEmail];
+            localStorage.setItem("profile-data", JSON.stringify(userProfileData));
+        }
+
+        deleteAccountModal.hide();
+        deletedAccountAlert.innerHTML = "Tu cuenta ha sido eliminada con éxito."
+        deletedAccountAlert.classList.remove("d-none");
+        setTimeout(() => {
+            showSpinner();
+        }, 1200)
+        setTimeout(() => {
+            logout();
+            window.location = "index.html";
+        }, 2000)
+    }
+})
