@@ -52,17 +52,18 @@ function showCategoriesList(){
              (inputSearch == "" || categoryNameAndDesc.includes(inputSearch))) {
 
             htmlContentToAppend += `
-            <div onclick="setCatID(${category.id})" class="list-group-item list-group-item-action cursor-active">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="${category.imgSrc}" alt="${category.description}" class="img-thumbnail">
-                    </div>
-                    <div class="col">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">${category.name}</h4>
-                            <small class="text-muted">${category.productCount} artículos</small>
+            <div class="col-6 col-md-4 col-xxl-3 d-flex">
+                <div class="card" role="button" onclick="setCatID(${category.id})">
+                    <img src="${category.imgSrc}" alt="Imagen de categoría ${category.name}"
+                         class="card-img-top">
+                    <div class="card-body">
+                        <div class="card-title text-center fs-5">
+                            <b>${category.name}</b>
                         </div>
-                        <p class="mb-1">${category.description}</p>
+                        <div class="card-text mt-1 text-center">
+                            <p class="mb-1">${category.description}</p>
+                        </div>
+                        <p class="mb-0 text-center text-muted">${category.productCount} artículos</p>
                     </div>
                 </div>
             </div>
