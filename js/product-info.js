@@ -131,7 +131,7 @@ function getImages(array) {
         }
     }
     let imagesCarousel = `
-    <div id="imagesCarousel" class="carousel mt-5 slide d-inline-block" data-bs-ride="carousel" 
+    <div id="imagesCarousel" class="carousel mt-5 slide d-inline-block" data-bs-ride="carousel"
         data-bs-interval="2200">
         <div class="carousel-indicators">
             ${carouselIndicators}
@@ -241,7 +241,6 @@ clearButton.addEventListener("click", () => {
 
 //Selecciona calificación de nuevo comentario en base a elección del usuario
 function pickCommentScore() {
-    const heartScoreContainer = document.getElementById("pickScoreHearts");
     //Asigna a cada elemento de clase pickScore un evento de click
     for (let i = 0; i < pickScoreHearts.length; i++) {
         const element = pickScoreHearts[i];
