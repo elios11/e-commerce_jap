@@ -270,7 +270,7 @@ function paymentMethodFields() {
 
 // Verifica si todos los input de cantidad de producto son válidos
 function validateProductsQuantity() {
-    const quantityInputs = document.querySelectorAll("table input[type='number']");
+    const quantityInputs = document.querySelectorAll(".list-group-item input[type='number']");
     let allValid = true;
 
     quantityInputs.forEach(element => {
