@@ -11,10 +11,16 @@ const clearButton = document.getElementById("clearButton");
 
 async function getData() {
     const productsRes = await fetch(PRODUCT_URL);
+    if (!productsRes.ok) {
+        throw new Error("No se pudieron obtener los datos de producto...")
+    }
     const productsData = await productsRes.json();
     productInfoArray = productsData;
 
     const commentsRes = await fetch(PRODUCT_COMMENTS_URL);
+    if (!commentsRes.ok) {
+        throw new Error("No se pudieron obtener los comentarios de producto...")
+    }
     const commentsData = await commentsRes.json();
     productCommentsArray = commentsData;
 
@@ -36,7 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
     pickCommentScore();
-    getData();
+    getData()
+        .catch(err => console.log("Error: ", err.message));
 });
 
 function showProductInfo() {
@@ -222,7 +229,8 @@ sendCommentButton.addEventListener("click", function() {
         });
         localStorage.setItem(`${productID}_userComments`, JSON.stringify(nuevosComentarios));
         commentTextBox.value = "";
-        getData();
+        getData()
+            .catch(err => console.log("Error: ", err.message));
     }
     else {
         document.querySelector(".dataAlert").innerHTML = "Su comentario debe contener al menos 20 caracteres."

@@ -18,8 +18,14 @@ const paymentMethodModal = document.getElementById("paymentMethodModal");
 // Guarda el precio actual del dólar en una variable
 async function getLatestCotizations(url) {
     const cotizationRes = await fetch(url);
+    
+    if (cotizationRes.status !== 200) {
+        throw new Error("No fue posible obtener las cotizaciones actuales...");
+    }
     const cotizationData = await cotizationRes.json();
+
     currentUSDPrice = cotizationData.rates.USD.buy;
+    return cotizationData;
 }
 
 function getCartData() {
@@ -239,7 +245,8 @@ function calculateShippingCost(subcost, shippingTax) {
 
 // Espera cotización del dolar y devuelve el subtotal sumado de todos los elementos en dólares
 async function getSubtotalValue() {
-    await getLatestCotizations(BROU_COTIZATION_API);
+    await getLatestCotizations(BROU_COTIZATION_API)
+        .catch(err => console.log("Error: ", err));
     let subtotal = sumOfSubtotals(extractSubtotals(userCartItems));
     return subtotal;
 }
