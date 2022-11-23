@@ -17,7 +17,7 @@ async function getData() {
     const productsData = await productsRes.json();
     productInfoArray = productsData;
 
-    const commentsRes = await fetch(PRODUCT_COMMENTS_URL);
+    let commentsRes = await fetch(PRODUCT_COMMENTS_URL);
     if (!commentsRes.ok) {
         throw new Error("No se pudieron obtener los comentarios de producto...")
     }
@@ -51,7 +51,7 @@ function showProductInfo() {
 
     let htmlContentToAppend = `
     <div class="row d-flex align-items-center">
-        <div class="col-xl-7 text-center">
+        <div class="col-12 col-xl-7 text-center">
             ${getImages(productInfoArray)}
         </div>
 
@@ -133,13 +133,14 @@ function getImages(array) {
                 </div>
             `
             carouselIndicators += `
-            <button type="button" data-bs-target="#imagesCarousel" data-bs-slide-to="${i}" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#imagesCarousel" data-bs-slide-to="${i}" 
+            aria-label="Slide ${i + 1}"></button>
             `
         }
     }
     let imagesCarousel = `
-    <div id="imagesCarousel" class="carousel mt-5 slide d-inline-block" data-bs-ride="carousel"
-        data-bs-interval="2200">
+    <div id="imagesCarousel" class="carousel slide carousel-dark mt-5 d-inline-block" data-bs-ride="carousel"
+        data-bs-interval="2700" data-bs-touch="true">
         <div class="carousel-indicators">
             ${carouselIndicators}
         </div>
