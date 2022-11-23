@@ -50,12 +50,12 @@ function showProductInfo() {
     document.getElementById("productName").innerHTML = `e-Mercado - ${productInfoArray.name}`;
 
     let htmlContentToAppend = `
-    <div class="row d-flex align-items-center">
-        <div class="col-12 col-xl-7 text-center">
+    <div class="row align-items-center">
+        <div class="col-12 col-lg-7 text-center">
             ${getImages(productInfoArray)}
         </div>
 
-        <div class="col-xl-4 mt-lg-0 mt-3 ms-xl-5">
+        <div class="col-12 col-lg-5 col-xl-4 ps-lg-5 ps-xl-0 mt-3 mt-lg-5 mt-xl-0 ms-xl-5">
             <h1 class="display-6 text-center">
                 ${productInfoArray.name}
             </h1>
@@ -65,7 +65,7 @@ function showProductInfo() {
                     Categoría - <a class="link-secondary" href="products.html">${productInfoArray.category}</a>
                 </div>
                 <div class="d-flex justify-content-end col-6">
-                    Artículos vendidos - &nbsp<b>${productInfoArray.soldCount}</b>
+                    Artículos vendidos: <b class="ps-1">${productInfoArray.soldCount}</b>
                 </div>
             </div>
 
@@ -139,8 +139,8 @@ function getImages(array) {
         }
     }
     let imagesCarousel = `
-    <div id="imagesCarousel" class="carousel slide carousel-dark mt-5 d-inline-block" data-bs-ride="carousel"
-        data-bs-interval="2700" data-bs-touch="true">
+    <div id="imagesCarousel" class="carousel slide carousel-dark w-100 mt-5 d-inline-block" 
+         data-bs-ride="carousel" data-bs-interval="2700" data-bs-touch="true">
         <div class="carousel-indicators">
             ${carouselIndicators}
         </div>
