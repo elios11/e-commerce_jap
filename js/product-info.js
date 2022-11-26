@@ -73,8 +73,8 @@ function showProductInfo() {
                 <div class="d-flex align-items-center col-6">
                     <h3 class="mb-0">
                         ${productInfoArray.currency} 
-                        ${productInfoArray.currency == "UYU" ? 
-                            productInfoArray.cost.toLocaleString("ES") : 
+                        ${productInfoArray.currency == "UYU" ?
+                            productInfoArray.cost.toLocaleString("ES") :
                             productInfoArray.cost.toLocaleString("EN")
                         }
                     </h3>
@@ -108,12 +108,13 @@ function showProductInfo() {
     </div>
     `
     document.getElementById("productInfoContainer").innerHTML = htmlContentToAppend;
+    startCarousel();
 }
 
 function getImages(array) {
     let carrouselItems = "";
     let carouselIndicators = "";
-    for(let i = 0; i < array.images.length; i++) {
+    for (let i = 0; i < array.images.length; i++) {
         let currentImg = array.images[i];
         if (i === 0) {
             carrouselItems += `
@@ -139,8 +140,7 @@ function getImages(array) {
         }
     }
     let imagesCarousel = `
-    <div id="imagesCarousel" class="carousel slide carousel-dark w-100 mt-5 d-inline-block" 
-         data-bs-ride="carousel" data-bs-interval="2700" data-bs-touch="true">
+    <div id="imagesCarousel" class="carousel slide carousel-dark w-100 mt-5 d-inline-block">
         <div class="carousel-indicators">
             ${carouselIndicators}
         </div>
@@ -160,6 +160,14 @@ function getImages(array) {
     </div>
     `;
     return imagesCarousel;
+}
+
+function startCarousel() {
+    let imagesCarousel = document.querySelector('#imagesCarousel')
+    let carousel = new bootstrap.Carousel(imagesCarousel, {
+        interval: 3000,
+        wrap: true
+    })
 }
 
 function getComments(array) {
@@ -201,7 +209,7 @@ function getScore(comment) {
 }
 
 //Envia nuevo comentario al localStorage
-sendCommentButton.addEventListener("click", function() {
+sendCommentButton.addEventListener("click", function () {
     let commentTextBox = document.getElementById("commentTextBox");
     let nuevosComentarios = [];
     if (localStorage.getItem(`${productID}_userComments`)) {
@@ -221,13 +229,13 @@ sendCommentButton.addEventListener("click", function() {
             element.classList.remove("checked");
         });
         nuevosComentarios.push(
-        {
-            product: productID,
-            score: pickScore + 1,
-            description: commentTextBox.value,
-            user: userEmail,
-            dateTime: fullDate
-        });
+            {
+                product: productID,
+                score: pickScore + 1,
+                description: commentTextBox.value,
+                user: userEmail,
+                dateTime: fullDate
+            });
         localStorage.setItem(`${productID}_userComments`, JSON.stringify(nuevosComentarios));
         commentTextBox.value = "";
         getData()
@@ -254,7 +262,7 @@ function pickCommentScore() {
     for (let i = 0; i < pickScoreHearts.length; i++) {
         const element = pickScoreHearts[i];
 
-        element.addEventListener("click", function() {
+        element.addEventListener("click", function () {
             //Despinta los corazones actualmente seleccionados
             for (let i = 0; i <= pickScore; i++) {
                 pickScoreHearts[i].classList.remove("checked");
@@ -270,13 +278,13 @@ function pickCommentScore() {
 
         //Pinta y despinta corazones al pasar el ratón sobre ellos
         let hoveredScore = i + 1;
-        element.addEventListener("mouseover", function() {
+        element.addEventListener("mouseover", function () {
             for (let i = 0; i < hoveredScore; i++) {
                 pickScoreHearts[i].classList.add("hoverHeart");
             }
         })
 
-        element.addEventListener("mouseout", function() {
+        element.addEventListener("mouseout", function () {
             for (let i = 0; i < hoveredScore; i++) {
                 pickScoreHearts[i].classList.remove("hoverHeart");
             }
@@ -287,7 +295,7 @@ function pickCommentScore() {
 //Agrega comentarios del localStorage al array de comentarios original
 function addCommentsToArray() {
     let localStorageComments = JSON.parse(localStorage.getItem(`${productID}_userComments`));
-    if(localStorageComments) {
+    if (localStorageComments) {
         localStorageComments.forEach(element => {
             productCommentsArray.push(element);
         });
@@ -324,7 +332,7 @@ function addToCart() {
     let cartItems = {};
     cartItems[userEmail] = {};
     let alreadyInCart = false;
-    
+
     if (localStorageCartItems) {
         cartItems = localStorageCartItems;
         if (!localStorageCartItems[userEmail]) {
@@ -347,14 +355,14 @@ function addToCart() {
     }
     if (!alreadyInCart) {
         cartItems[userEmail][`productID_${productInfoArray.id}`] =
-            {
-                id: productInfoArray.id,
-                name: productInfoArray.name,
-                count: 1,
-                unitCost: productInfoArray.cost,
-                currency: productInfoArray.currency,
-                image: productInfoArray.images[0]
-            }
+        {
+            id: productInfoArray.id,
+            name: productInfoArray.name,
+            count: 1,
+            unitCost: productInfoArray.cost,
+            currency: productInfoArray.currency,
+            image: productInfoArray.images[0]
+        }
         addToCartAlert.classList.add("alert-success");
         addToCartAlert.innerHTML = `
         <h6 class="pb-1 pt-2 px-2 text-center">¡El producto fue añadido al 
