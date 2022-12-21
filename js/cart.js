@@ -2,7 +2,7 @@ let userCartItems = {};
 let currentUSDPrice;
 let shippingTaxes;
 let alreadyTriedSubmitting = false;
-const BROU_COTIZATION_API = "https://cotizaciones-brou.herokuapp.com/api/currency/latest";
+const EXCHANGE_RATES_COTIZATION = "https://api.apilayer.com/exchangerates_data/convert?to=UYU&from=USD&amount=1";
 const CART_CONTAINER = document.getElementById("cart");
 const PRODUCTS_COST_TEXT = document.getElementById("productsCost");
 const SHIPPING_COST_TEXT = document.getElementById("shippingCost");
@@ -15,16 +15,26 @@ const paymentMethodMessage = document.getElementById("paymentMethodMessage");
 const selectPaymentMethodBTN = document.getElementById("selectPaymentMethod");
 const paymentMethodModal = document.getElementById("paymentMethodModal");
 
+// Define opciones de fetch y aplica key de API de cotizaciones
+let myHeaders = new Headers();
+myHeaders.append("apikey", "KPH3x1TGqvSWhCWDRWeJ0KyAafdKFHGV");
+
+let requestOptions = {
+  method: 'GET',
+  redirect: 'follow',
+  headers: myHeaders
+};
+
 // Guarda el precio actual del dólar en una variable
 async function getLatestCotizations(url) {
-    const cotizationRes = await fetch(url);
+    const cotizationRes = await fetch(url, requestOptions);
     
     if (cotizationRes.status !== 200) {
         throw new Error("No fue posible obtener las cotizaciones actuales...");
     }
     const cotizationData = await cotizationRes.json();
 
-    currentUSDPrice = cotizationData.rates.USD.buy;
+    currentUSDPrice = cotizationData.result;
     return cotizationData;
 }
 
@@ -245,7 +255,7 @@ function calculateShippingCost(subcost, shippingTax) {
 
 // Espera cotización del dolar y devuelve el subtotal sumado de todos los elementos en dólares
 async function getSubtotalValue() {
-    await getLatestCotizations(BROU_COTIZATION_API)
+    await getLatestCotizations(EXCHANGE_RATES_COTIZATION)
         .catch(err => console.log("Error: ", err));
     let subtotal = sumOfSubtotals(extractSubtotals(userCartItems));
     return subtotal;
